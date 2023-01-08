@@ -3,8 +3,8 @@ function fetnetNotify(subtitle = '', message = '') {
 };
 
 if ($request.method === 'POST') {
-  fetnetNotify('test1');
-  // fetnetNotify($request.url);
+  // fetnetNotify('test1');
+  fetnetNotify('u:' + $request.url);
   // const cookie = $request.headers['Cookie'] || $request.headers['cookie'];
   // if (cookie && $request.body) {
   //   try {
