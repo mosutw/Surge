@@ -3,7 +3,7 @@ function fetnetNotify(subtitle = '', message = '') {
 };
 
 if ($request.method === 'POST') {
-  fetnetNotify('test');
+  fetnetNotify($request.url);
   // const cookie = $request.headers['Cookie'] || $request.headers['cookie'];
   // if (cookie && $request.body) {
   //   try {
