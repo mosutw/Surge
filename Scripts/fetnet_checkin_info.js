@@ -11,22 +11,22 @@ function getUrlParameter(name) {
 //3
 
 if ($request.method === 'GET') {
-  // fetnetNotify('test1');
+  fetnetNotify('test1');
   var client_id = getUrlParameter("client_id")
   // console.log('client_id:' + client_id)
 
   const saveClientId = $persistentStore.write(client_id, 'fetnetClientId');
-if (!(saveClientId)) {
-  fetnetNotify(
-    '保存ClientId 失敗 ‼️',
-    '請稍後嘗試'
-  );
-} else {
-  fetnetNotify(
-    '保存Client Id成功',
-    ''
-  );
-}
+  if (!(saveClientId)) {
+    fetnetNotify(
+      '保存ClientId 失敗 ‼️',
+      '請稍後嘗試'
+    );
+  } else {
+    fetnetNotify(
+      '保存Client Id成功',
+      ''
+    );
+  }
 
   // if (cookie && $request.body) {
   //   try {
