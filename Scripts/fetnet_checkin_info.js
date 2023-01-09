@@ -2,7 +2,7 @@ function fetnetNotify(subtitle = '', message = '') {
   $notification.post('🍑 Fetnet token', subtitle, message, { 'url': 'superapp://' });
 };
 
-//1
+//2
 // if ($request.method === 'POST') {
 //   // fetnetNotify('test1');
 //   const cookie = $request.headers['Cookie'] || $request.headers['cookie'];
@@ -44,8 +44,8 @@ function fetnetNotify(subtitle = '', message = '') {
 if ($request.method === 'GET') {
   // fetnetNotify('test1');
   const cookie = $request.headers['Cookie'] || $request.headers['cookie'];
-  fetnetNotify($request.querystring);
-  console.log('qstring:' + $request.querystring)
+  fetnetNotify($request.query);
+  console.log('qstring:' + $request.query)
   // if (cookie && $request.body) {
   //   try {
   //     let body = JSON.parse($request.body);
