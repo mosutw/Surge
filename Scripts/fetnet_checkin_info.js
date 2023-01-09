@@ -8,7 +8,7 @@ if ($request.method === 'GET') {
   // fetnetNotify('test1');
   const cookie = $request.headers['Cookie'] || $request.headers['cookie'];
   fetnetNotify('$request');
-  console.log('qstring:' + JSON.parse($request))
+  console.log('qstring:' + $request)
   // if (cookie && $request.body) {
   //   try {
   //     let body = JSON.parse($request.body);
