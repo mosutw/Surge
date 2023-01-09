@@ -8,7 +8,7 @@ function getUrlParameter(name) {
   var results = regex.exec($request.url);
   return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
 };
-//2
+//3
 
 if ($request.method === 'GET') {
   // fetnetNotify('test1');
