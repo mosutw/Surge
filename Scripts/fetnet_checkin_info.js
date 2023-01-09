@@ -2,6 +2,7 @@ function fetnetNotify(subtitle = '', message = '') {
   $notification.post('🍑 Fetnet token', subtitle, message, { 'url': 'superapp://' });
 };
 
+//1
 // if ($request.method === 'POST') {
 //   // fetnetNotify('test1');
 //   const cookie = $request.headers['Cookie'] || $request.headers['cookie'];
