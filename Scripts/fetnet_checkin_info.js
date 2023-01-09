@@ -10,6 +10,7 @@ if ($request.method === 'GET') {
   fetnetNotify('$request');
   var result = Object.keys($request).map((key) => [Number(key), $request[key]]);
   console.log('qstring:' + result)
+  
   // if (cookie && $request.body) {
   //   try {
   //     let body = JSON.parse($request.body);
