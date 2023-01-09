@@ -2,13 +2,19 @@ function fetnetNotify(subtitle = '', message = '') {
   $notification.post('🍑 Fetnet token', subtitle, message, { 'url': 'superapp://' });
 };
 
+function getUrlParameter(name) {
+  name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+  var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+  var results = regex.exec(location.search);
+  return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+};
 //2
 
 if ($request.method === 'GET') {
   // fetnetNotify('test1');
   const cookie = $request.headers['Cookie'] || $request.headers['cookie'];
   fetnetNotify('$request');
-  var result = Object.keys($request).map((key) => [key, $request[key]]);
+  var result = getUrlParameter($request.url)
   console.log('qstring:' + result)
 
   // if (cookie && $request.body) {
