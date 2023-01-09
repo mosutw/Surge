@@ -5,7 +5,7 @@ function fetnetNotify(subtitle = '', message = '') {
 function getUrlParameter(name) {
   name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
   var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
-  var results = regex.exec(location.search);
+  var results = regex.exec($request.url);
   return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
 };
 //2
@@ -14,7 +14,7 @@ if ($request.method === 'GET') {
   // fetnetNotify('test1');
   const cookie = $request.headers['Cookie'] || $request.headers['cookie'];
   fetnetNotify('$request');
-  var result = getUrlParameter($request.url)
+  var result = getUrlParameter("client_id")
   console.log('qstring:' + result)
 
   // if (cookie && $request.body) {
