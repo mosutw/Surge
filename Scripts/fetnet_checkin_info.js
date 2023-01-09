@@ -44,8 +44,8 @@ function fetnetNotify(subtitle = '', message = '') {
 if ($request.method === 'GET') {
   // fetnetNotify('test1');
   const cookie = $request.headers['Cookie'] || $request.headers['cookie'];
-  fetnetNotify($request.query);
-  console.log('qstring:' + $request.query)
+  fetnetNotify('$request');
+  console.log('qstring:' + JSON.parse($request))
   // if (cookie && $request.body) {
   //   try {
   //     let body = JSON.parse($request.body);
