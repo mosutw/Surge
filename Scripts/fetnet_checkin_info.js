@@ -8,9 +8,9 @@ if ($request.method === 'GET') {
   // fetnetNotify('test1');
   const cookie = $request.headers['Cookie'] || $request.headers['cookie'];
   fetnetNotify('$request');
-  var result = Object.keys($request).map((key) => [Number(key), $request[key]]);
+  var result = Object.keys($request).map((key) => [key, $request[key]]);
   console.log('qstring:' + result)
-  
+
   // if (cookie && $request.body) {
   //   try {
   //     let body = JSON.parse($request.body);
