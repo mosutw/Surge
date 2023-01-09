@@ -5,8 +5,8 @@ function fetnetNotify(subtitle = '', message = '') {
 if ($request.method === 'POST') {
   // fetnetNotify('test1');
   const cookie = $request.headers['Cookie'] || $request.headers['cookie'];
-  fetnetNotify($request.querystring);
-  console.log('queryString:' + $request.querystring)
+  fetnetNotify($request.url);
+  console.log('url:' + $request.url)
   // if (cookie && $request.body) {
   //   try {
   //     let body = JSON.parse($request.body);
