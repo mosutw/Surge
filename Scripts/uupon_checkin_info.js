@@ -12,8 +12,8 @@ function getUrlParameter(name) {
 
 if ($request.method === 'GET') {
   uuponNotify('test1');
-  // console.log('client_id:' + client_id)
   const cookie = $request.headers['Cookie'] || $request.headers['cookie'];
+  console.log('cookie:' + cookie)
   const saveCookie = $persistentStore.write(cookie, 'uuponCookie');
   if (!saveCookie) {
     uuponNotify(
