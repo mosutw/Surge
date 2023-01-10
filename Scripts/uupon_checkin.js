@@ -37,10 +37,10 @@ let checkinRequest = {
 
 function getEventPageUrl() {
   $httpClient.post(mainPageRequest, function (error, response, data) {
+    console.log(response)
+    console.log(data)
     if (error) {
       console.log(error)
-      console.log(response)
-      console.log(data)
       uuponNotify(
         '取得活動頁面失敗 ‼️',
         '連線錯誤'
