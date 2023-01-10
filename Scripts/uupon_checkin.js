@@ -40,62 +40,62 @@ function getEventPageUrl() {
     // console.log(response);
     // console.log(data);
     // console.log(typeof(data))
-    d = response;
-    console.log(d);
-    if (error) {
-      console.log(error)
-      uuponNotify(
-        '取得活動頁面失敗 ‼️',
-        '連線錯誤'
-      );
-      $done();
-    } else {
-      if (response.status === 200) {
-        try {
-          const obj = JSON.parse(data);
-          console.log(data)
-          // if (obj.success === true) {
-          //   const mainInfo = obj.mainInfo;
-          //   let found = false;
-          //   for (const info of mainInfo) {
-          //     if (info.adInfo && info.columnType === "3") {
-          //       const adInfo = info.adInfo[0];
-          //       const actionUrl = adInfo.action.actionValue;
-          //       console.log('uupon 簽到活動頁面 👉' + actionUrl);
-          //       found = true;
-          //       checkinRequest.headers.Referer = actionUrl;
-          //       eventPageRequest.url = actionUrl;
-          //       eventPageRequest.headers.cookie = '';
-          //       getJavascriptUrl();
-          //     }
-          //   }
-          //   if (!found) {
-          //     console.log('找不到簽到活動頁面');
-          //     $done();
-          //   }
-          // } else {
-          //   uuponNotify(
-          //     '取得活動頁面失敗 ‼️',
-          //     obj.resultMessage
-          //   );
-          //   $done();
-          // }
-        }
-        catch (error) {
-          uuponNotify(
-            '取得活動頁面失敗 ‼️',
-            error
-          );
-          $done();
-        }
-      } else {
-        uuponNotify(
-          'Cookie 已過期 ‼️',
-          '請重新登入'
-        );
-        $done();
-      }
-    }
+    el.ineerHTML = data
+    console.log(el);
+    // if (error) {
+    //   console.log(error)
+    //   uuponNotify(
+    //     '取得活動頁面失敗 ‼️',
+    //     '連線錯誤'
+    //   );
+    //   $done();
+    // } else {
+    //   if (response.status === 200) {
+    //     try {
+    //       const obj = JSON.parse(data);
+    //       console.log(data)
+    //       // if (obj.success === true) {
+    //       //   const mainInfo = obj.mainInfo;
+    //       //   let found = false;
+    //       //   for (const info of mainInfo) {
+    //       //     if (info.adInfo && info.columnType === "3") {
+    //       //       const adInfo = info.adInfo[0];
+    //       //       const actionUrl = adInfo.action.actionValue;
+    //       //       console.log('uupon 簽到活動頁面 👉' + actionUrl);
+    //       //       found = true;
+    //       //       checkinRequest.headers.Referer = actionUrl;
+    //       //       eventPageRequest.url = actionUrl;
+    //       //       eventPageRequest.headers.cookie = '';
+    //       //       getJavascriptUrl();
+    //       //     }
+    //       //   }
+    //       //   if (!found) {
+    //       //     console.log('找不到簽到活動頁面');
+    //       //     $done();
+    //       //   }
+    //       // } else {
+    //       //   uuponNotify(
+    //       //     '取得活動頁面失敗 ‼️',
+    //       //     obj.resultMessage
+    //       //   );
+    //       //   $done();
+    //       // }
+    //     }
+    //     catch (error) {
+    //       uuponNotify(
+    //         '取得活動頁面失敗 ‼️',
+    //         error
+    //       );
+    //       $done();
+    //     }
+    //   } else {
+    //     uuponNotify(
+    //       'Cookie 已過期 ‼️',
+    //       '請重新登入'
+    //     );
+    //     $done();
+    //   }
+    // }
   });
 }
 
