@@ -3,7 +3,7 @@
  
  
 [Script]
-cron "16 0 * * *" script-path=https://raw.githubusercontent.com/mosutw/Surge/main/Scripts/uupon_checkin_info.js, wake-system=1, timeout=10
+cron "16 0 * * *" script-path=https://raw.githubusercontent.com/mosutw/Surge/main/Scripts/uupon_checkin.js, wake-system=1, timeout=10
 uupon_checkin_info.js = type=http-request,pattern=^https:\/\/appevts\.uupon\.com\/dailysignin2\/page$,script-path=https://raw.githubusercontent.com/mosutw/Surge/main/Scripts/uupon_checkin_info.js,requires-body=true,script-update-interval=-1
 
 
