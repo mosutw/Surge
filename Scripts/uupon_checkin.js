@@ -40,7 +40,7 @@ function getEventPageUrl() {
     // console.log(response);
     // console.log(data);
     // console.log(typeof(data))
-    d = response.body;
+    d = response;
     console.log(d);
     if (error) {
       console.log(error)
