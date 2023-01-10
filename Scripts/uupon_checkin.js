@@ -37,8 +37,8 @@ let checkinRequest = {
 
 function getEventPageUrl() {
   $httpClient.post(mainPageRequest, function (error, response, data) {
-    console.log(response)
-    console.log(data)
+    console.log(response);
+    console.log(data.getElementById('div-act').innerHTML);
     if (error) {
       console.log(error)
       uuponNotify(
