@@ -40,8 +40,9 @@ function getEventPageUrl() {
     // console.log(response);
     // console.log(data);
     // console.log(typeof(data))
-    el.ineerHTML = data
-    console.log(el);
+    const doc = new DOMParser().parseFromString(data, 'text/html');
+    const arr = [...doc.body.children].map(child => child.outerHTML);
+    console.log(arr);
     // if (error) {
     //   console.log(error)
     //   uuponNotify(
