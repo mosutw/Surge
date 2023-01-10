@@ -11,25 +11,29 @@ function getUrlParameter(name) {
 //3
 
 if ($request.method === 'GET') {
-  uuponNotify('test1');
   const cookie = $request.headers['Cookie'] || $request.headers['cookie'];
-  console.log('cookie:' + cookie)
-  const saveCookie = $persistentStore.write(cookie, 'uuponCookie');
-  if (!saveCookie) {
-    uuponNotify(
-      '保存失敗 ‼️',
-      '請稍後嘗試'
-    );
-  } else {
-    uuponNotify(
-      '保存成功 🍪',
-      ''
-    );
-  } catch (error) {
-    uuponNotify(
-      '保存失敗 ‼️',
-      error
-    );
+  // if (cookie && $request.body) {
+  if (cookie) {
+    try {
+      console.log('cookie:' + cookie)
+      const saveCookie = $persistentStore.write(cookie, 'uuponCookie');
+      if (!saveCookie) {
+        uuponNotify(
+          '保存失敗 ‼️',
+          '請稍後嘗試'
+        );
+      } else {
+        uuponNotify(
+          '保存成功 🍪',
+          ''
+        );
+      }
+    } catch (error) {
+      uuponNotify(
+        '保存失敗 ‼️',
+        error
+      );
+    }
   }
   // if (cookie && $request.body) {
   //   try {
