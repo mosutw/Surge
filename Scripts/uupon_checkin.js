@@ -39,9 +39,9 @@ function getEventPageUrl() {
   $httpClient.post(mainPageRequest, function (error, response, data) {
     // console.log(response);
     // console.log(data);
-    console.log(typeof(data))
-    document = parser.parseFromString(data, "text/html");
-    console.log(document);
+    // console.log(typeof(data))
+    d = response.body;
+    console.log(d);
     if (error) {
       console.log(error)
       uuponNotify(
