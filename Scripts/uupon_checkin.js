@@ -38,8 +38,10 @@ let checkinRequest = {
 function getEventPageUrl() {
   $httpClient.post(mainPageRequest, function (error, response, data) {
     // console.log(response);
-    console.log(data);
+    // console.log(data);
     console.log(typeof(data))
+    document = parser.parseFromString(data, "text/html");
+    console.log(document);
     if (error) {
       console.log(error)
       uuponNotify(
