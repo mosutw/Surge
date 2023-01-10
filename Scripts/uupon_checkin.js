@@ -40,9 +40,10 @@ function getEventPageUrl() {
     // console.log(response);
     // console.log(data);
     // console.log(typeof(data))
-    const doc = new DOMParser().parseFromString(data, 'text/html');
-    const arr = [...doc.body.children].map(child => child.outerHTML);
-    console.log(arr);
+    var el = document.createElement( 'html' );
+    el.innerHTML = data;
+    el.getElementsById( 'div-act'); // Live NodeList of your anchor elements
+    console.log(el);
     // if (error) {
     //   console.log(error)
     //   uuponNotify(
