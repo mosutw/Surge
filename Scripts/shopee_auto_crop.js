@@ -79,14 +79,14 @@ async function preCheck() {
     cropNames = shopeeCropName.split(',');
     return resolve();
   });
-}
 
-let createCropRequest = {
-  url: `https://games.shopee.tw/farm/api/orchard/crop/create?t=${new Date().getTime()}`,
-  headers: config.shopeeHeaders,
-  body: {
-    metaId: 0,
-    s: shopeeCropToken
+  let createCropRequest = {
+    url: `https://games.shopee.tw/farm/api/orchard/crop/create?t=${new Date().getTime()}`,
+    headers: config.shopeeHeaders,
+    body: {
+      metaId: 0,
+      s: shopeeCropToken
+    }
   }
 }
 
