@@ -5,7 +5,7 @@ const shopeeHeaders = {
   'X-CSRFToken': shopeeCSRFToken,
 };
 function shopeeNotify(subtitle = '', message = '') {
-  $notification.post('🍤 蝦皮免運寶箱', subtitle, message, { 'url': 'shopeetw://' });
+  $notification.post('🍤 蝦皮果園朋友列表', subtitle, message, { 'url': 'shopeetw://' });
 };
 
 let shopeeGetFriendIdRequest = {
@@ -15,7 +15,7 @@ let shopeeGetFriendIdRequest = {
 
 
 // 取得朋友列表
-function ShopeeGetFriendId() {
+function shopeeGetFriendId() {
   $httpClient.get(shopeeGetFriendIdRequest, function (error, response, data) {
     if (error) {
       shopeeNotify(
@@ -64,4 +64,4 @@ function ShopeeGetFriendId() {
   });
 }
 
-eventListGetActivity();
+shopeeGetFriendId();
