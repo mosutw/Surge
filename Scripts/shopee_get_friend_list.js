@@ -30,17 +30,20 @@ function shopeeGetFriendId() {
 //          console.log(data);
           console.log(obj.msg);
           if (obj.msg === 'success') {
-            console.log('1111');
-            const eventUrl = obj.data.basic.event_code;
-            let module_id = 0;
-            let found = false;
-            for (const item of obj.data.modules) {
-              if (item.module_name === 'Service.LUCKY_DRAW_COMPONENT') {
-                module_id = item.module_id;
-                found = true;
-                break;
-              }
-            }
+            let uniqueData = obj.filter(function(item, index, self) {
+              return self.findIndex(function(i) {
+                  //console.log(i.data.FriendID);
+                return i.data.FriendID === item.data.FriendID;
+              }) === index;
+            });            
+            console.log(uniqueData);
+            // for (const item of obj.data.modules) {
+            //   if (item.module_name === 'Service.LUCKY_DRAW_COMPONENT') {
+            //     module_id = item.module_id;
+            //     found = true;
+            //     break;
+            //   }
+            // }
           } else {
             shopeeNotify(
               '朋友列表取得失敗1 ‼️',
