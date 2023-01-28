@@ -1,6 +1,7 @@
 const shopeeCookie = $persistentStore.read('CookieSP') + ';SPC_EC=' + $persistentStore.read('SPC_EC') + ';';
 const shopeeCSRFToken = $persistentStore.read('CSRFTokenSP');
 const shopeeFriendsInfo = $persistentStore.read('ShopeeCropFriends');
+const shopeeCropToken = $persistentStore.read('ShopeeCropToken') || '';
 const shopeeHeaders = {
   'Cookie': shopeeCookie,
   'X-CSRFToken': shopeeCSRFToken,
