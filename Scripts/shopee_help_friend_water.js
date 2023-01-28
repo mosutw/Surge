@@ -31,48 +31,49 @@ let shopeeHelpFriendWaterRequest = {
 
 // 幫朋友澆水
 function shopeeHelpFriendWater() {
-  for (const Friend of shopeeFriendsInfo) {
-    try {
-      // shopeeHelpFriendWaterRequest.body.friendId = Friend.FriendId;
-      // shopeeHelpFriendWaterRequest.body.name = Friend.FriendName;
-      // shopeeHelpFriendWaterRequest.body.deviceId = '';
-      const request = {
-        url: `https://games.shopee.tw/farm/api/friend/orchard/context/get?friendId=` + Friend.FriendId,
-        headers: shopeeHeaders
-      };
-      $httpClient.get(request, function (error, response, data) {
-        if (error) {
-          return reject(['取得朋友CronId失敗1 ‼️', '請重新登入']);
-        }
-        else {
-          if (response.status === 200) {
-            const obj = JSON.parse(data);
-            if (obj.msg === 'success') {
-              console.log(obj);
-              // const cropMetas = obj.data.cropMetas;
-              // let found = false;
-              // let haveSeed = true;
+  console.log(shopeeFriendsInfo);
+  // for (const Friend of shopeeFriendsInfo) {
+  //   try {
+  //     // shopeeHelpFriendWaterRequest.body.friendId = Friend.FriendId;
+  //     // shopeeHelpFriendWaterRequest.body.name = Friend.FriendName;
+  //     // shopeeHelpFriendWaterRequest.body.deviceId = '';
+  //     const request = {
+  //       url: `https://games.shopee.tw/farm/api/friend/orchard/context/get?friendId=` + Friend.FriendId,
+  //       headers: shopeeHeaders
+  //     };
+  //     $httpClient.get(request, function (error, response, data) {
+  //       if (error) {
+  //         return reject(['取得朋友CronId失敗1 ‼️', '請重新登入']);
+  //       }
+  //       else {
+  //         if (response.status === 200) {
+  //           const obj = JSON.parse(data);
+  //           if (obj.msg === 'success') {
+  //             console.log(obj);
+  //             // const cropMetas = obj.data.cropMetas;
+  //             // let found = false;
+  //             // let haveSeed = true;
 
-              // if (found === false) {
-              //   return reject(['取得種子失敗 ‼️', `今天沒有「${shopeeCropName}」的種子`]);
-              // }
-            } else {
-              return reject(['取得朋友CronId失敗2 ‼️', `錯誤代號：${obj.code}，訊息：${obj.msg}`]);
-            }
-          } else {
-            return reject(['取得朋友CronId失敗3 ‼️', response.status]);
-          }          
-        }
-      });
-    } 
-    catch (error) {
-      shopeeNotify(
-        '幫澆水失敗 ‼️',
-        error
-      );
-      $done();
-    }
-  }
+  //             // if (found === false) {
+  //             //   return reject(['取得種子失敗 ‼️', `今天沒有「${shopeeCropName}」的種子`]);
+  //             // }
+  //           } else {
+  //             return reject(['取得朋友CronId失敗2 ‼️', `錯誤代號：${obj.code}，訊息：${obj.msg}`]);
+  //           }
+  //         } else {
+  //           return reject(['取得朋友CronId失敗3 ‼️', response.status]);
+  //         }          
+  //       }
+  //     });
+  //   } 
+  //   catch (error) {
+  //     shopeeNotify(
+  //       '幫澆水失敗 ‼️',
+  //       error
+  //     );
+  //     $done();
+  //   }
+  // }
 }
 
 shopeeHelpFriendWater();
