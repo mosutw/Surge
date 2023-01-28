@@ -35,14 +35,9 @@ function shopeeGetFriendId() {
                 return i.data.FriendID === item.data.FriendID;
               }) === index;
             });            
-            console.log(uniqueData);
-            // for (const item of obj.data.modules) {
-            //   if (item.module_name === 'Service.LUCKY_DRAW_COMPONENT') {
-            //     module_id = item.module_id;
-            //     found = true;
-            //     break;
-            //   }
-            // }
+            // console.log(uniqueData);
+            FriendsInfo = uniqueData.map(item =>({FriendId: item.data.FriendID, FriendName: item.data.name}));
+            console.log(FriendsInfo);
           } else {
             shopeeNotify(
               '朋友列表取得失敗1 ‼️',
