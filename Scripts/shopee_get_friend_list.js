@@ -27,8 +27,10 @@ function shopeeGetFriendId() {
       if (response.status === 200) {
         try {
           const obj = JSON.parse(data);
-          console.log(data);
+//          console.log(data);
+          console.log(obj.msg);
           if (obj.msg === 'success') {
+            console.log('1111');
             const eventUrl = obj.data.basic.event_code;
             let module_id = 0;
             let found = false;
@@ -41,14 +43,14 @@ function shopeeGetFriendId() {
             }
           } else {
             shopeeNotify(
-              '朋友列表取得失敗 ‼️',
+              '朋友列表取得失敗1 ‼️',
               obj.msg
             );
             $done();
           }
         } catch (error) {
           shopeeNotify(
-            '朋友列表取得失敗 ‼️',
+            '朋友列表取得失敗2 ‼️',
             error
           );
           $done();
