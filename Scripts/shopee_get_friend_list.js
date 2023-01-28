@@ -30,7 +30,7 @@ function shopeeGetFriendId() {
 //          console.log(data);
           console.log(obj.msg);
           if (obj.msg === 'success') {
-            let uniqueData = obj.filter(function(item, index, self) {
+            let uniqueData = obj.data.message.filter(function(item, index, self) {
               return self.findIndex(function(i) {
                   //console.log(i.data.FriendID);
                 return i.data.FriendID === item.data.FriendID;
