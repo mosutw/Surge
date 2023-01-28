@@ -35,9 +35,9 @@ function shopeeGetFriendId() {
                 return i.data.FriendID === item.data.FriendID;
               }) === index;
             });            
-            // console.log(uniqueData);
             FriendsInfo = uniqueData.map(item =>({FriendId: item.data.FriendID, FriendName: item.data.name}));
-            console.log(FriendsInfo);
+            $persistentStore.write(FriendsInfo, 'ShopeeCropFriends');
+            // console.log(FriendsInfo);
           } else {
             shopeeNotify(
               '朋友列表取得失敗1 ‼️',
