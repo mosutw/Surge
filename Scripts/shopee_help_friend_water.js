@@ -30,7 +30,7 @@ let shopeeHelpFriendWaterRequest = {
 
 
 // 幫朋友澆水
-function shopeehHelpFriendWater() {
+function shopeeHelpFriendWater() {
   for (const Friend of shopeeFriendsInfo) {
     try {
       // shopeeHelpFriendWaterRequest.body.friendId = Friend.FriendId;
