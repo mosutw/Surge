@@ -2,7 +2,7 @@ const shopeeCookie = $persistentStore.read('CookieSP') + ';SPC_EC=' + $persisten
 const shopeeCSRFToken = $persistentStore.read('CSRFTokenSP');
 const shopeeFriendsInfo = $persistentStore.read('ShopeeCropFriends');
 const shopeeCropToken = $persistentStore.read('ShopeeCropToken') || '';
-const shopeeInfo = $persistentStore.read('ShopeeInfo');
+// const shopeeInfo = $persistentStore.read('ShopeeInfo');
 const shopeeHeaders = {
   'Cookie': shopeeCookie,
   'X-CSRFToken': shopeeCSRFToken,
@@ -32,8 +32,7 @@ let shopeeHelpFriendWaterRequest = {
 
 // 幫朋友澆水
 function shopeeHelpFriendWater() {
-  // console.log(JSON.parse(shopeeFriendsInfo));
-  console.log(shopeeInfo);
+  console.log(JSON.parse(shopeeFriendsInfo)[0]);
   // for (const Friend of shopeeFriendsInfo) {
   //   try {
   //     // shopeeHelpFriendWaterRequest.body.friendId = Friend.FriendId;
