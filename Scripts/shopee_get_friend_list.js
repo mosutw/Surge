@@ -27,6 +27,7 @@ function shopeeGetFriendId() {
       if (response.status === 200) {
         try {
           if (obj.msg === 'success') {
+            const obj = JSON.parse(data);
             let uniqueData = obj.data.messages.filter(function(item, index, self) {
               return self.findIndex(function(i) {
                   //console.log(i.data.FriendID);
