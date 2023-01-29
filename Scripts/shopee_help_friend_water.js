@@ -32,7 +32,6 @@ let shopeeHelpFriendWaterRequest = {
 
 // 幫朋友澆水
 function shopeeHelpFriendWater() {
-  console.log(JSON.parse(shopeeFriendsInfo)[0]);
   Friend = JSON.parse(shopeeFriendsInfo)[0];
   shopeeHelpFriendWaterRequest.body.friendId = Friend.FriendId;
   shopeeHelpFriendWaterRequest.body.name = Friend.FriendName;
@@ -47,6 +46,7 @@ function shopeeHelpFriendWater() {
     }
     else {
       if (response.status === 200) {
+        console.log(data);
         const obj = JSON.parse(data);
         if (obj.msg === 'success') {
           console.log(obj);
