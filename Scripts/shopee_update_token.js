@@ -183,7 +183,7 @@ async function updateCookie(spcEc) {
                 shopeeInfo.userName = obj.data.username;
                 console.log('✅ 建立新版 token');
               }
-
+              console.log(tokenInfo);
               shopeeInfo.token = tokenInfo;
               const save = $persistentStore.write(JSON.stringify(shopeeInfo, null, 4), 'ShopeeInfo');
               if (!save) {
