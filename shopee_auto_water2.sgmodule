@@ -11,8 +11,8 @@
 [蝦蝦果園]道具商店水滴 = type=cron, cronexp="50 * * * *", script-path=https://kinta.ma/surge/scripts/shopee_grocery_store_water.js, wake-system=1, timeout=5
 [蝦蝦果園]取得作物資料 = type=http-request, pattern=^https:\/\/games\.shopee\.tw\/farm\/api\/orchard\/crop\/water(.*),script-path=https://kinta.ma/surge/scripts/shopee_get_crop.js, requires-body=true
 [蝦蝦果園]取得道具商店token = type=http-request, pattern=^https:\/\/games\.shopee\.tw\/farm\/api\/grocery_store\/claim,script-path=https://kinta.ma/surge/scripts/shopee_get_grocery_store_token.js, requires-body=true
-[蝦蝦果園]取得朋友列表 = type=http-request, pattern=^https:\/\/games\.shopee\.tw\/farm\/api\/message,script-path=https://raw.githubusercontent.com/mosutw/Surge/main/Scripts/shopee_get_friend_list.js, requires-body=true
-#[蝦蝦果園]幫朋友澆水 = type=http-request, pattern=^https:\/\/games\.shopee\.tw\/farm\/api\/friend\/help,script-path=https://raw.githubusercontent.com/mosutw/Surge/main/Scripts/shopee_help_friend_water.js, requires-body=true
+[蝦蝦果園]取得朋友列表 = script-path=https://raw.githubusercontent.com/mosutw/Surge/main/Scripts/shopee_get_friend_list.js, requires-body=true
+[蝦蝦果園]幫朋友澆水 = script-path=https://raw.githubusercontent.com/mosutw/Surge/main/Scripts/shopee_help_friend_water.js, requires-body=true
 
 [MITM]
 hostname = %APPEND% games.shopee.tw
