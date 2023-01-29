@@ -90,6 +90,8 @@ async function updateSpcEc() {
             }
             const cookie = response.headers['Set-Cookie'] || response.headers['set-cookie'];
             if (cookie) {
+              console.log('1..........');
+              console.log(cookie);
               const filteredCookie = cookie.replaceAll('HttpOnly;', '').replaceAll('Secure,', '');
               const cookieObject = parseCookie(filteredCookie);
 
