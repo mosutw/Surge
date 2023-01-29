@@ -37,7 +37,8 @@ function shopeeGetFriendId() {
             });            
             FriendsInfo = uniqueData.map(item =>({FriendId: item.data.FriendID, FriendName: item.data.name}));
             $persistentStore.write(FriendsInfo, 'ShopeeCropFriends');
-            console.log('朋友數目:' + FriendsInfo.length);
+            const fi = $persistentStore.read('ShopeeCropFriends');
+            console.log('朋友數目:' + fi.length);
           } else {
             shopeeNotify(
               '朋友列表取得失敗1 ‼️',
