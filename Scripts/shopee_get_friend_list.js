@@ -35,8 +35,9 @@ function shopeeGetFriendId() {
                 return i.data.FriendID === item.data.FriendID;
               }) === index;
             });            
-            FriendsInfo = uniqueData.map(item =>({FriendId: item.data.FriendID, FriendName: item.data.name}));
-            const saveCronFriends = $persistentStore.write(FriendsInfo[0], 'ShopeeCropFriends');
+            // FriendsInfo = uniqueData.map(item =>({FriendId: item.data.FriendID, FriendName: item.data.name}));
+            FriendsInfo = uniqueData[0];
+            const saveCronFriends = $persistentStore.write(FriendsInfo, 'ShopeeCropFriends');
             // console.log(FriendsInfo);
             if (!saveCronFriends) {
               shopeeNotify(
