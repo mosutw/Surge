@@ -40,11 +40,15 @@ function shopeeHelpFriendWater() {
     url: `https://games.shopee.tw/farm/api/friend/orchard/context/get?friendId=` + Friend.FriendId,
     headers: shopeeHeaders
   };
+  console.log(request);
   $httpClient.get(request, function (error, response, data) {
     if (error) {
-      return reject(['取得朋友CronId失敗1 ‼️', '請重新登入']);
+      console.log(error);
+
+      // return reject(['取得朋友CronId失敗1 ‼️', '請重新登入']);
     }
     else {
+      console.log(response);
       if (response.status === 200) {
         console.log(data);
         const obj = JSON.parse(data);
@@ -58,10 +62,11 @@ function shopeeHelpFriendWater() {
           //   return reject(['取得種子失敗 ‼️', `今天沒有「${shopeeCropName}」的種子`]);
           // }
         } else {
-          return reject(['取得朋友CronId失敗2 ‼️', `錯誤代號：${obj.code}，訊息：${obj.msg}`]);
-        }
+          console.log('aaaaaaa');
+          }
       } else {
-        return reject(['取得朋友CronId失敗3 ‼️', response.status]);
+        console.log('bbbbbbbbb');
+          
       }          
     }
   });
