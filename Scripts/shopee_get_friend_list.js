@@ -39,7 +39,7 @@ function shopeeGetFriendId() {
             // FriendsInfo = uniqueData.map(item =>({FriendId: item.data.FriendID, FriendName: item.data.name}));
             FriendsInfo = obj.data.messages[0];
             console.log('FriendsInfo');
-            // const saveCronFriends = $persistentStore.write(FriendsInfo, 'ShopeeCropFriends');
+            const saveCronFriends = $persistentStore.write(JSON.stringify(FriendsInfo), 'ShopeeCropFriends');
             // console.log(FriendsInfo);
             if (!saveCronFriends) {
               shopeeNotify(
