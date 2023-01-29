@@ -9,7 +9,7 @@ function shopeeNotify(subtitle = '', message = '') {
 };
 
 let shopeeGetFriendIdRequest = {
-  url: 'https://games.shopee.tw/farm/api/message/get?page=1&pageSize=100',
+  url: 'https://games.shopee.tw/farm/api/message/get?page=1&pageSize=20',
   headers: shopeeHeaders,
 };
 
