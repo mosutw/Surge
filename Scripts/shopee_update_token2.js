@@ -173,7 +173,7 @@ async function updateCookie(spcEc) {
                 SPC_F: cookieObject.SPC_F,
                 SPC_CLIENTID: cookieObject.SPC_CLIENTID,
               }
-
+              console.log(tokeninfo);
               if (isEmptyObject(shopeeInfo)) {
                 const oldShopeeToken = $persistentStore.read('ShopeeToken');
                 if (!oldShopeeToken || oldShopeeToken.length === 0) {
