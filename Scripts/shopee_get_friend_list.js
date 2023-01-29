@@ -45,7 +45,7 @@ function shopeeGetFriendId() {
                 '保存成功'
               );
             }                    
-            console.log('朋友數目:' + FriendInfo.length);
+            console.log('朋友數目:' + FriendsInfo.length);
             $done();
           } else {
             shopeeNotify(
