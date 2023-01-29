@@ -29,18 +29,15 @@ function shopeeGetFriendId() {
           console.log(response.status);
           const obj = JSON.parse(data);
           if (obj.msg === 'success') {
-            // console.log(obj.data);
-            // let uniqueData = obj.data.messages.filter(function(item, index, self) {
-            //   return self.findIndex(function(i) {
-            //       //console.log(i.data.FriendID);
-            //     return i.data.FriendID === item.data.FriendID;
-            //   }) === index;
-            // });            
-            // FriendsInfo = uniqueData.map(item =>({FriendId: item.data.FriendID, FriendName: item.data.name}));
-            FriendsInfo = obj.data.messages[0];
-            console.log('FriendsInfo');
+            console.log(obj.data);
+            let uniqueData = obj.data.messages.filter(function(item, index, self) {
+              return self.findIndex(function(i) {
+                  //console.log(i.data.FriendID);
+                return i.data.FriendID === item.data.FriendID;
+              }) === index;
+            });            
+            FriendsInfo = uniqueData.map(item =>({FriendId: item.data.FriendID, FriendName: item.data.name}));
             const saveCronFriends = $persistentStore.write(JSON.stringify(FriendsInfo), 'ShopeeCropFriends');
-            // console.log(FriendsInfo);
             if (!saveCronFriends) {
               shopeeNotify(
                 '保存失敗 ‼️',
@@ -50,9 +47,8 @@ function shopeeGetFriendId() {
               shopeeNotify(
                 '保存成功'
               );
-            }
-                      
-            // console.log('朋友數目:' + fi.length);
+            }                    
+            console.log('朋友數目:' + FriendInfo.length);
           } else {
             shopeeNotify(
               '朋友列表取得失敗1 ‼️',
