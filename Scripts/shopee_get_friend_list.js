@@ -13,8 +13,60 @@ let shopeeGetFriendIdRequest = {
   headers: shopeeHeaders,
 };
 
+let shopeeGetDeviceIdRequest = {
+  url: 'https://shopee.tw/sw.js',
+  headers: shopeeHeaders,
+};
 
-// 取得朋友列表
+// 取得DeviceID
+function shopeeGetDeviceId() {
+  $httpClient.get(shopeeGetDeviceIdRequest, function (error, response, data) {
+    if (error) {
+      shopeeNotify(
+        'DeviceId取得失敗 ‼️',
+        '連線錯誤'
+      );
+      $done();
+    } else {
+      if (response.status === 200) {
+        const cookie = response.headers['Set-Cookie'] || response.headers['set-cookie'];
+        if (cookie) {
+          console.log('1.............');
+          console.log(cookie);
+          const filteredCookie = cookie.replaceAll('HttpOnly;', '').replaceAll('Secure,', '');
+          const cookieObject = parseCookie(filteredCookie);
+
+          // 舊方法，2/1 之後廢棄
+          const spcClientId = cookieObject.SPC_CLIENTID;
+          const saveSpcClientId = $persistentStore.write(spcClientId, 'SPC_ClientId');
+
+          if (!(saveSpcClientId)) {
+            shopeeNotify(
+              'DeviceId取得失敗1 ‼️'
+            );
+            $done();
+          } else {
+            shopeeNotify(
+              'DeviceId保存成功'
+            );          }
+            $done();
+          } else {
+          shopeeNotify(
+            'DeviceId取得失敗2 ‼️'
+          );
+          $done();
+      }        
+      } else {
+        shopeeNotify(
+          'Cookie 已過期 ‼️',
+          '請重新登入'
+        );
+        $done();
+      }
+    }
+  });
+}
+  // 取得朋友列表
 function shopeeGetFriendId() {
   $httpClient.get(shopeeGetFriendIdRequest, function (error, response, data) {
     if (error) {
@@ -73,4 +125,5 @@ function shopeeGetFriendId() {
   });
 }
 
+shopeeGetDeviceId();
 shopeeGetFriendId();
