@@ -21,7 +21,9 @@ let shopeeGetDeviceIdRequest = {
 // 取得DeviceID
 function shopeeGetDeviceId() {
   $httpClient.get(shopeeGetDeviceIdRequest, function (error, response, data) {
+    console.log(response.status);
     if (error) {
+      console.log(error);
       shopeeNotify(
         'DeviceId取得失敗 ‼️',
         '連線錯誤'
@@ -90,12 +92,12 @@ function shopeeGetFriendId() {
             const saveCronFriends = $persistentStore.write(JSON.stringify(FriendsInfo), 'ShopeeCropFriends');
             if (!saveCronFriends) {
               shopeeNotify(
-                '保存失敗 ‼️',
+                '朋友列表保存失敗 ‼️',
                 saveCronFriends 
               );
             } else {
               shopeeNotify(
-                '保存成功'
+                '朋友列表保存成功'
               );
             }                    
             console.log('朋友數目:' + FriendsInfo.length);
