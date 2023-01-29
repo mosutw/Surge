@@ -2,7 +2,7 @@ let showNotification = true;
 let config = null;
 
 function surgeNotify(subtitle = '', message = '') {
-  $notification.post('🍤 蝦皮更新 token', subtitle, message, { 'url': 'shopeetw://' });
+  $notification.post('🍤 蝦皮更新 token2', subtitle, message, { 'url': 'shopeetw://' });
 };
 
 function handleError(error) {
