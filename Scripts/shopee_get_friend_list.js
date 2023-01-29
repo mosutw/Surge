@@ -37,17 +37,17 @@ function shopeeGetFriendId() {
               }) === index;
             });            
             FriendsInfo = uniqueData.map(item =>({FriendId: item.data.FriendID, FriendName: item.data.name}));
-            const saveCronFriends = $persistentStore.write(JSON.stringify(FriendsInfo), 'ShopeeCropFriends');
-            if (!saveCronFriends) {
-              shopeeNotify(
-                '保存失敗 ‼️',
-                saveCronFriends 
-              );
-            } else {
-              shopeeNotify(
-                '保存成功'
-              );
-            }                    
+            // const saveCronFriends = $persistentStore.write(JSON.stringify(FriendsInfo), 'ShopeeCropFriends');
+            // if (!saveCronFriends) {
+            //   shopeeNotify(
+            //     '保存失敗 ‼️',
+            //     saveCronFriends 
+            //   );
+            // } else {
+            //   shopeeNotify(
+            //     '保存成功'
+            //   );
+            // }                    
             console.log('朋友數目:' + FriendInfo.length);
           } else {
             shopeeNotify(
