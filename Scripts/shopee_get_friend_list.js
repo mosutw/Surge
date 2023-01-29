@@ -29,20 +29,20 @@ function shopeeGetFriendId() {
           const obj = JSON.parse(data);
           if (obj.msg === 'success') {
             // console.log(obj.data);
-            let uniqueData = obj.data.messages.filter(function(item, index, self) {
-              return self.findIndex(function(i) {
-                  //console.log(i.data.FriendID);
-                return i.data.FriendID === item.data.FriendID;
-              }) === index;
-            });            
+            // let uniqueData = obj.data.messages.filter(function(item, index, self) {
+            //   return self.findIndex(function(i) {
+            //       //console.log(i.data.FriendID);
+            //     return i.data.FriendID === item.data.FriendID;
+            //   }) === index;
+            // });            
             // FriendsInfo = uniqueData.map(item =>({FriendId: item.data.FriendID, FriendName: item.data.name}));
-            FriendsInfo = uniqueData[0];
+            FriendsInfo = obj.data.messages[0];
             const saveCronFriends = $persistentStore.write(FriendsInfo, 'ShopeeCropFriends');
             // console.log(FriendsInfo);
             if (!saveCronFriends) {
               shopeeNotify(
                 '保存失敗 ‼️',
-                saveCronFriends
+                saveCronFriends 
               );
             } else {
               shopeeNotify(
