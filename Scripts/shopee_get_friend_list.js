@@ -37,7 +37,7 @@ function shopeeGetFriendId() {
             });            
             FriendsInfo = uniqueData.map(item =>({FriendId: item.data.FriendID, FriendName: item.data.name}));
             const saveCronFriends = $persistentStore.write(FriendsInfo, 'ShopeeCropFriends');
-            if (!saveCropFriends) {
+            if (!saveCronFriends) {
               shopeeNotify(
                 '保存失敗 ‼️',
                 saveCronFriends
