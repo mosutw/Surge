@@ -34,7 +34,7 @@ function shopeeGetFriendId() {
             //     return i.data.FriendID === item.data.FriendID;
             //   }) === index;
             // });            
-            FriendsInfo = obj.data.messages[0];
+            // FriendsInfo = obj.data.messages[0];
             // FriendsInfo = uniqueData.map(item =>({FriendId: item.data.FriendID, FriendName: item.data.name}));
             // const saveCronFriends = $persistentStore.write(JSON.stringify(FriendsInfo), 'ShopeeCropFriends');
             // if (!saveCronFriends) {
@@ -48,7 +48,7 @@ function shopeeGetFriendId() {
             //   );
             // }                    
             // console.log('朋友數目:' + JSON.stringify(FriendInfo.length));
-            console.log('朋友數目:' + JSON.stringify(FriendsInfo).length);
+            console.log('朋友數目:' + JSON.stringify(obj).length);
           } else {
             shopeeNotify(
               '朋友列表取得失敗1 ‼️',
