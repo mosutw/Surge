@@ -9,7 +9,7 @@ function shopeeNotify(subtitle = '', message = '') {
 };
 
 let shopeeGetFriendIdRequest = {
-  url: 'https://games.shopee.tw/farm/api/message/get?page=1&pageSize=20',
+  url: 'https://games.shopee.tw/farm/api/message/get?page=1&pageSize=100',
   headers: shopeeHeaders,
 };
 
@@ -26,29 +26,28 @@ function shopeeGetFriendId() {
     } else {
       if (response.status === 200) {
         try {
-          const obj = JSON.parse(data);
           if (obj.msg === 'success') {
-            // let uniqueData = obj.data.messages.filter(function(item, index, self) {
-            //   return self.findIndex(function(i) {
-            //       //console.log(i.data.FriendID);
-            //     return i.data.FriendID === item.data.FriendID;
-            //   }) === index;
-            // });            
-            // FriendsInfo = obj.data.messages[0];
-            // FriendsInfo = uniqueData.map(item =>({FriendId: item.data.FriendID, FriendName: item.data.name}));
-            // const saveCronFriends = $persistentStore.write(JSON.stringify(FriendsInfo), 'ShopeeCropFriends');
-            // if (!saveCronFriends) {
-            //   shopeeNotify(
-            //     '保存失敗 ‼️',
-            //     saveCronFriends 
-            //   );
-            // } else {
-            //   shopeeNotify(
-            //     '保存成功'
-            //   );
-            // }                    
-            // console.log('朋友數目:' + JSON.stringify(FriendInfo.length));
-            console.log('朋友數目:' + data.length);
+            let uniqueData = obj.data.messages.filter(function(item, index, self) {
+              return self.findIndex(function(i) {
+                  //console.log(i.data.FriendID);
+                return i.data.FriendID === item.data.FriendID;
+              }) === index;
+            });            
+            FriendsInfo = obj.data.messages[0];
+            FriendsInfo = uniqueData.map(item =>({FriendId: item.data.FriendID, FriendName: item.data.name}));
+            const saveCronFriends = $persistentStore.write(JSON.stringify(FriendsInfo), 'ShopeeCropFriends');
+            if (!saveCronFriends) {
+              shopeeNotify(
+                '保存失敗 ‼️',
+                saveCronFriends 
+              );
+            } else {
+              shopeeNotify(
+                '保存成功'
+              );
+            }                    
+            console.log('朋友數目:' + FriendInfo.length);
+            $done();
           } else {
             shopeeNotify(
               '朋友列表取得失敗1 ‼️',
