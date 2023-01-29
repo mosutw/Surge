@@ -74,6 +74,7 @@ function shopeeHelpFriendWater() {
   //     $done();
   //   }
   // }
+  $done();
 }
 
 shopeeHelpFriendWater();
