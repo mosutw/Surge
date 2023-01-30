@@ -138,7 +138,7 @@ async function loopGetRequest() {
   let CropFail = 0;
   Friend = JSON.parse(shopeeFriendsInfo)[0];
   // for (const Friend of JSON.parse(shopeeFriendsInfo)) {
-    await shopeeGetFriendCrop(Friend);
+    setTimeout(await shopeeGetFriendCrop(Friend),1000);
   // }
   // console.log('OK:' + CropOK + 'Fail:' + CropFail);
   // $done();
