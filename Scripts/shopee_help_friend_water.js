@@ -47,7 +47,7 @@ function shopeeGetFriendCrop() {
         headers: shopeeHeaders
       };
       // console.log(request);
-      $httpClient.get(request, function (error, response, data) {
+      $httpClient.get(request, async function (error, response, data) {
         if (error) {
           console.log('取得朋友CronId失敗1 ‼️', '請重新登入');
           $done();
