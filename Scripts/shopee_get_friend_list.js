@@ -70,6 +70,7 @@ function shopeeGetDeviceId() {
 }
   // 取得朋友列表
 function shopeeGetFriendId() {
+  const oldFriendsInfo = $persistentStore.read('ShopeeCropFriends');
   $httpClient.get(shopeeGetFriendIdRequest, function (error, response, data) {
     if (error) {
       shopeeNotify(
@@ -88,7 +89,18 @@ function shopeeGetFriendId() {
                 return i.data.FriendID === item.data.FriendID;
               }) === index;
             });            
-            FriendsInfo = uniqueData.map(item =>({FriendId: item.data.FriendID, FriendName: item.data.name}));
+            FriendsInfo_new = uniqueData.map(item =>({FriendId: item.data.FriendID, FriendName: item.data.name}));
+            
+            const FriendsInfo = [...FriendsInfo_old, ...FriendsInfo_new].reduce((acc, curr) => {
+              const existing = acc.find(item => item.FriendId === curr.FriendId);
+              if (!existing) {
+                acc.push(curr);
+              } else {
+                Object.assign(existing, curr);
+              }
+              return acc;
+            }, []);
+
             const saveCronFriends = $persistentStore.write(JSON.stringify(FriendsInfo), 'ShopeeCropFriends');
             if (!saveCronFriends) {
               shopeeNotify(
@@ -127,5 +139,5 @@ function shopeeGetFriendId() {
   });
 }
 
-shopeeGetDeviceId();
+// shopeeGetDeviceId();
 shopeeGetFriendId();
