@@ -52,7 +52,7 @@ async function shopeeGetFriendCrop(Friend) {
       $httpClient.get(request, async function (error, response, data) {
         if (error) {
           console.log('取得朋友CronId失敗1 ‼️', '請重新登入');
-          $done();
+          // $done();
           // return reject(['取得朋友CronId失敗1 ‼️', '請重新登入']);
         }
         else {
@@ -62,9 +62,9 @@ async function shopeeGetFriendCrop(Friend) {
               shopeeHelpFriendWaterRequest.body.cropId = obj.data.crops[0].id;
               // console.log(shopeeHelpFriendWaterRequest.headers);
               console.log(shopeeHelpFriendWaterRequest.body);
-              console.log('-----------------');
+              console.log('3----------------');
               // $done();
-              await shopeeHelpFriendWater(shopeeHelpFriendWaterRequest);
+              // await shopeeHelpFriendWater(shopeeHelpFriendWaterRequest);
               // $done();
 
             } else {
