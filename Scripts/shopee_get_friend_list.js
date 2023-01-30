@@ -70,7 +70,7 @@ function shopeeGetDeviceId() {
 }
   // 取得朋友列表
 function shopeeGetFriendId() {
-  let FriendsInfo_old = $persistentStore.read('ShopeeCropFriends');
+  const FriendsInfo_old = JSON.parse($persistentStore.read('ShopeeCropFriends'));
   $httpClient.get(shopeeGetFriendIdRequest, function (error, response, data) {
     if (error) {
       shopeeNotify(
