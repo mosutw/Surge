@@ -32,7 +32,7 @@ let shopeeHelpFriendWaterRequest = {
 
 
 // 幫朋友澆水
-function shopeeHelpFriendWater() {
+async function shopeeHelpFriendWater() {
   // console.log(JSON.parse(shopeeFriendsInfo));
   // $done();
   let CropOK = 0;
