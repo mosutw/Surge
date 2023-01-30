@@ -61,9 +61,9 @@ function shopeeHelpFriendWater() {
             if (obj.msg === 'success') {
               // console.log(obj);
               shopeeHelpFriendWaterRequest.body.cropId = obj.data.crops[0].id;
-              console.log(shopeeHelpFriendWaterRequest.headers);
-              console.log('-----------------');
+              // console.log(shopeeHelpFriendWaterRequest.headers);
               console.log(shopeeHelpFriendWaterRequest.body);
+              console.log('-----------------');
               // $done();
               $httpClient.post(shopeeHelpFriendWaterRequest, function (error, response, data) {
                 if (error) {
@@ -73,8 +73,8 @@ function shopeeHelpFriendWater() {
                 }
                 else {
                   if (response.status === 200) {
-                    const obj = JSON.parse(data);
-                    if (obj.msg === 'success') {
+                    const obj1 = JSON.parse(data);
+                    if (obj1.msg === 'success') {
                       // console.log('ok------------');                      
                       // console.log(obj);
                       CropOK += 1;
