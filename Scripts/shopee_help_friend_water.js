@@ -48,7 +48,7 @@ async function shopeeGetFriendCrop(Friend) {
         url: `https://games.shopee.tw/farm/api/friend/orchard/context/get?friendId=` + Friend.FriendId,
         headers: shopeeHeaders
       };
-      // console.log(request);
+      console.log(request);
       $httpClient.get(request, async function (error, response, data) {
         if (error) {
           console.log('取得朋友CronId失敗1 ‼️', '請重新登入');
@@ -144,6 +144,7 @@ async function loopGetRequest() {
   for (const Friend of JSON.parse(shopeeFriendsInfo)) {
     console.log('1------');
     const RequestData = await shopeeGetFriendCrop(Friend);
+    console.log(RequestData);
     await shopeeHelpFriendWater(RequestData);
   }
   console.log('OK:' + CropOK + 'Fail:' + CropFail);
