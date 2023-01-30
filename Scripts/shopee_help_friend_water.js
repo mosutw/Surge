@@ -143,8 +143,8 @@ async function loopGetRequest() {
     console.log('1------');
     await shopeeGetFriendCrop(Friend)
   }
-  // console.log('OK:' + CropOK + 'Fail:' + CropFail);
-  // $done();
+  console.log('OK:' + CropOK + 'Fail:' + CropFail);
+  $done();
 }
 // shopeeGetFriendCrop();
 loopGetRequest();
