@@ -63,7 +63,7 @@ async function shopeeGetFriendCrop(Friend) {
               console.log('-----------------');
               // $done();
               await shopeeHelpFriendWater(shopeeHelpFriendWaterRequest);
-              $done();
+              // $done();
 
             } else {
               CropFail += 1;
