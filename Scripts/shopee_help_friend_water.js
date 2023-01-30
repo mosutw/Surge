@@ -34,7 +34,7 @@ let shopeeHelpFriendWaterRequest = {
 function shopeeHelpFriendWater() {
   // console.log(JSON.parse(shopeeFriendsInfo));
   // $done();
-  Friend = JSON.parse(shopeeFriendsInfo)[19];
+  Friend = JSON.parse(shopeeFriendsInfo)[20];
   shopeeHelpFriendWaterRequest.body.friendId = Friend.FriendId;
   shopeeHelpFriendWaterRequest.body.friendName = Friend.FriendName;
   // shopeeHelpFriendWaterRequest.body.deviceId = '';
