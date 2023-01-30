@@ -54,6 +54,7 @@ function shopeeHelpFriendWater() {
           console.log(obj);
           shopeeHelpFriendWaterRequest.body.cropId = obj.data.crops.id;
           console.log(obj.data.crops.id);
+          $done();
           // $httpClient.post(shopeeHelpFriendWaterRequest, function (error, response, data) {
           //   if (error) {
           //     console.log(error);
