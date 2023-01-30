@@ -53,9 +53,11 @@ function shopeeHelpFriendWater() {
       if (response.status === 200) {
         const obj = JSON.parse(data);
         if (obj.msg === 'success') {
-          console.log(obj);
+          // console.log(obj);
           shopeeHelpFriendWaterRequest.body.cropId = obj.data.crops[0].id;
-          console.log(obj.data.crops[0].id);
+          console.log(shopeeHeaders);
+          console.log('-----------------');
+          console.log(shopeeHelpFriendWaterRequest.body);
           // $done();
           $httpClient.post(shopeeHelpFriendWaterRequest, function (error, response, data) {
             if (error) {
