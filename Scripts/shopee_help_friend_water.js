@@ -35,8 +35,8 @@ let shopeeHelpFriendWaterRequest = {
 function shopeeHelpFriendWater() {
   // console.log(JSON.parse(shopeeFriendsInfo));
   // $done();
-  const CropOK = 0;
-  const CropFail = 0;
+  let CropOK = 0;
+  let CropFail = 0;
   for (const Friend of JSON.parse(shopeeFriendsInfo)) {
     try {
       // Friend = JSON.parse(shopeeFriendsInfo)[24];
