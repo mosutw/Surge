@@ -1,4 +1,4 @@
-const shopeeCookie = $persistentStore.read('CookieSP') + ';SPC_EC=' + $persistentStore.read('SPC_EC') + ';';
+const shopeeCookie = $persistentStore.read('CookieSP') + ';SPC_EC=' + $persistentStore.read('SPC_EC') + ';SPC_F=61D8A54AC8FE46CFnexuighucearlvaz; SPC_CLIENTID=61D8A54AC8FE46CFnexuighucearlvaz'   ;
 const shopeeCSRFToken = $persistentStore.read('CSRFTokenSP');
 const shopeeFriendsInfo = $persistentStore.read('ShopeeCropFriends');
 const shopeeCropToken = $persistentStore.read('ShopeeCropToken') || '';
@@ -18,7 +18,7 @@ let shopeeGetFriendCropIdRequest = {
 
 let shopeeHelpFriendWaterRequest = {
   url: 'https://games.shopee.tw/farm/api/friend/help',
-  headers: shopeeHeaders  + ';SPC_F=61D8A54AC8FE46CFnexuighucearlvaz; SPC_CLIENTID=61D8A54AC8FE46CFnexuighucearlvaz'  ,
+  headers: shopeeHeaders  ,
   body: {
     friendId: '',
     cropId: '',
@@ -55,7 +55,7 @@ function shopeeHelpFriendWater() {
         if (obj.msg === 'success') {
           // console.log(obj);
           shopeeHelpFriendWaterRequest.body.cropId = obj.data.crops[0].id;
-          console.log(shopeeHeaders);
+          console.log(shopeeHelpFriendWaterRequest.headers);
           console.log('-----------------');
           console.log(shopeeHelpFriendWaterRequest.body);
           // $done();
