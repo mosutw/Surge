@@ -51,6 +51,7 @@ function shopeeHelpFriendWater() {
       if (response.status === 200) {
         const obj = JSON.parse(data);
         if (obj.msg === 'success') {
+          console.log(obj);
           shopeeHelpFriendWaterRequest.body.cropId = obj.data.crops.id;
           console.log(obj.data.crops.id);
           // $httpClient.post(shopeeHelpFriendWaterRequest, function (error, response, data) {
@@ -67,7 +68,7 @@ function shopeeHelpFriendWater() {
           //     }
           //   }
           // });
-          $done();
+          // $done();
 
         } else {
           console.log('aaaaaaa');
