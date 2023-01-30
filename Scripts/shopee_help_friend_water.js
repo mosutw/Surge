@@ -32,6 +32,8 @@ let shopeeHelpFriendWaterRequest = {
 
 // 幫朋友澆水
 async function shopeeGetFriendCrop(Friend) {
+  console.log('2------');
+
   // console.log(JSON.parse(shopeeFriendsInfo));
   // $done();
   // let CropOK = 0;
@@ -138,7 +140,7 @@ async function loopGetRequest() {
   let CropFail = 0;
   // Friend = JSON.parse(shopeeFriendsInfo)[0];
   for (const Friend of JSON.parse(shopeeFriendsInfo)) {
-    console.log('------');
+    console.log('1------');
     await shopeeGetFriendCrop(Friend)
   }
   // console.log('OK:' + CropOK + 'Fail:' + CropFail);
