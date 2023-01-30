@@ -40,7 +40,7 @@ function shopeeHelpFriendWater() {
   // shopeeHelpFriendWaterRequest.body.deviceId = '';
   const request = {
     url: `https://games.shopee.tw/farm/api/friend/orchard/context/get?friendId=` + Friend.FriendId,
-    headers: shopeeHeaders
+    headers: shopeeHeaders + ';SPC_F=61D8A54AC8FE46CFnexuighucearlvaz; SPC_CLIENTID=61D8A54AC8FE46CFnexuighucearlvaz'  
   };
   // console.log(request);
   $httpClient.get(request, function (error, response, data) {
