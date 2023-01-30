@@ -110,11 +110,12 @@ async function shopeeHelpFriendWater(shopeeHelpFriendWaterRequest) {
             // console.log(obj);
             // CropOK += 1;
             console.log('幫朋友澆水成功');        
-            // $done();          
+            $done();          
           }
           else {
             // CropFail += 1;
-            console.log('幫朋友澆水失敗4');        
+            console.log('幫朋友澆水失敗4');    
+            $done();    
           }
         }
       }
