@@ -22,7 +22,7 @@ let shopeeHelpFriendWaterRequest = {
   headers: shopeeHeaders,
   body: {
     friendId: '',
-    cronId: '',
+    cropId: '',
     devicdId: '',
     friendName: '',
     s: shopeeCropToken,
@@ -36,14 +36,13 @@ function shopeeHelpFriendWater() {
   Friend = JSON.parse(shopeeFriendsInfo)[0];
   shopeeHelpFriendWaterRequest.body.friendId = Friend.FriendId;
   shopeeHelpFriendWaterRequest.body.name = Friend.FriendName;
-  shopeeHelpFriendWaterRequest.body.deviceId = '';
+  // shopeeHelpFriendWaterRequest.body.deviceId = '';
   const request = {
     url: `https://games.shopee.tw/farm/api/friend/orchard/context/get?friendId=` + Friend.FriendId,
     headers: shopeeHeaders
   };
   // console.log(request);
   $httpClient.get(request, function (error, response, data) {
-    console.log("eeeeeeeee");
     if (error) {
       console.log(error);
       $done();
@@ -53,10 +52,22 @@ function shopeeHelpFriendWater() {
       if (response.status === 200) {
         const obj = JSON.parse(data);
         if (obj.msg === 'success') {
-          console.log(obj);
-          // const cropMetas = obj.data.cropMetas;
-          // let found = false;
-          // let haveSeed = true;
+          console.log(obj.data.crops.id);
+          shopeeHelpFriendWaterRequest.body.cropId = obj.data.crops.id;
+          $httpClient.post(shopeeHelpFriendWaterRequest, function (error, response, data) {
+            if (error) {
+              console.log(error);
+              $done();
+              // return reject(['取得朋友CronId失敗1 ‼️', '請重新登入']);
+            }
+            else {
+              if (response.status === 200) {
+                const obj = JSON.parse(data);
+                console.log(obj);
+                $done();
+              }
+            }
+          });
 
           // if (found === false) {
           //   return reject(['取得種子失敗 ‼️', `今天沒有「${shopeeCropName}」的種子`]);
