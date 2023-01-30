@@ -37,8 +37,7 @@ async function shopeeHelpFriendWater() {
   // $done();
   let CropOK = 0;
   let CropFail = 0;
-  const loop = async() => {
-    for (const Friend of JSON.parse(shopeeFriendsInfo)) {
+  for (const Friend of JSON.parse(shopeeFriendsInfo)) {
     try {
       // Friend = JSON.parse(shopeeFriendsInfo)[24];
       console.log(Friend.FriendId + '-' + Friend.FriendName);
@@ -113,7 +112,6 @@ async function shopeeHelpFriendWater() {
     }
     // $done();
   }
-  };
   console.log('OK:' + CropOK + 'Fail:' + CropFail);
   // $done();
 }
