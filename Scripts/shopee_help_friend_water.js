@@ -30,16 +30,14 @@ let shopeeHelpFriendWaterRequest = {
 
 };
 
-
 // 幫朋友澆水
-async function shopeeHelpFriendWater() {
+function shopeeGetFriendCropId() {
   // console.log(JSON.parse(shopeeFriendsInfo));
   // $done();
   let CropOK = 0;
   let CropFail = 0;
   for (const Friend of JSON.parse(shopeeFriendsInfo)) {
     try {
-      // Friend = JSON.parse(shopeeFriendsInfo)[24];
       console.log(Friend.FriendId + '-' + Friend.FriendName);
       shopeeHelpFriendWaterRequest.body.friendId = Friend.FriendId;
       shopeeHelpFriendWaterRequest.body.friendName = Friend.FriendName;
@@ -59,35 +57,12 @@ async function shopeeHelpFriendWater() {
           if (response.status === 200) {
             const obj = JSON.parse(data);
             if (obj.msg === 'success') {
-              // console.log(obj);
               shopeeHelpFriendWaterRequest.body.cropId = obj.data.crops[0].id;
               // console.log(shopeeHelpFriendWaterRequest.headers);
               console.log(shopeeHelpFriendWaterRequest.body);
               console.log('-----------------');
               // $done();
-              $httpClient.post(shopeeHelpFriendWaterRequest, function (error, response, data) {
-                if (error) {
-                  console.log(error);
-                  // $done();
-                  // return reject(['取得朋友CronId失敗1 ‼️', '請重新登入']);
-                }
-                else {
-                  if (response.status === 200) {
-                    const obj1 = JSON.parse(data);
-                    if (obj1.msg === 'success') {
-                      // console.log('ok------------');                      
-                      // console.log(obj);
-                      CropOK += 1;
-                      console.log('幫朋友澆水失敗1');        
-                      // $done();          
-                    }
-                    else {
-                      CropFail += 1;
-                      console.log('幫朋友澆水失敗1');        
-                    }
-                  }
-                }
-              });
+              await shopeeHelpFriendWater(shopeeHelpFriendWaterRequest);
               // $done();
 
             } else {
@@ -113,6 +88,45 @@ async function shopeeHelpFriendWater() {
     // $done();
   }
   console.log('OK:' + CropOK + 'Fail:' + CropFail);
+  // $done();
+}
+
+// 幫朋友澆水
+async function shopeeHelpFriendWater(shopeeHelpFriendWaterRequest) {
+  try {
+    $httpClient.post(shopeeHelpFriendWaterRequest, function (error, response, data) {
+      if (error) {
+        console.log(error);
+        // $done();
+        // return reject(['取得朋友CronId失敗1 ‼️', '請重新登入']);
+      }
+      else {
+        if (response.status === 200) {
+          const obj1 = JSON.parse(data);
+          if (obj1.msg === 'success') {
+            // console.log('ok------------');                      
+            // console.log(obj);
+            CropOK += 1;
+            console.log('幫朋友澆水失敗1');        
+            // $done();          
+          }
+          else {
+            CropFail += 1;
+            console.log('幫朋友澆水失敗1');        
+          }
+        }
+      }
+    });
+    // $done();
+  } 
+  catch (error) {
+    console.log('幫朋友澆水失敗3');
+    shopeeNotify(
+      '幫澆水失敗 ‼️',
+      error
+    );
+    $done();
+  }
   // $done();
 }
 
