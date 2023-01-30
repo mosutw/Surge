@@ -31,12 +31,12 @@ let shopeeHelpFriendWaterRequest = {
 };
 
 // 幫朋友澆水
-async function shopeeGetFriendCrop() {
+async function shopeeGetFriendCrop(Friend) {
   // console.log(JSON.parse(shopeeFriendsInfo));
   // $done();
-  let CropOK = 0;
-  let CropFail = 0;
-  for (const Friend of JSON.parse(shopeeFriendsInfo)) {
+  // let CropOK = 0;
+  // let CropFail = 0;
+  // for (const Friend of JSON.parse(shopeeFriendsInfo)) {
     try {
       console.log(Friend.FriendId + '-' + Friend.FriendName);
       shopeeHelpFriendWaterRequest.body.friendId = Friend.FriendId;
@@ -86,9 +86,9 @@ async function shopeeGetFriendCrop() {
       $done();
     }
     // $done();
-  }
-  console.log('OK:' + CropOK + 'Fail:' + CropFail);
-  // $done();
+  // }
+  // console.log('OK:' + CropOK + 'Fail:' + CropFail);
+  // // $done();
 }
 
 // 幫朋友澆水
@@ -130,4 +130,14 @@ async function shopeeHelpFriendWater(shopeeHelpFriendWaterRequest) {
   // $done();
 }
 
-shopeeGetFriendCrop();
+async loopGetRequest() {
+  let CropOK = 0;
+  let CropFail = 0;
+  for (const Friend of JSON.parse(shopeeFriendsInfo)) {
+    await shopeeGetFriendCrop(Friend);
+  }
+  console.log('OK:' + CropOK + 'Fail:' + CropFail);
+  // $done();
+}
+// shopeeGetFriendCrop();
+loopGetRequest();
