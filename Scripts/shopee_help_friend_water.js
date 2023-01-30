@@ -22,7 +22,7 @@ let shopeeHelpFriendWaterRequest = {
   body: {
     friendId: '',
     cropId: '',
-    devicdId: '',
+    devicdId: '61D8A54AC8FE46CFnexuighucearlvaz',
     friendName: '',
     s: shopeeCropToken,
   },
