@@ -53,22 +53,22 @@ function shopeeHelpFriendWater() {
         if (obj.msg === 'success') {
           console.log(obj);
           shopeeHelpFriendWaterRequest.body.cropId = obj.data.crops[0].id;
-          console.log(obj.data.crops.id);
-          $done();
-          // $httpClient.post(shopeeHelpFriendWaterRequest, function (error, response, data) {
-          //   if (error) {
-          //     console.log(error);
-          //     $done();
-          //     // return reject(['取得朋友CronId失敗1 ‼️', '請重新登入']);
-          //   }
-          //   else {
-          //     if (response.status === 200) {
-          //       const obj = JSON.parse(data);
-          //       console.log(obj);
-          //       $done();
-          //     }
-          //   }
-          // });
+          console.log(obj.data.crops[0].id);
+          // $done();
+          $httpClient.post(shopeeHelpFriendWaterRequest, function (error, response, data) {
+            if (error) {
+              console.log(error);
+              $done();
+              // return reject(['取得朋友CronId失敗1 ‼️', '請重新登入']);
+            }
+            else {
+              if (response.status === 200) {
+                const obj = JSON.parse(data);
+                console.log(obj);
+                $done();
+              }
+            }
+          });
           // $done();
 
         } else {
