@@ -37,7 +37,8 @@ async function shopeeHelpFriendWater() {
   // $done();
   let CropOK = 0;
   let CropFail = 0;
-  for (const Friend of JSON.parse(shopeeFriendsInfo)) {
+  const loop = async() => {
+    for (const Friend of JSON.parse(shopeeFriendsInfo)) {
     try {
       // Friend = JSON.parse(shopeeFriendsInfo)[24];
       console.log(Friend.FriendId + '-' + Friend.FriendName);
@@ -52,7 +53,7 @@ async function shopeeHelpFriendWater() {
       $httpClient.get(request, function (error, response, data) {
         if (error) {
           console.log('取得朋友CronId失敗1 ‼️', '請重新登入');
-          // $done();
+          $done();
           // return reject(['取得朋友CronId失敗1 ‼️', '請重新登入']);
         }
         else {
@@ -92,7 +93,7 @@ async function shopeeHelpFriendWater() {
 
             } else {
               CropFail += 1;
-              console.log('幫朋友澆水失敗1');
+              console.log('幫朋友澆水失敗1');              
               }
           } else {
             CropFail += 1;
@@ -112,6 +113,7 @@ async function shopeeHelpFriendWater() {
     }
     // $done();
   }
+  };
   console.log('OK:' + CropOK + 'Fail:' + CropFail);
   $done();
 }
