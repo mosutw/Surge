@@ -36,7 +36,7 @@ function shopeeHelpFriendWater() {
   // $done();
   Friend = JSON.parse(shopeeFriendsInfo)[19];
   shopeeHelpFriendWaterRequest.body.friendId = Friend.FriendId;
-  shopeeHelpFriendWaterRequest.body.name = Friend.FriendName;
+  shopeeHelpFriendWaterRequest.body.friendName = Friend.FriendName;
   // shopeeHelpFriendWaterRequest.body.deviceId = '';
   const request = {
     url: `https://games.shopee.tw/farm/api/friend/orchard/context/get?friendId=` + Friend.FriendId,
