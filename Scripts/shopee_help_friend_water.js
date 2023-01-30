@@ -130,13 +130,13 @@ async function shopeeHelpFriendWater(shopeeHelpFriendWaterRequest) {
   // $done();
 }
 
-async loopGetRequest() {
+async function loopGetRequest() {
   let CropOK = 0;
   let CropFail = 0;
   for (const Friend of JSON.parse(shopeeFriendsInfo)) {
     await shopeeGetFriendCrop(Friend);
   }
-  console.log('OK:' + CropOK + 'Fail:' + CropFail);
+  // console.log('OK:' + CropOK + 'Fail:' + CropFail);
   // $done();
 }
 // shopeeGetFriendCrop();
