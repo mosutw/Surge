@@ -61,6 +61,7 @@ function shopeeHelpFriendWater() {
           // $done();
           $httpClient.post(shopeeHelpFriendWaterRequest, function (error, response, data) {
             if (error) {
+              console.log('e------------');
               console.log(error);
               $done();
               // return reject(['取得朋友CronId失敗1 ‼️', '請重新登入']);
@@ -68,6 +69,7 @@ function shopeeHelpFriendWater() {
             else {
               if (response.status === 200) {
                 const obj = JSON.parse(data);
+                console.log('ok------------');
                 console.log(obj);
                 $done();
               }
