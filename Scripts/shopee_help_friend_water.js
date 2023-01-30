@@ -113,7 +113,7 @@ async function shopeeHelpFriendWater() {
     // $done();
   }
   console.log('OK:' + CropOK + 'Fail:' + CropFail);
-  // $done();
+  $done();
 }
 
 shopeeHelpFriendWater();
