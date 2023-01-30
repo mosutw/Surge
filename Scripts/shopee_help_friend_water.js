@@ -111,7 +111,7 @@ function shopeeHelpFriendWater() {
       );
       $done();
     }
-    $done();
+    // $done();
   }
 
 
