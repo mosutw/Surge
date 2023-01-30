@@ -13,7 +13,8 @@ function shopeeNotify(subtitle = '', message = '') {
 
 let shopeeGetFriendCropIdRequest = {
   url: 'https://games.shopee.tw/farm/api/friend/orchard/context/get?friendId=103989402',
-  headers: shopeeHeaders,
+  // headers: shopeeHeaders,
+  headers: '',
 };
 
 let shopeeHelpFriendWaterRequest = {
@@ -116,7 +117,7 @@ function shopeeHelpFriendWater() {
   //   }
   // }
   console.log('fffffffffff');
-  $done();
+  // $done();
 }
 
 shopeeHelpFriendWater();
