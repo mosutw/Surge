@@ -32,7 +32,7 @@ let shopeeHelpFriendWaterRequest = {
 
 // 幫朋友澆水
 function shopeeHelpFriendWater() {
-  Friend = JSON.parse(shopeeFriendsInfo)[0];
+  Friend = JSON.parse(shopeeFriendsInfo)[1];
   shopeeHelpFriendWaterRequest.body.friendId = Friend.FriendId;
   shopeeHelpFriendWaterRequest.body.name = Friend.FriendName;
   // shopeeHelpFriendWaterRequest.body.deviceId = '';
@@ -44,7 +44,7 @@ function shopeeHelpFriendWater() {
   $httpClient.get(request, function (error, response, data) {
     if (error) {
       console.log(error);
-      $done();
+      // $done();
       // return reject(['取得朋友CronId失敗1 ‼️', '請重新登入']);
     }
     else {
