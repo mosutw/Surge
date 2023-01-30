@@ -63,15 +63,17 @@ async function shopeeGetFriendCrop(Friend) {
               console.log('-----------------');
               // $done();
               await shopeeHelpFriendWater(shopeeHelpFriendWaterRequest);
-              // // $done();
+              $done();
 
             } else {
               CropFail += 1;
-              console.log('幫朋友澆水失敗1');              
+              console.log('幫朋友澆水失敗1');    
+              $done();          
               }
           } else {
             CropFail += 1;
             console.log('幫朋友澆水失敗2');
+            $done();
           }          
           // $done();
         }
@@ -112,7 +114,7 @@ async function shopeeHelpFriendWater(shopeeHelpFriendWaterRequest) {
           }
           else {
             // CropFail += 1;
-            console.log('幫朋友澆水失敗1');        
+            console.log('幫朋友澆水失敗4');        
           }
         }
       }
@@ -120,7 +122,7 @@ async function shopeeHelpFriendWater(shopeeHelpFriendWaterRequest) {
     // $done();
   } 
   catch (error) {
-    console.log('幫朋友澆水失敗3');
+    console.log('幫朋友澆水失敗5');
     shopeeNotify(
       '幫澆水失敗 ‼️',
       error
