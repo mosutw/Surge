@@ -32,9 +32,9 @@ let shopeeHelpFriendWaterRequest = {
 
 // 幫朋友澆水
 function shopeeHelpFriendWater() {
-  console.log(JSON.parse(shopeeFriendsInfo));
-  $done();
-  Friend = JSON.parse(shopeeFriendsInfo)[1];
+  // console.log(JSON.parse(shopeeFriendsInfo));
+  // $done();
+  Friend = JSON.parse(shopeeFriendsInfo)[19];
   shopeeHelpFriendWaterRequest.body.friendId = Friend.FriendId;
   shopeeHelpFriendWaterRequest.body.name = Friend.FriendName;
   // shopeeHelpFriendWaterRequest.body.deviceId = '';
