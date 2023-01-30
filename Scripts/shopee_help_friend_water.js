@@ -1,4 +1,5 @@
-const shopeeCookie = $persistentStore.read('CookieSP') + ';SPC_EC=' + $persistentStore.read('SPC_EC') + ';SPC_F=61D8A54AC8FE46CFnexuighucearlvaz; SPC_CLIENTID=61D8A54AC8FE46CFnexuighucearlvaz'   ;
+// const shopeeCookie = $persistentStore.read('CookieSP') + ';SPC_EC=' + $persistentStore.read('SPC_EC') + ';SPC_F=61D8A54AC8FE46CFnexuighucearlvaz; SPC_CLIENTID=61D8A54AC8FE46CFnexuighucearlvaz'   ;
+const shopeeCookie = $persistentStore.read('CookieSP') + ';SPC_EC=' + $persistentStore.read('SPC_EC') ;
 const shopeeCSRFToken = $persistentStore.read('CSRFTokenSP');
 const shopeeFriendsInfo = $persistentStore.read('ShopeeCropFriends');
 const shopeeCropToken = $persistentStore.read('ShopeeCropToken') || '';
@@ -22,7 +23,7 @@ let shopeeHelpFriendWaterRequest = {
   body: {
     friendId: '',
     cropId: '',
-    devicdId: '61D8A54AC8FE46CFnexuighucearlvaz',
+    //devicdId: '61D8A54AC8FE46CFnexuighucearlvaz',
     friendName: '',
     s: shopeeCropToken,
   },
@@ -34,7 +35,7 @@ let shopeeHelpFriendWaterRequest = {
 function shopeeHelpFriendWater() {
   // console.log(JSON.parse(shopeeFriendsInfo));
   // $done();
-  Friend = JSON.parse(shopeeFriendsInfo)[20];
+  Friend = JSON.parse(shopeeFriendsInfo)[24];
   shopeeHelpFriendWaterRequest.body.friendId = Friend.FriendId;
   shopeeHelpFriendWaterRequest.body.friendName = Friend.FriendName;
   // shopeeHelpFriendWaterRequest.body.deviceId = '';
@@ -61,7 +62,6 @@ function shopeeHelpFriendWater() {
           // $done();
           $httpClient.post(shopeeHelpFriendWaterRequest, function (error, response, data) {
             if (error) {
-              console.log('e------------');
               console.log(error);
               $done();
               // return reject(['取得朋友CronId失敗1 ‼️', '請重新登入']);
