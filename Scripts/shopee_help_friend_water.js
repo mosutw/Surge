@@ -66,16 +66,18 @@ async function shopeeGetFriendCrop(Friend) {
               // $done();
               // await shopeeHelpFriendWater(shopeeHelpFriendWaterRequest);
               // $done();
-
+              return shopeeHelpFriendWaterRequest;
             } else {
               CropFail += 1;
               console.log('幫朋友澆水失敗1');    
-              $done();          
+              return 'error';
+              // $done();          
               }
           } else {
             CropFail += 1;
             console.log('幫朋友澆水失敗2');
-            $done();
+            return 'error';
+            // $done();
           }          
           // $done();
         }
@@ -141,7 +143,8 @@ async function loopGetRequest() {
   // Friend = JSON.parse(shopeeFriendsInfo)[0];
   for (const Friend of JSON.parse(shopeeFriendsInfo)) {
     console.log('1------');
-    await shopeeGetFriendCrop(Friend)
+    const RequestData = await shopeeGetFriendCrop(Friend);
+    await shopeeHelpFriendWater(RequestData);
   }
   console.log('OK:' + CropOK + 'Fail:' + CropFail);
   $done();
