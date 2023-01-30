@@ -67,6 +67,7 @@ function shopeeHelpFriendWater() {
           //     }
           //   }
           // });
+          $done();
 
         } else {
           console.log('aaaaaaa');
@@ -75,7 +76,7 @@ function shopeeHelpFriendWater() {
         console.log('bbbbbbbbb');
           
       }          
-      $done();
+      // $done();
     }
   });
 
