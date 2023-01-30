@@ -13,8 +13,7 @@ function shopeeNotify(subtitle = '', message = '') {
 
 let shopeeGetFriendCropIdRequest = {
   url: 'https://games.shopee.tw/farm/api/friend/orchard/context/get?friendId=103989402',
-  // headers: shopeeHeaders,
-  headers: '',
+  headers: shopeeHeaders,
 };
 
 let shopeeHelpFriendWaterRequest = {
@@ -54,24 +53,21 @@ function shopeeHelpFriendWater() {
         if (obj.msg === 'success') {
           console.log(obj.data.crops.id);
           shopeeHelpFriendWaterRequest.body.cropId = obj.data.crops.id;
-          $httpClient.post(shopeeHelpFriendWaterRequest, function (error, response, data) {
-            if (error) {
-              console.log(error);
-              $done();
-              // return reject(['取得朋友CronId失敗1 ‼️', '請重新登入']);
-            }
-            else {
-              if (response.status === 200) {
-                const obj = JSON.parse(data);
-                console.log(obj);
-                $done();
-              }
-            }
-          });
+          // $httpClient.post(shopeeHelpFriendWaterRequest, function (error, response, data) {
+          //   if (error) {
+          //     console.log(error);
+          //     $done();
+          //     // return reject(['取得朋友CronId失敗1 ‼️', '請重新登入']);
+          //   }
+          //   else {
+          //     if (response.status === 200) {
+          //       const obj = JSON.parse(data);
+          //       console.log(obj);
+          //       $done();
+          //     }
+          //   }
+          // });
 
-          // if (found === false) {
-          //   return reject(['取得種子失敗 ‼️', `今天沒有「${shopeeCropName}」的種子`]);
-          // }
         } else {
           console.log('aaaaaaa');
           }
