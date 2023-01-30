@@ -50,10 +50,7 @@ function shopeeHelpFriendWater() {
       // return reject(['取得朋友CronId失敗1 ‼️', '請重新登入']);
     }
     else {
-      console.log(request.headers);
-      console.log(response);
       if (response.status === 200) {
-        console.log(data);
         const obj = JSON.parse(data);
         if (obj.msg === 'success') {
           console.log(obj);
