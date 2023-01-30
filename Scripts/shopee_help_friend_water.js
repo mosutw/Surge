@@ -31,7 +31,7 @@ let shopeeHelpFriendWaterRequest = {
 };
 
 // 幫朋友澆水
-function shopeeGetFriendCropId() {
+function shopeeGetFriendCrop() {
   // console.log(JSON.parse(shopeeFriendsInfo));
   // $done();
   let CropOK = 0;
@@ -130,4 +130,4 @@ async function shopeeHelpFriendWater(shopeeHelpFriendWaterRequest) {
   // $done();
 }
 
-shopeeHelpFriendWater();
+shopeeGetFriendCrop();
