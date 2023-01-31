@@ -113,6 +113,24 @@ async function HelpFriendWater(shopeeHelpFriendWaterRequest) {
   })
 }
 
+async function preCheck() {
+  return new Promise((resolve, reject) => {
+    const shopeeInfo = getSaveObject('ShopeeInfo');
+    if (isEmptyObject(shopeeInfo)) {
+      return reject(['檢查失敗 ‼️', '沒有新版 token']);
+    }
+    const shopeeHeaders = {
+      'Cookie': cookieToString(shopeeInfo.token),
+      'Content-Type': 'application/json',
+    }
+    config = {
+      shopeeInfo: shopeeInfo,
+      shopeeHeaders: shopeeHeaders,
+    }
+    return resolve();
+  });
+}
+
 async function delay(seconds) {
   console.log(`⏰ 等待 ${seconds} 秒`);
   return new Promise((resolve) => {
@@ -129,16 +147,17 @@ async function delay(seconds) {
     const Friends =  JSON.parse(shopeeFriendsInfo);
     console.log(Friends.length);
     let num = 0;
+    // await preCheck();    
     // for (let i = 0; i < Friends.length; i++) {
-    for (let i = 0; i < 2; i++) {
-      num += i;
-      // await delay(0.1);
-      // await GetFriendCropiId(Friends[i]);
+    // for (let i = 0; i < 2; i++) {
+    //   num += i;
+    //   // await delay(0.1);
+    //   // await GetFriendCropiId(Friends[i]);
 
-      // console.log(shopeeHelpFriendWaterRequest.body);
-      // await HelpFriendWater(shopeeHelpFriendWaterRequest);
-      // $done();
-    }
+    //   // console.log(shopeeHelpFriendWaterRequest.body);
+    //   // await HelpFriendWater(shopeeHelpFriendWaterRequest);
+    //   // $done();
+    // }
     console.log(num);
     console.log('✅ 完成澆水')
     surgeNotify('幫朋友澆水完成 ✅', '');
@@ -149,4 +168,4 @@ async function delay(seconds) {
 })();
 
 
-// 20230131-26
+// 20230131-27
