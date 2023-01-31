@@ -71,7 +71,7 @@ async function GetFriendCropiId(Friend) {
             const obj = JSON.parse(data);
             if (obj.msg === 'success') {
               shopeeHelpFriendWaterRequest.body.cropId = obj.data.crops[0].id;
-              console.log(shopeeHelpFriendWaterRequest.body);
+              // console.log(shopeeHelpFriendWaterRequest.body);
               return resolve();
             } else {
               // CropFail += 1;
@@ -95,7 +95,7 @@ async function HelpFriendWater(shopeeHelpFriendWaterRequest) {
     try {
       $httpClient.post(shopeeHelpFriendWaterRequest, function (error, response, data) {
         if (error) {
-          console.log(error);
+          // console.log(error);
           // $done();
           return resolve();
           // return reject(['幫朋友澆水失敗1 ‼️']);
@@ -168,13 +168,13 @@ async function delay(seconds) {
     console.log(Friends.length);
     let num = 0;
     // await preCheck();    
-    // for (let i = 0; i < Friends.length; i++) {
-    for (let i = 0; i < 2; i++) {
+    for (let i = 0; i < Friends.length; i++) {
+    // for (let i = 0; i < 2; i++) {
       num += i;
       await delay(0.1);
       await GetFriendCropiId(Friends[i]);
 
-      console.log(shopeeHelpFriendWaterRequest.body);
+      // console.log(shopeeHelpFriendWaterRequest.body);
       const result = await HelpFriendWater(shopeeHelpFriendWaterRequest);
       // $done();
     }
@@ -188,4 +188,4 @@ async function delay(seconds) {
 })();
 
 
-// 20230131-30
+// 20230131-31
