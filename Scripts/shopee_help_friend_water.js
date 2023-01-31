@@ -193,6 +193,11 @@ async function A(num) {
     setTimeout(() => {
       // num += 1;
       // resolve(num + 1);
+      const request = {
+        url: `https://games.shopee.tw/farm/api/friend/orchard/context/get?friendId=103989402`,
+        headers: shopeeHeaders
+      };
+
       resolve($httpClient.get(request, function (error, response, data) {
         return response;
       }));
@@ -215,6 +220,6 @@ async function loop() {
 }
 
 loop();
-//20230131-4
+//20230131-5
 
 
