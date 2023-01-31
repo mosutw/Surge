@@ -125,9 +125,12 @@ async function delay(seconds) {
   try {
     // await getRewardList();
     const Friends =  JSON.parse(shopeeFriendsInfo);
-    for (let i = 0; i < Friends.length; i++) {
-      await delay(0.5);
-      const RequestData = await GetFriendCropiId(Friends);
+    console.log(Friends.length);
+    // for (let i = 0; i < Friends.length; i++) {
+    for (let i = 0; i < 2; i++) {
+      await delay(0.1);
+      const RequestData = await GetFriendCropiId(Friends[i]);
+      console.log(Request);
       // await helpFriendWater(RequestData);
     }
     console.log('✅ 完成澆水')
@@ -139,4 +142,4 @@ async function delay(seconds) {
 })();
 
 
-//20230131-15
+//20230131-16
