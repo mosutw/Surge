@@ -173,6 +173,7 @@ async function loopGetRequest() {
   // for (const Friend of JSON.parse(shopeeFriendsInfo)) {
     console.log('1------');
     let RequestData = await shopeeGetFriendCrop(Friend);
+    console.log('a----------');
     console.log(RequestData);
     // if (RequestData !== 'error') {
     //   let result = await shopeeHelpFriendWater(RequestData);
@@ -183,4 +184,32 @@ async function loopGetRequest() {
   // $done();
 }
 // shopeeGetFriendCrop();
-loopGetRequest();
+// loopGetRequest();
+
+async function A(num) {
+  return new Promise(resolve => {
+    setTimeout(() => {
+      // num += 1;
+      resolve(num + 1);
+    }, 100);
+  });
+}
+
+async function B(num) {
+  return num + 1;
+}
+
+async function loop() {
+  let num = 0;
+  for (let i = 0; i < 10; i++) {
+    num = await A(num);
+    num = await B(num);
+    console.log(num);
+  }
+  $done();
+}
+
+loop();
+
+
+
