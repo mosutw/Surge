@@ -243,7 +243,7 @@ async function getData(friendId) {
 
 async function loopRequests1() {
   for (let i = 0; i < 10; i++) {
-    const data = await getData(103989402 + i);
+    const data = await getData(103989402);
     console.log(data);
     // do something with the data
   }
@@ -251,5 +251,5 @@ async function loopRequests1() {
 }
 
 loopRequests1();
-//20230131-13
+//20230131-14
 
