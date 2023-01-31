@@ -31,14 +31,8 @@ let shopeeHelpFriendWaterRequest = {
 };
 
 // 幫朋友澆水
-async function shopeeGetFriendCrop(Friend) {
-  console.log('2------');
-
-  // console.log(JSON.parse(shopeeFriendsInfo));
-  // $done();
-  // let CropOK = 0;
-  // let CropFail = 0;
-  // for (const Friend of JSON.parse(shopeeFriendsInfo)) {
+async function GetFriendCropiId(Friend) {
+  return new Promise((resolve, reject) => {
     try {
       console.log(Friend.FriendId + '-' + Friend.FriendName);
       shopeeHelpFriendWaterRequest.body.friendId = Friend.FriendId;
@@ -48,82 +42,33 @@ async function shopeeGetFriendCrop(Friend) {
         url: `https://games.shopee.tw/farm/api/friend/orchard/context/get?friendId=` + Friend.FriendId,
         headers: shopeeHeaders
       };
-      // console.log(request);
-      await $httpClient.get(request, function (error, response, data) {
-        // console.log(response);
+
+      $httpClient.get(request, function (error, response, data) {
         if (error) {
-          console.log('取得朋友CronId失敗1 ‼️', '請重新登入');
-          // $done();
-          // return reject(['取得朋友CronId失敗1 ‼️', '請重新登入']);
-          return new Promise(resolve => {
-            setTimeout(() => {
-              resolve('error');
-            },100);
-          });
+          console.log('取得朋友CronId失敗1 ‼️');
+          return reject('取得朋友CronId失敗1 ‼️');
         }
         else {
           if (response.status === 200) {
             const obj = JSON.parse(data);
             if (obj.msg === 'success') {
               shopeeHelpFriendWaterRequest.body.cropId = obj.data.crops[0].id;
-              // console.log(shopeeHelpFriendWaterRequest.headers);
               console.log(shopeeHelpFriendWaterRequest.body);
-              console.log('3----------------');
-              // $done();
-              // await shopeeHelpFriendWater(shopeeHelpFriendWaterRequest);
-              // $done();
-              return shopeeHelpFriendWaterRequest;
-              // return new Promise(resolve => {
-              //   setTimeout(() => {
-              //     resolve(shopeeHelpFriendWaterRequest);
-              //   },100);
-              // });
-    
+              return resolve();
             } else {
-              CropFail += 1;
-              console.log('幫朋友澆水失敗1');    
-              // return 'error';
-              return new Promise(resolve => {
-                setTimeout(() => {
-                  resolve('error');
-                },100);
-              });
-    
-              // $done();          
-              }
-          } else {
-            CropFail += 1;
-            console.log('幫朋友澆水失敗2');
-            // return 'error';
-            return new Promise(resolve => {
-              setTimeout(() => {
-                resolve('error');
-              },100);
-            });
-            // $done();
-          }          
-          // $done();
+              // CropFail += 1;
+              console.log('取得朋友CronId失敗2');
+              return reject('取得朋友CronId失敗2');    
+            }   
+          }
         }
-      });
-    } 
-    catch (error) {
-      console.log('幫朋友澆水失敗3');
-      shopeeNotify(
-        '幫澆水失敗 ‼️',
-        error
-      );
-      // $done();
-      // return 'error';
-      return new Promise(resolve => {
-        setTimeout(() => {
-          resolve('error');
-        },100);
-      });
+      });   
     }
-    // $done();
-  // }
-  // console.log('OK:' + CropOK + 'Fail:' + CropFail);
-  // // $done();
+    catch {
+      console.log('取得朋友CronId失敗3');
+      return reject(['取得列表失敗3 ‼️', error]);
+    }
+  });
 }
 
 // 幫朋友澆水
@@ -166,90 +111,32 @@ async function shopeeHelpFriendWater(shopeeHelpFriendWaterRequest) {
   // $done();
 }
 
-async function loopGetRequest() {
-  let CropOK = 0;
-  let CropFail = 0;
-  Friend = JSON.parse(shopeeFriendsInfo)[0];
-  // for (const Friend of JSON.parse(shopeeFriendsInfo)) {
-    // console.log('1------');
-    let RequestData = await shopeeGetFriendCrop(Friend);
-    // console.log('a----------');
-    console.log(RequestData);
-    $done();
-    // if (RequestData !== 'error') {
-    //   let result = await shopeeHelpFriendWater(RequestData);
-    //   console.log(result);
-    // }
-  // }
-  // console.log('OK:' + CropOK + 'Fail:' + CropFail);
-  // $done();
+async function delay(seconds) {
+  console.log(`⏰ 等待 ${seconds} 秒`);
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve();
+    }, seconds * 1000);
+  });
 }
-// shopeeGetFriendCrop();
-// loopGetRequest();
 
-// -----------
-// async function A(i, num) {
-//   return new Promise(resolve => {
-//     setTimeout(() => {
-//       // num += 1;
-//       // resolve(num + 1);
-//       const request = {
-//         url: `https://games.shopee.tw/farm/api/friend/orchard/context/get?friendId=103989402`,
-//         headers: shopeeHeaders
-//       };
-
-//       resolve($httpClient.get(request, function (error, response, data) {
-//         // return response;
-//         return new Promise(resolve => {
-//           setTimeout(() => {
-//             console.log(i);
-//             console.log(response);
-//             resolve(response);
-//           },10);
-//         });
-  
-//       }));
-//     }, 100);
-//   });
-// }
-
-// async function B(num) {
-//   return num + 1;
-// }
-
-// async function loop() {
-//   let num = 0;
-//   for (let i = 0; i < 10; i++) {
-//     console.log(i + '------');
-//     num = await A(i, num);
-//     // num = await B(num);
-//     // console.log(num);
-//   }
-//   // $done();
-// }
-
-// loop();
-
-
-async function getData(friendId) {
+(async () => {
+  console.log('ℹ️ 蝦蝦果園幫朋友澆水 v20230131');
   try {
-    const response = await fetch(`https://games.shopee.tw/farm/api/friend/orchard/context/get?friendId=${friendId}`);
-    const data = await response.json();
-    return data;
+    // await getRewardList();
+    const Friends =  JSON.parse(shopeeFriendsInfo);
+    for (let i = 0; i < Friends.length; i++) {
+      await delay(0.5);
+      const RequestData = await GetFriendCropiId(Friends);
+      // await helpFriendWater(RequestData);
+    }
+    console.log('✅ 完成澆水')
+    surgeNotify('幫朋友澆水完成 ✅', '');
   } catch (error) {
-    console.error(error);
-  }
-}
-
-async function loopRequests1() {
-  for (let i = 0; i < 10; i++) {
-    const data = await getData(103989402);
-    console.log(data);
-    // do something with the data
+    handleError(error);
   }
   $done();
-}
+})();
 
-loopRequests1();
-//20230131-14
 
+//20230131-15
