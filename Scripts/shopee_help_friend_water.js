@@ -49,12 +49,6 @@ async function shopeeGetFriendCrop(Friend) {
         headers: shopeeHeaders
       };
       // console.log(request);
-      return new Promise(resolve => {
-        setTimeout(() => {
-          resolve(request);
-        },100);
-      });
-
       await $httpClient.get(request, function (error, response, data) {
         // console.log(response);
         if (error) {
@@ -218,6 +212,6 @@ async function loop() {
 }
 
 // loop();
-//20230131-2
+//20230131-3
 
 
