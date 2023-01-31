@@ -16,7 +16,7 @@ let shopeeCandyGetRewardListRequest = {
 
   // 取得獎勵兌換列表
 function shopeeCandyGetRewardList() {
-  const RewardList = $httpClient.get(shopeeCandyRewardListRequest, function (error, response, data) {
+  const RewardList = $httpClient.get(shopeeCandyGetRewardListRequest, function (error, response, data) {
     if (error) {
       shopeeNotify(
         '獎勵兌換列表取得失敗 ‼️',
