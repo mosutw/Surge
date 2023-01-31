@@ -221,12 +221,12 @@ async function loop() {
   for (let i = 0; i < 10; i++) {
     num = await A(num);
     // num = await B(num);
-    console.log(num);
+    // console.log(num);
   }
   $done();
 }
 
 loop();
-//20230131-7
+//20230131-8
 
 
