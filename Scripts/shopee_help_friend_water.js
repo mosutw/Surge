@@ -1,4 +1,4 @@
-// 20230131-43
+// 20230201-1
 // const shopeeCookie = $persistentStore.read('CookieSP') + ';SPC_EC=' + $persistentStore.read('SPC_EC') + ';SPC_F=61D8A54AC8FE46CFnexuighucearlvaz; SPC_CLIENTID=61D8A54AC8FE46CFnexuighucearlvaz'   ;
 const shopeeCookie = $persistentStore.read('CookieSP') + ';SPC_EC=' + $persistentStore.read('SPC_EC') ;
 const shopeeCSRFToken = $persistentStore.read('CSRFTokenSP');
@@ -33,6 +33,7 @@ let shopeeHelpFriendWaterRequest = {
 
 let CropOK = 0;
 let CropFail = 0;
+let CropId = '';
 
 function surgeNotify(subtitle = '', message = '') {
   $notification.post('🍤 蝦蝦果園領取任務獎勵', subtitle, message, { 'url': 'shopeetw://' });
@@ -54,6 +55,7 @@ function handleError(error) {
 
 // 幫朋友澆水
 async function GetFriendCropiId(Friend) {
+  CropId = '';
   return new Promise((resolve, reject) => {
     try {
       console.log(Friend.FriendId + '-' + Friend.FriendName);
@@ -68,7 +70,8 @@ async function GetFriendCropiId(Friend) {
       $httpClient.get(request, function (error, response, data) {
         if (error) {
           console.log('取得朋友CronId失敗1 ‼️');
-          return reject(['取得朋友CronId失敗1 ‼️']);
+          // return reject(['取得朋友CronId失敗1 ‼️']);
+          return resolve();
         }
         else {
           if (response.status === 200) {
@@ -76,11 +79,13 @@ async function GetFriendCropiId(Friend) {
             if (obj.msg === 'success') {
               shopeeHelpFriendWaterRequest.body.cropId = obj.data.crops[0].id;
               // console.log(shopeeHelpFriendWaterRequest.body);
+              CropId = obj.data.crops[0].id;
               return resolve();
             } else {
               // CropFail += 1;
               console.log('取得朋友CronId失敗2');
-              return reject('取得朋友CronId失敗2');    
+              // return reject('取得朋友CronId失敗2');    
+              return resolve();              
             }   
           }
         }
@@ -182,10 +187,11 @@ async function delay(seconds) {
       console.log(i);
       await delay(0.2);
       await GetFriendCropiId(Friends[i]);
-
-      // console.log(shopeeHelpFriendWaterRequest.body);
-      await HelpFriendWater(shopeeHelpFriendWaterRequest);
-      // $done();
+      if (CropId !== underfined || CropId !== '') {
+        // console.log(shopeeHelpFriendWaterRequest.body);
+        await HelpFriendWater(shopeeHelpFriendWaterRequest);
+        // $done();
+      }
     }
       console.log('✅ 完成澆水, OK:' + CropOK + ',Fail:' + CropFail );
       surgeNotify(['幫朋友澆水完成 ✅', 'OK:' + CropOK + ',Fail:' + CropFail]);
