@@ -1,4 +1,4 @@
-// 20230131-42
+// 20230131-43
 // const shopeeCookie = $persistentStore.read('CookieSP') + ';SPC_EC=' + $persistentStore.read('SPC_EC') + ';SPC_F=61D8A54AC8FE46CFnexuighucearlvaz; SPC_CLIENTID=61D8A54AC8FE46CFnexuighucearlvaz'   ;
 const shopeeCookie = $persistentStore.read('CookieSP') + ';SPC_EC=' + $persistentStore.read('SPC_EC') ;
 const shopeeCSRFToken = $persistentStore.read('CSRFTokenSP');
@@ -30,6 +30,9 @@ let shopeeHelpFriendWaterRequest = {
   },
 
 };
+
+let CropOK = 0;
+let CropFail = 0;
 
 function surgeNotify(subtitle = '', message = '') {
   $notification.post('🍤 蝦蝦果園領取任務獎勵', subtitle, message, { 'url': 'shopeetw://' });
@@ -98,6 +101,7 @@ async function HelpFriendWater(shopeeHelpFriendWaterRequest) {
         if (error) {
           // console.log(error);
           // $done();
+          CropFail += 1;
           return resolve();
           // return reject(['幫朋友澆水失敗1 ‼️']);
         }
@@ -107,6 +111,7 @@ async function HelpFriendWater(shopeeHelpFriendWaterRequest) {
             console.log(obj1.msg);
             if (obj1.msg === 'success') {
               console.log('幫朋友澆水成功');        
+              CropOK += 1;
               return resolve();
               // $done();          
             }
@@ -114,6 +119,7 @@ async function HelpFriendWater(shopeeHelpFriendWaterRequest) {
               // CropFail += 1;
               console.log('幫朋友澆水失敗4');    
               // return reject(['幫朋友澆水失敗4 ‼️']);
+              CropFail += 1;
               return resolve();              
             }
           }
@@ -181,8 +187,8 @@ async function delay(seconds) {
       await HelpFriendWater(shopeeHelpFriendWaterRequest);
       // $done();
     }
-      console.log('✅ 完成澆水')
-      surgeNotify('幫朋友澆水完成 ✅', '');
+      console.log('✅ 完成澆水, OK:' + CropOK + ',Fail:' + CropFail );
+      surgeNotify(['幫朋友澆水完成 ✅', 'OK:' + CropOK + ',Fail:' + CropFail]);
 
   } catch (error) {
     handleError(error);
