@@ -167,6 +167,7 @@ async function delay(seconds) {
     // await getRewardList();
     const Friends =  JSON.parse(shopeeFriendsInfo);
     console.log(Friends.length);
+    console.log(Friends);
     let num = 0;
     // await preCheck();    
     for (let i = 0; i < Friends.length; i++) {
@@ -189,4 +190,4 @@ async function delay(seconds) {
 })();
 
 
-// 20230131-32
+// 20230131-33
