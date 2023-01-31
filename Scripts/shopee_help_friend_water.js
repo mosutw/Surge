@@ -185,14 +185,17 @@ async function loopGetRequest() {
   // $done();
 }
 // shopeeGetFriendCrop();
-loopGetRequest();
+// loopGetRequest();
 
 // -----------
 async function A(num) {
   return new Promise(resolve => {
     setTimeout(() => {
       // num += 1;
-      resolve(num + 1);
+      // resolve(num + 1);
+      resolve($httpClient.get(request, function (error, response, data) {
+        return response;
+      }));
     }, 100);
   });
 }
@@ -211,7 +214,7 @@ async function loop() {
   $done();
 }
 
-// loop();
-//20230131-3
+loop();
+//20230131-4
 
 
