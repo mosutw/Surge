@@ -205,7 +205,7 @@ async function A(i, num) {
             console.log(i);
             console.log(response);
             resolve(response);
-          },100);
+          },300);
         });
   
       }));
@@ -228,6 +228,6 @@ async function loop() {
 }
 
 loop();
-//20230131-9
+//20230131-10
 
 
