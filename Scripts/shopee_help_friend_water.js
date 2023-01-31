@@ -127,11 +127,11 @@ async function delay(seconds) {
     console.log(Friends.length);
     // for (let i = 0; i < Friends.length; i++) {
     for (let i = 0; i < 2; i++) {
-      await delay(0.1);
+      // await delay(0.1);
       await GetFriendCropiId(Friends[i]);
       console.log(shopeeHelpFriendWaterRequest.body);
       // await helpFriendWater(RequestData);
-      $done();
+      // $done();
     }
     console.log('✅ 完成澆水')
     surgeNotify('幫朋友澆水完成 ✅', '');
@@ -143,4 +143,4 @@ async function delay(seconds) {
 })();
 
 
-//20230131-20
+//20230131-21
