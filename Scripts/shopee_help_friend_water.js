@@ -205,7 +205,7 @@ async function A(i, num) {
             console.log(i);
             console.log(response);
             resolve(response);
-          },300);
+          },10);
         });
   
       }));
@@ -220,6 +220,7 @@ async function B(num) {
 async function loop() {
   let num = 0;
   for (let i = 0; i < 10; i++) {
+    console.log(i + '------');
     num = await A(i, num);
     // num = await B(num);
     // console.log(num);
@@ -228,6 +229,5 @@ async function loop() {
 }
 
 loop();
-//20230131-10
-
+//20230131-11
 
