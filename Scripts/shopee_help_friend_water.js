@@ -188,46 +188,67 @@ async function loopGetRequest() {
 // loopGetRequest();
 
 // -----------
-async function A(i, num) {
-  return new Promise(resolve => {
-    setTimeout(() => {
-      // num += 1;
-      // resolve(num + 1);
-      const request = {
-        url: `https://games.shopee.tw/farm/api/friend/orchard/context/get?friendId=103989402`,
-        headers: shopeeHeaders
-      };
+// async function A(i, num) {
+//   return new Promise(resolve => {
+//     setTimeout(() => {
+//       // num += 1;
+//       // resolve(num + 1);
+//       const request = {
+//         url: `https://games.shopee.tw/farm/api/friend/orchard/context/get?friendId=103989402`,
+//         headers: shopeeHeaders
+//       };
 
-      resolve($httpClient.get(request, function (error, response, data) {
-        // return response;
-        return new Promise(resolve => {
-          setTimeout(() => {
-            console.log(i);
-            console.log(response);
-            resolve(response);
-          },10);
-        });
+//       resolve($httpClient.get(request, function (error, response, data) {
+//         // return response;
+//         return new Promise(resolve => {
+//           setTimeout(() => {
+//             console.log(i);
+//             console.log(response);
+//             resolve(response);
+//           },10);
+//         });
   
-      }));
-    }, 100);
-  });
-}
+//       }));
+//     }, 100);
+//   });
+// }
 
-async function B(num) {
-  return num + 1;
-}
+// async function B(num) {
+//   return num + 1;
+// }
 
-async function loop() {
-  let num = 0;
-  for (let i = 0; i < 10; i++) {
-    console.log(i + '------');
-    num = await A(i, num);
-    // num = await B(num);
-    // console.log(num);
+// async function loop() {
+//   let num = 0;
+//   for (let i = 0; i < 10; i++) {
+//     console.log(i + '------');
+//     num = await A(i, num);
+//     // num = await B(num);
+//     // console.log(num);
+//   }
+//   // $done();
+// }
+
+// loop();
+
+
+async function getData(friendId) {
+  try {
+    const response = await fetch(`https://games.shopee.tw/farm/api/friend/orchard/context/get?friendId=${friendId}`);
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error(error);
   }
-  $done();
 }
 
-loop();
-//20230131-11
+async function loopRequests1() {
+  for (let i = 0; i < 10; i++) {
+    const data = await getData(103989402 + i);
+    console.log(data);
+    // do something with the data
+  }
+}
+
+loopRequests1();
+//20230131-12
 
