@@ -42,7 +42,7 @@ async function GetFriendCropiId(Friend) {
         url: `https://games.shopee.tw/farm/api/friend/orchard/context/get?friendId=` + Friend.FriendId,
         headers: shopeeHeaders
       };
-      console.log(request);
+      // console.log(request);
       $httpClient.get(request, function (error, response, data) {
         if (error) {
           console.log('取得朋友CronId失敗1 ‼️');
@@ -129,12 +129,13 @@ async function delay(seconds) {
     // for (let i = 0; i < Friends.length; i++) {
     for (let i = 0; i < 2; i++) {
       await delay(0.1);
-      const RequestData = await GetFriendCropiId(Friends[i]);
-      console.log(Request);
+      await GetFriendCropiId(Friends[i]);
+      console.log(shopeeHelpFriendWaterRequest.body);
       // await helpFriendWater(RequestData);
     }
     console.log('✅ 完成澆水')
     surgeNotify('幫朋友澆水完成 ✅', '');
+    $done();
   } catch (error) {
     handleError(error);
   }
@@ -142,4 +143,4 @@ async function delay(seconds) {
 })();
 
 
-//20230131-18
+//20230131-19
