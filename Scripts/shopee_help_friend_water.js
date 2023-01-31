@@ -174,9 +174,9 @@ async function loopGetRequest() {
     console.log('1------');
     let RequestData = await shopeeGetFriendCrop(Friend);
     console.log(RequestData);
-    if (RequestData !== 'error') {
-      let result = await shopeeHelpFriendWater(RequestData);
-      console.log(result);
+    // if (RequestData !== 'error') {
+    //   let result = await shopeeHelpFriendWater(RequestData);
+    //   console.log(result);
     }
   }
   // console.log('OK:' + CropOK + 'Fail:' + CropFail);
