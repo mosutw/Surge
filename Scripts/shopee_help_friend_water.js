@@ -72,41 +72,44 @@ async function GetFriendCropiId(Friend) {
 
 // 幫朋友澆水
 async function HelpFriendWater(shopeeHelpFriendWaterRequest) {
-  // console.log(shopeeHelpFriendWaterRequest);
-  try {
-    $httpClient.post(shopeeHelpFriendWaterRequest, function (error, response, data) {
-      if (error) {
-        console.log(error);
-        // $done();
-        return reject(['幫朋友澆水失敗1 ‼️']);
-      }
-      else {
-        if (response.status === 200) {
-          const obj1 = JSON.parse(data);
-          if (obj1.msg === 'success') {
-            console.log('幫朋友澆水成功');        
-            return resolve();
-            // $done();          
-          }
-          else {
-            // CropFail += 1;
-            console.log('幫朋友澆水失敗4');    
-            return reject(['幫朋友澆水失敗2 ‼️']);
+  return new Promise((resolve, reject) => {
+    // console.log(shopeeHelpFriendWaterRequest);
+    try {
+      $httpClient.post(shopeeHelpFriendWaterRequest, function (error, response, data) {
+        if (error) {
+          console.log(error);
+          // $done();
+          return reject(['幫朋友澆水失敗1 ‼️']);
+        }
+        else {
+          if (response.status === 200) {
+            const obj1 = JSON.parse(data);
+            if (obj1.msg === 'success') {
+              console.log('幫朋友澆水成功');        
+              return resolve();
+              // $done();          
+            }
+            else {
+              // CropFail += 1;
+              console.log('幫朋友澆水失敗4');    
+              return reject(['幫朋友澆水失敗4 ‼️']);
+            }
           }
         }
-      }
-    });
+      });
+      // $done();
+    } 
+    catch (error) {
+      console.log('幫朋友澆水失敗5');
+      shopeeNotify(
+        '幫澆水失敗 ‼️',
+        error
+      );
+      return reject(['幫朋友澆水失敗5 ‼️']);
+      // $done();
+    }
     // $done();
-  } 
-  catch (error) {
-    console.log('幫朋友澆水失敗5');
-    shopeeNotify(
-      '幫澆水失敗 ‼️',
-      error
-    );
-    // $done();
-  }
-  // $done();
+  })
 }
 
 async function delay(seconds) {
@@ -124,8 +127,8 @@ async function delay(seconds) {
     // await getRewardList();
     const Friends =  JSON.parse(shopeeFriendsInfo);
     console.log(Friends.length);
-    for (let i = 0; i < Friends.length; i++) {
-    // for (let i = 0; i < 2; i++) {
+    // for (let i = 0; i < Friends.length; i++) {
+    for (let i = 0; i < 2; i++) {
       await delay(0.1);
       await GetFriendCropiId(Friends[i]);
       // console.log(shopeeHelpFriendWaterRequest.body);
@@ -142,4 +145,4 @@ async function delay(seconds) {
 })();
 
 
-//20230131-23
+//20230131-24
