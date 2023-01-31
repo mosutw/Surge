@@ -1,4 +1,4 @@
-// 20230131-37
+// 20230131-38
 // const shopeeCookie = $persistentStore.read('CookieSP') + ';SPC_EC=' + $persistentStore.read('SPC_EC') + ';SPC_F=61D8A54AC8FE46CFnexuighucearlvaz; SPC_CLIENTID=61D8A54AC8FE46CFnexuighucearlvaz'   ;
 const shopeeCookie = $persistentStore.read('CookieSP') + ';SPC_EC=' + $persistentStore.read('SPC_EC') ;
 const shopeeCSRFToken = $persistentStore.read('CSRFTokenSP');
@@ -168,12 +168,12 @@ async function delay(seconds) {
     // await getRewardList();
     const Friends =  JSON.parse(shopeeFriendsInfo);
     console.log(Friends.length);
-    console.log(Friends);
+    // console.log(Friends);
     let num = 0;
     // await preCheck();    
     for (let i = 0; i < Friends.length; i++) {
     // for (let i = 0; i < 2; i++) {
-      if (!Friends[i]) {
+      if (!Friends[i].FriendId) {
         await delay(0.1);
         await GetFriendCropiId(Friends[i]);
 
