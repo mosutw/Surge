@@ -173,7 +173,7 @@ async function delay(seconds) {
     // await preCheck();    
     for (let i = 0; i < Friends.length; i++) {
     // for (let i = 0; i < 2; i++) {
-      await delay(0.1);
+      await delay(0.5);
       await GetFriendCropiId(Friends[i]);
 
       // console.log(shopeeHelpFriendWaterRequest.body);

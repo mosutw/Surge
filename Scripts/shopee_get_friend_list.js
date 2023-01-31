@@ -113,8 +113,7 @@ function shopeeGetFriendId() {
                 '朋友列表保存成功'
               );
             }   
-            // console.log(FriendsInfo[17]);                 
-            console.log(FriendsInfo);                 
+            // console.log(FriendsInfo);                 
             console.log('朋友數目:' + FriendsInfo.length);
             $done();
           } else {
