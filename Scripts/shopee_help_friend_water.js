@@ -30,6 +30,23 @@ let shopeeHelpFriendWaterRequest = {
 
 };
 
+function surgeNotify(subtitle = '', message = '') {
+  $notification.post('🍤 蝦蝦果園領取任務獎勵', subtitle, message, { 'url': 'shopeetw://' });
+};
+
+function handleError(error) {
+  if (Array.isArray(error)) {
+    console.log(`❌ ${error[0]} ${error[1]}`);
+    if (showNotification) {
+      surgeNotify(error[0], error[1]);
+    }
+  } else {
+    console.log(`❌ ${error}`);
+    if (showNotification) {
+      surgeNotify(error);
+    }
+  }
+}
 // 幫朋友澆水
 async function GetFriendCropiId(Friend) {
   return new Promise((resolve, reject) => {
@@ -168,4 +185,4 @@ async function delay(seconds) {
 })();
 
 
-// 20230131-27
+// 20230131-28
