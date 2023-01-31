@@ -199,7 +199,13 @@ async function A(num) {
       };
 
       resolve($httpClient.get(request, function (error, response, data) {
-        return response;
+        // return response;
+        return new Promise(resolve => {
+          setTimeout(() => {
+            resolve(response);
+          },100);
+        });
+  
       }));
     }, 100);
   });
@@ -220,6 +226,6 @@ async function loop() {
 }
 
 loop();
-//20230131-5
+//20230131-6
 
 
