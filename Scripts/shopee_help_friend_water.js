@@ -49,7 +49,7 @@ async function shopeeGetFriendCrop(Friend) {
         headers: shopeeHeaders
       };
       // console.log(request);
-      $httpClient.get(request, function (error, response, data) {
+      await $httpClient.get(request, function (error, response, data) {
         // console.log(response);
         if (error) {
           console.log('取得朋友CronId失敗1 ‼️', '請重新登入');
@@ -184,7 +184,7 @@ async function loopGetRequest() {
   // $done();
 }
 // shopeeGetFriendCrop();
-// loopGetRequest();
+loopGetRequest();
 
 // -----------
 async function A(num) {
