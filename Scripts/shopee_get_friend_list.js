@@ -101,7 +101,7 @@ function shopeeGetFriendId() {
               return acc;
             }, []);
 
-            FriendsInfo = FriendsInfo.filter(item => Object.keys(item).length !== 0);
+            FriendsInfo = FriendsInfo.filter(item => item.FriendId !== undefined);
             const saveCronFriends = $persistentStore.write(JSON.stringify(FriendsInfo), 'ShopeeCropFriends');
             if (!saveCronFriends) {
               shopeeNotify(
@@ -113,8 +113,8 @@ function shopeeGetFriendId() {
                 '朋友列表保存成功'
               );
             }   
-            console.log(FriendsInfo[17]);                 
-            console.log(FriendsInfo[18]);                 
+            // console.log(FriendsInfo[17]);                 
+            console.log(FriendsInfo);                 
             console.log('朋友數目:' + FriendsInfo.length);
             $done();
           } else {
