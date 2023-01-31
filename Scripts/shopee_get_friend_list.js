@@ -101,7 +101,7 @@ function shopeeGetFriendId() {
               return acc;
             }, []);
 
-            FriendsInfo = FriendsInfo.filter(item => Object.keys(item) !== 0);
+            FriendsInfo = FriendsInfo.filter(item => Object.keys(item).length !== 0);
             const saveCronFriends = $persistentStore.write(JSON.stringify(FriendsInfo), 'ShopeeCropFriends');
             if (!saveCronFriends) {
               shopeeNotify(
