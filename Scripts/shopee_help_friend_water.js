@@ -78,12 +78,12 @@ async function shopeeGetFriendCrop(Friend) {
               // $done();
               // await shopeeHelpFriendWater(shopeeHelpFriendWaterRequest);
               // $done();
-              // return shopeeHelpFriendWaterRequest;
-              return new Promise(resolve => {
-                setTimeout(() => {
-                  resolve(shopeeHelpFriendWaterRequest);
-                },100);
-              });
+              return shopeeHelpFriendWaterRequest;
+              // return new Promise(resolve => {
+              //   setTimeout(() => {
+              //     resolve(shopeeHelpFriendWaterRequest);
+              //   },100);
+              // });
     
             } else {
               CropFail += 1;
@@ -218,6 +218,6 @@ async function loop() {
 }
 
 // loop();
-//20230131-1
+//20230131-2
 
 
