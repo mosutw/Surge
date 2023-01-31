@@ -47,6 +47,7 @@ function handleError(error) {
     }
   }
 }
+
 // 幫朋友澆水
 async function GetFriendCropiId(Friend) {
   return new Promise((resolve, reject) => {
@@ -96,21 +97,22 @@ async function HelpFriendWater(shopeeHelpFriendWaterRequest) {
         if (error) {
           console.log(error);
           // $done();
-          return reject(['幫朋友澆水失敗1 ‼️']);
+          return resolve();
+          // return reject(['幫朋友澆水失敗1 ‼️']);
         }
         else {
           if (response.status === 200) {
             const obj1 = JSON.parse(data);
             if (obj1.msg === 'success') {
               console.log('幫朋友澆水成功');        
-              return reject(['幫朋友澆水失敗TEST ‼️']);
-              // return resolve();
+              return resolve();
               // $done();          
             }
             else {
               // CropFail += 1;
               console.log('幫朋友澆水失敗4');    
-              return reject(['幫朋友澆水失敗4 ‼️']);
+              // return reject(['幫朋友澆水失敗4 ‼️']);
+              return resolve();              
             }
           }
         }
@@ -123,7 +125,8 @@ async function HelpFriendWater(shopeeHelpFriendWaterRequest) {
         '幫澆水失敗 ‼️',
         error
       );
-      return reject(['幫朋友澆水失敗5 ‼️']);
+      return resolve();
+      // return reject(['幫朋友澆水失敗5 ‼️']);
       // $done();
     }
     // $done();
@@ -172,7 +175,7 @@ async function delay(seconds) {
       await GetFriendCropiId(Friends[i]);
 
       console.log(shopeeHelpFriendWaterRequest.body);
-      // await HelpFriendWater(shopeeHelpFriendWaterRequest);
+      const result = await HelpFriendWater(shopeeHelpFriendWaterRequest);
       // $done();
     }
     console.log(num);
@@ -185,4 +188,4 @@ async function delay(seconds) {
 })();
 
 
-// 20230131-29
+// 20230131-30
