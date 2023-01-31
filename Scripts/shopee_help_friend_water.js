@@ -72,6 +72,7 @@ async function GetFriendCropiId(Friend) {
 
 // 幫朋友澆水
 async function HelpFriendWater(shopeeHelpFriendWaterRequest) {
+  // console.log(shopeeHelpFriendWaterRequest);
   try {
     $httpClient.post(shopeeHelpFriendWaterRequest, function (error, response, data) {
       if (error) {
@@ -128,7 +129,7 @@ async function delay(seconds) {
       await delay(0.1);
       await GetFriendCropiId(Friends[i]);
       // console.log(shopeeHelpFriendWaterRequest.body);
-      await HelpFriendWater(shopeeHelpFriendWaterRequest.body);
+      await HelpFriendWater(shopeeHelpFriendWaterRequest);
       // $done();
     }
     console.log('✅ 完成澆水')
@@ -141,4 +142,4 @@ async function delay(seconds) {
 })();
 
 
-//20230131-22
+//20230131-23
