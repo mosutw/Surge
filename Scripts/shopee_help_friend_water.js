@@ -247,8 +247,9 @@ async function loopRequests1() {
     console.log(data);
     // do something with the data
   }
+  $done();
 }
 
 loopRequests1();
-//20230131-12
+//20230131-13
 
