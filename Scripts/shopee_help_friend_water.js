@@ -180,7 +180,7 @@ async function loopGetRequest() {
     // }
   // }
   // console.log('OK:' + CropOK + 'Fail:' + CropFail);
-  $done();
+  // $done();
 }
 // shopeeGetFriendCrop();
 loopGetRequest();
