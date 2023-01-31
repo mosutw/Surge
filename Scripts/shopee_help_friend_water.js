@@ -86,7 +86,8 @@ async function HelpFriendWater(shopeeHelpFriendWaterRequest) {
             const obj1 = JSON.parse(data);
             if (obj1.msg === 'success') {
               console.log('幫朋友澆水成功');        
-              return resolve();
+              return reject(['幫朋友澆水失敗TEST ‼️']);
+              // return resolve();
               // $done();          
             }
             else {
@@ -132,7 +133,7 @@ async function delay(seconds) {
       await delay(0.1);
       await GetFriendCropiId(Friends[i]);
       // console.log(shopeeHelpFriendWaterRequest.body);
-      await HelpFriendWater(shopeeHelpFriendWaterRequest);
+      // await HelpFriendWater(shopeeHelpFriendWaterRequest);
       // $done();
     }
     console.log('✅ 完成澆水')
@@ -145,4 +146,4 @@ async function delay(seconds) {
 })();
 
 
-//20230131-24
+// 20230131-25
