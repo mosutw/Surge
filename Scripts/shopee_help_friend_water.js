@@ -103,6 +103,7 @@ async function HelpFriendWater(shopeeHelpFriendWaterRequest) {
         else {
           if (response.status === 200) {
             const obj1 = JSON.parse(data);
+            console.log(obj.msg);
             if (obj1.msg === 'success') {
               console.log('幫朋友澆水成功');        
               return resolve();
@@ -188,4 +189,4 @@ async function delay(seconds) {
 })();
 
 
-// 20230131-31
+// 20230131-32
