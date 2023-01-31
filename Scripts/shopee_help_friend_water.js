@@ -46,7 +46,7 @@ async function GetFriendCropiId(Friend) {
       $httpClient.get(request, function (error, response, data) {
         if (error) {
           console.log('取得朋友CronId失敗1 ‼️');
-          return reject('取得朋友CronId失敗1 ‼️');
+          return reject(['取得朋友CronId失敗1 ‼️']);
         }
         else {
           if (response.status === 200) {
@@ -63,10 +63,9 @@ async function GetFriendCropiId(Friend) {
           }
         }
       });   
-    }
-    catch {
+    } catch(error) {
       console.log('取得朋友CronId失敗3');
-      return reject(['取得列表失敗3 ‼️']);
+      return reject(['取得列表失敗3 ‼️', error]);
     }
   });
 }
@@ -132,6 +131,7 @@ async function delay(seconds) {
       await GetFriendCropiId(Friends[i]);
       console.log(shopeeHelpFriendWaterRequest.body);
       // await helpFriendWater(RequestData);
+      $done();
     }
     console.log('✅ 完成澆水')
     surgeNotify('幫朋友澆水完成 ✅', '');
@@ -143,4 +143,4 @@ async function delay(seconds) {
 })();
 
 
-//20230131-19
+//20230131-20
