@@ -49,6 +49,12 @@ async function shopeeGetFriendCrop(Friend) {
         headers: shopeeHeaders
       };
       // console.log(request);
+      return new Promise(resolve => {
+        setTimeout(() => {
+          resolve(request);
+        },100);
+      });
+
       await $httpClient.get(request, function (error, response, data) {
         // console.log(response);
         if (error) {
@@ -175,6 +181,7 @@ async function loopGetRequest() {
     let RequestData = await shopeeGetFriendCrop(Friend);
     // console.log('a----------');
     console.log(RequestData);
+    $done();
     // if (RequestData !== 'error') {
     //   let result = await shopeeHelpFriendWater(RequestData);
     //   console.log(result);
@@ -211,6 +218,6 @@ async function loop() {
 }
 
 // loop();
-
+//20230131-1
 
 
