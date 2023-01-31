@@ -202,6 +202,7 @@ async function A(num) {
         // return response;
         return new Promise(resolve => {
           setTimeout(() => {
+            console.log(response);
             resolve(response);
           },100);
         });
@@ -226,6 +227,6 @@ async function loop() {
 }
 
 loop();
-//20230131-6
+//20230131-7
 
 
