@@ -71,28 +71,26 @@ async function GetFriendCropiId(Friend) {
 }
 
 // 幫朋友澆水
-async function shopeeHelpFriendWater(shopeeHelpFriendWaterRequest) {
+async function HelpFriendWater(shopeeHelpFriendWaterRequest) {
   try {
     $httpClient.post(shopeeHelpFriendWaterRequest, function (error, response, data) {
       if (error) {
         console.log(error);
         // $done();
-        // return reject(['取得朋友CronId失敗1 ‼️', '請重新登入']);
+        return reject(['幫朋友澆水失敗1 ‼️']);
       }
       else {
         if (response.status === 200) {
           const obj1 = JSON.parse(data);
           if (obj1.msg === 'success') {
-            // console.log('ok------------');                      
-            // console.log(obj);
-            // CropOK += 1;
             console.log('幫朋友澆水成功');        
-            $done();          
+            return resolve();
+            // $done();          
           }
           else {
             // CropFail += 1;
             console.log('幫朋友澆水失敗4');    
-            $done();    
+            return reject(['幫朋友澆水失敗2 ‼️']);
           }
         }
       }
@@ -105,7 +103,7 @@ async function shopeeHelpFriendWater(shopeeHelpFriendWaterRequest) {
       '幫澆水失敗 ‼️',
       error
     );
-    $done();
+    // $done();
   }
   // $done();
 }
@@ -125,12 +123,12 @@ async function delay(seconds) {
     // await getRewardList();
     const Friends =  JSON.parse(shopeeFriendsInfo);
     console.log(Friends.length);
-    // for (let i = 0; i < Friends.length; i++) {
-    for (let i = 0; i < 2; i++) {
-      // await delay(0.1);
+    for (let i = 0; i < Friends.length; i++) {
+    // for (let i = 0; i < 2; i++) {
+      await delay(0.1);
       await GetFriendCropiId(Friends[i]);
-      console.log(shopeeHelpFriendWaterRequest.body);
-      // await helpFriendWater(RequestData);
+      // console.log(shopeeHelpFriendWaterRequest.body);
+      await HelpFriendWater(shopeeHelpFriendWaterRequest.body);
       // $done();
     }
     console.log('✅ 完成澆水')
@@ -143,4 +141,4 @@ async function delay(seconds) {
 })();
 
 
-//20230131-21
+//20230131-22
