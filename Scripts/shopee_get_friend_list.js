@@ -91,7 +91,7 @@ function shopeeGetFriendId() {
             });            
             const FriendsInfo_new = uniqueData.map(item =>({FriendId: item.data.FriendID, FriendName: item.data.name}));
             
-            const FriendsInfo = [...FriendsInfo_old, ...FriendsInfo_new].reduce((acc, curr) => {
+            let FriendsInfo = [...FriendsInfo_old, ...FriendsInfo_new].reduce((acc, curr) => {
               const existing = acc.find(item => item.FriendId === curr.FriendId);
               if (!existing) {
                 acc.push(curr);
@@ -101,6 +101,7 @@ function shopeeGetFriendId() {
               return acc;
             }, []);
 
+            FriendsInfo = FriendsInfo.filter(item => Object.keys(item) !== 0);
             const saveCronFriends = $persistentStore.write(JSON.stringify(FriendsInfo), 'ShopeeCropFriends');
             if (!saveCronFriends) {
               shopeeNotify(
