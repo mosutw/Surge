@@ -188,7 +188,7 @@ async function loopGetRequest() {
 // loopGetRequest();
 
 // -----------
-async function A(num) {
+async function A(i, num) {
   return new Promise(resolve => {
     setTimeout(() => {
       // num += 1;
@@ -202,6 +202,7 @@ async function A(num) {
         // return response;
         return new Promise(resolve => {
           setTimeout(() => {
+            console.log(i);
             console.log(response);
             resolve(response);
           },100);
@@ -219,7 +220,7 @@ async function B(num) {
 async function loop() {
   let num = 0;
   for (let i = 0; i < 10; i++) {
-    num = await A(num);
+    num = await A(i, num);
     // num = await B(num);
     // console.log(num);
   }
@@ -227,6 +228,6 @@ async function loop() {
 }
 
 loop();
-//20230131-8
+//20230131-9
 
 
