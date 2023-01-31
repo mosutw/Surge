@@ -172,17 +172,19 @@ async function delay(seconds) {
     // await preCheck();    
     for (let i = 0; i < Friends.length; i++) {
     // for (let i = 0; i < 2; i++) {
-      num += i;
-      await delay(0.1);
-      await GetFriendCropiId(Friends[i]);
+      if (!Friends[i]) {
+        await delay(0.1);
+        await GetFriendCropiId(Friends[i]);
 
-      // console.log(shopeeHelpFriendWaterRequest.body);
-      const result = await HelpFriendWater(shopeeHelpFriendWaterRequest);
-      // $done();
+        // console.log(shopeeHelpFriendWaterRequest.body);
+        const result = await HelpFriendWater(shopeeHelpFriendWaterRequest);
+        // $done();
+        console.log(i);
+        console.log('✅ 完成澆水')
+        surgeNotify('幫朋友澆水完成 ✅', '');
+        }
     }
-    console.log(num);
-    console.log('✅ 完成澆水')
-    surgeNotify('幫朋友澆水完成 ✅', '');
+
   } catch (error) {
     handleError(error);
   }
@@ -190,4 +192,4 @@ async function delay(seconds) {
 })();
 
 
-// 20230131-34
+// 20230131-35
