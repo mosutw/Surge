@@ -177,7 +177,7 @@ async function loopGetRequest() {
     // if (RequestData !== 'error') {
     //   let result = await shopeeHelpFriendWater(RequestData);
     //   console.log(result);
-    }
+    // }
   // }
   // console.log('OK:' + CropOK + 'Fail:' + CropFail);
   $done();
