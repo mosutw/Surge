@@ -169,8 +169,8 @@ async function shopeeHelpFriendWater(shopeeHelpFriendWaterRequest) {
 async function loopGetRequest() {
   let CropOK = 0;
   let CropFail = 0;
-  // Friend = JSON.parse(shopeeFriendsInfo)[0];
-  for (const Friend of JSON.parse(shopeeFriendsInfo)) {
+  Friend = JSON.parse(shopeeFriendsInfo)[0];
+  // for (const Friend of JSON.parse(shopeeFriendsInfo)) {
     console.log('1------');
     let RequestData = await shopeeGetFriendCrop(Friend);
     console.log(RequestData);
@@ -178,7 +178,7 @@ async function loopGetRequest() {
     //   let result = await shopeeHelpFriendWater(RequestData);
     //   console.log(result);
     }
-  }
+  // }
   // console.log('OK:' + CropOK + 'Fail:' + CropFail);
   $done();
 }
