@@ -55,6 +55,11 @@ async function shopeeGetFriendCrop(Friend) {
           console.log('取得朋友CronId失敗1 ‼️', '請重新登入');
           // $done();
           // return reject(['取得朋友CronId失敗1 ‼️', '請重新登入']);
+          return new Promise(resolve => {
+            setTimeout(() => {
+              resolve('error');
+            },100);
+          });
         }
         else {
           if (response.status === 200) {
@@ -67,17 +72,34 @@ async function shopeeGetFriendCrop(Friend) {
               // $done();
               // await shopeeHelpFriendWater(shopeeHelpFriendWaterRequest);
               // $done();
-              return shopeeHelpFriendWaterRequest;
+              // return shopeeHelpFriendWaterRequest;
+              return new Promise(resolve => {
+                setTimeout(() => {
+                  resolve(shopeeHelpFriendWaterRequest);
+                },100);
+              });
+    
             } else {
               CropFail += 1;
               console.log('幫朋友澆水失敗1');    
-              return 'error';
+              // return 'error';
+              return new Promise(resolve => {
+                setTimeout(() => {
+                  resolve('error');
+                },100);
+              });
+    
               // $done();          
               }
           } else {
             CropFail += 1;
             console.log('幫朋友澆水失敗2');
-            return 'error';
+            // return 'error';
+            return new Promise(resolve => {
+              setTimeout(() => {
+                resolve('error');
+              },100);
+            });
             // $done();
           }          
           // $done();
@@ -90,7 +112,13 @@ async function shopeeGetFriendCrop(Friend) {
         '幫澆水失敗 ‼️',
         error
       );
-      $done();
+      // $done();
+      // return 'error';
+      return new Promise(resolve => {
+        setTimeout(() => {
+          resolve('error');
+        },100);
+      });
     }
     // $done();
   // }
@@ -144,11 +172,14 @@ async function loopGetRequest() {
   // Friend = JSON.parse(shopeeFriendsInfo)[0];
   for (const Friend of JSON.parse(shopeeFriendsInfo)) {
     console.log('1------');
-    const RequestData = await shopeeGetFriendCrop(Friend);
+    let RequestData = await shopeeGetFriendCrop(Friend);
     console.log(RequestData);
-    await shopeeHelpFriendWater(RequestData);
+    if (RequestData !== 'error') {
+      let result = await shopeeHelpFriendWater(RequestData);
+      console.log(result);
+    }
   }
-  console.log('OK:' + CropOK + 'Fail:' + CropFail);
+  // console.log('OK:' + CropOK + 'Fail:' + CropFail);
   $done();
 }
 // shopeeGetFriendCrop();
