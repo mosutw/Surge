@@ -1,4 +1,4 @@
-//20230201-23
+//20230201-24
 // const shopeeCookie = $persistentStore.read('CookieSP') + ';SPC_EC=' + $persistentStore.read('SPC_EC') + ';';
 // const shopeeCSRFToken = $persistentStore.read('CSRFTokenSP');
 // const shopeeHeaders = {
@@ -49,14 +49,6 @@ function surgeNotify(subtitle = '', message = '') {
 
 // function isEmptyObject(obj) {
 //   return Object.keys(obj).length === 0 && obj.constructor === Object ? true : false;
-// }
-
-// function cookieToString(cookieObject) {
-//   let string = '';
-//   for (const [key, value] of Object.entries(cookieObject)) {
-//     string += `${key}=${value};`
-//   }
-//   return string;
 // }
 
 // function cookieToString(cookieObject) {
@@ -229,6 +221,19 @@ function surgeNotify(subtitle = '', message = '') {
 //   }
 //   $done();
 // })();
+
+const shopeeInfo = $persistentStore.read('shopeeInfo');
+
+const shopeeHeaders = {
+  'Cookie': cookieToString(shopeeInfo.token),
+  'Content-Type': 'application/json',
+}
+config = {
+  shopeeInfo: shopeeInfo,
+  shopeeHeaders: shopeeHeaders,
+}
+console.log(shopeeInfo.token);
+
 
 let redeemRewardRequest = {
   // url: `https://games.shopee.tw/farm/api/orchard/crop/create?t=${new Date().getTime()}`,
