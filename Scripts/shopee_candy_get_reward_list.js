@@ -1,4 +1,4 @@
-//20230201-29
+//20230201-30
 // const shopeeCookie = $persistentStore.read('CookieSP') + ';SPC_EC=' + $persistentStore.read('SPC_EC') + ';';
 // const shopeeCSRFToken = $persistentStore.read('CSRFTokenSP');
 // const shopeeHeaders = {
@@ -52,7 +52,6 @@ function getSaveObject(key) {
 // }
 
 function cookieToString(cookieObject) {
-  console.log(cookieObject);
   let string = '';
   for (const [key, value] of Object.entries(cookieObject)) {
     string += `${key}=${value};`
@@ -223,8 +222,9 @@ function cookieToString(cookieObject) {
 //   $done();
 // })();
 
-const shopeeInfo = $persistentStore.read('ShopeeInfo');
+let shopeeInfo = JSON.parse($persistentStore.read('ShopeeInfo'));
 // console.log(shopeeInfo);
+shopeeInfo.token.userid = shopeeInfo.token.SPC_U;
 const shopeeHeaders = {
   'Cookie': cookieToString(shopeeInfo.token),
   'Content-Type': 'application/json',
