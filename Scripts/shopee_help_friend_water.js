@@ -1,4 +1,4 @@
-// 20230201-6
+// 20230201-7
 // const shopeeCookie = $persistentStore.read('CookieSP') + ';SPC_EC=' + $persistentStore.read('SPC_EC') + ';SPC_F=61D8A54AC8FE46CFnexuighucearlvaz; SPC_CLIENTID=61D8A54AC8FE46CFnexuighucearlvaz'   ;
 // const shopeeCookie = $persistentStore.read('CookieSP') + ';SPC_EC=' + $persistentStore.read('SPC_EC') ;
 // const shopeeCSRFToken = $persistentStore.read('CSRFTokenSP');
@@ -13,25 +13,6 @@
 
 let showNotification = true;
 let config = null;
-
-let shopeeGetFriendCropIdRequest = {
-  url: 'https://games.shopee.tw/farm/api/friend/orchard/context/get?friendId=103989402',
-  headers: shopeeHeaders,
-};
-
-let shopeeHelpFriendWaterRequest = {
-  url: 'https://games.shopee.tw/farm/api/friend/help',
-  headers: shopeeHeaders  ,
-  body: {
-    friendId: '',
-    cropId: '',
-    //devicdId: '61D8A54AC8FE46CFnexuighucearlvaz',
-    friendName: '',
-    s: shopeeCropToken,
-  },
-
-};
-
 let CropOK = 0;
 let CropFail = 0;
 let CropId = '';
@@ -40,7 +21,6 @@ function surgeNotify(subtitle = '', message = '') {
   $notification.post('🍤 蝦皮果園幫朋友澆水', subtitle, message, { 'url': 'shopeetw://' });
 
 };
-
 function handleError(error) {
   if (Array.isArray(error)) {
     console.log(`❌ ${error[0]} ${error[1]}`);
@@ -55,7 +35,66 @@ function handleError(error) {
   }
 }
 
-// 幫朋友澆水
+function getSaveObject(key) {
+  const string = $persistentStore.read(key);
+  return !string || string.length === 0 ? {} : JSON.parse(string);
+}
+
+function isEmptyObject(obj) {
+  return Object.keys(obj).length === 0 && obj.constructor === Object ? true : false;
+}
+
+function cookieToString(cookieObject) {
+  let string = '';
+  for (const [key, value] of Object.entries(cookieObject)) {
+    string += `${key}=${value};`
+  }
+  return string;
+}
+
+function cookieToString(cookieObject) {
+  let string = '';
+  for (const [key, value] of Object.entries(cookieObject)) {
+    string += `${key}=${value};`
+  }
+  return string;
+}
+
+async function preCheck() {
+  return new Promise((resolve, reject) => {
+    const shopeeInfo = getSaveObject('ShopeeInfo');
+    if (isEmptyObject(shopeeInfo)) {
+      return reject(['檢查失敗 ‼️', '沒有新版 token']);
+    }
+    const shopeeHeaders = {
+      'Cookie': cookieToString(shopeeInfo.token),
+      'Content-Type': 'application/json',
+    }
+    config = {
+      shopeeInfo: shopeeInfo,
+      shopeeHeaders: shopeeHeaders,
+    }
+    return resolve();
+  });
+}
+
+
+let shopeeHelpFriendWaterRequest = {
+  url: 'https://games.shopee.tw/farm/api/friend/help',
+  headers: config.shopeeHeaders  ,
+  body: {
+    friendId: '',
+    cropId: '',
+    //devicdId: '61D8A54AC8FE46CFnexuighucearlvaz',
+    friendName: '',
+    s: shopeeCropToken,
+  },
+
+};
+
+
+
+// 取CropId
 async function GetFriendCropiId(Friend) {
   CropId = '';
   return new Promise((resolve, reject) => {
@@ -186,7 +225,7 @@ async function delay(seconds) {
     console.log(Friends.length);
     // console.log(Friends);
     let num = 0;
-    // await preCheck();    
+    await preCheck();    
     for (let i = 0; i < Friends.length; i++) {
     // for (let i = 0; i < 2; i++) {
       console.log(i);
