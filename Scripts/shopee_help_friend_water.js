@@ -1,4 +1,4 @@
-// 20230201-7
+// 20230201-8
 // const shopeeCookie = $persistentStore.read('CookieSP') + ';SPC_EC=' + $persistentStore.read('SPC_EC') + ';SPC_F=61D8A54AC8FE46CFnexuighucearlvaz; SPC_CLIENTID=61D8A54AC8FE46CFnexuighucearlvaz'   ;
 // const shopeeCookie = $persistentStore.read('CookieSP') + ';SPC_EC=' + $persistentStore.read('SPC_EC') ;
 // const shopeeCSRFToken = $persistentStore.read('CSRFTokenSP');
@@ -79,19 +79,6 @@ async function preCheck() {
 }
 
 
-let shopeeHelpFriendWaterRequest = {
-  url: 'https://games.shopee.tw/farm/api/friend/help',
-  headers: config.shopeeHeaders  ,
-  body: {
-    friendId: '',
-    cropId: '',
-    //devicdId: '61D8A54AC8FE46CFnexuighucearlvaz',
-    friendName: '',
-    s: shopeeCropToken,
-  },
-
-};
-
 
 
 // 取CropId
@@ -145,6 +132,17 @@ async function GetFriendCropiId(Friend) {
 async function HelpFriendWater(shopeeHelpFriendWaterRequest) {
   return new Promise((resolve, reject) => {
     // console.log(shopeeHelpFriendWaterRequest);
+    const shopeeHelpFriendWaterRequest = {
+      url: 'https://games.shopee.tw/farm/api/friend/help',
+      headers: config.shopeeHeaders  ,
+      body: {
+        friendId: '',
+        cropId: '',
+        //devicdId: '61D8A54AC8FE46CFnexuighucearlvaz',
+        friendName: '',
+        s: shopeeCropToken,
+      },
+    };    
     try {
       $httpClient.post(shopeeHelpFriendWaterRequest, function (error, response, data) {
         if (error) {
