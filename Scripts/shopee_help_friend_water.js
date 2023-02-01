@@ -1,4 +1,4 @@
-// 20230201-13
+// 20230201-14
 // const shopeeCookie = $persistentStore.read('CookieSP') + ';SPC_EC=' + $persistentStore.read('SPC_EC') + ';SPC_F=61D8A54AC8FE46CFnexuighucearlvaz; SPC_CLIENTID=61D8A54AC8FE46CFnexuighucearlvaz'   ;
 // const shopeeCookie = $persistentStore.read('CookieSP') + ';SPC_EC=' + $persistentStore.read('SPC_EC') ;
 // const shopeeCSRFToken = $persistentStore.read('CSRFTokenSP');
@@ -113,10 +113,10 @@ async function GetFriendCropiId(Friend) {
         url: `https://games.shopee.tw/farm/api/friend/orchard/context/get?friendId=` + Friend.FriendId,
         headers: config.shopeeHeaders
       };
-      console.log(request);
+      // console.log(request);
       $httpClient.get(request, function (error, response, data) {
-        console.log(data);
-        console.log(error);
+        // console.log(data);
+        // console.log(error);
         if (error) {
           console.log('取得朋友CronId失敗1 ‼️');
           // return reject(['取得朋友CronId失敗1 ‼️']);
@@ -126,7 +126,7 @@ async function GetFriendCropiId(Friend) {
           if (response.status === 200) {
             const obj = JSON.parse(data);
             if (obj.msg === 'success') {
-              console.log( obj.data);
+              // console.log( obj.data);
               shopeeHelpFriendWaterRequest.body.cropId = obj.data.crops[0].id;
               // console.log(shopeeHelpFriendWaterRequest.body);
               CropId = obj.data.crops[0].id;
@@ -237,8 +237,10 @@ async function delay(seconds) {
       console.log(i);
       await delay(0.2);
       await GetFriendCropiId(Friends[i]);
+      console.log('a-------------');
       if (CropId !== underfined || CropId !== '') {
         // console.log(shopeeHelpFriendWaterRequest.body);
+
         await HelpFriendWater(shopeeHelpFriendWaterRequest);
         // $done();
       }
