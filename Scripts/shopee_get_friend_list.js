@@ -1,4 +1,4 @@
-//20230201-4
+//20230201-5
 const shopeeCookie = $persistentStore.read('CookieSP') + ';SPC_EC=' + $persistentStore.read('SPC_EC') + ';';
 const shopeeCSRFToken = $persistentStore.read('CSRFTokenSP');
 const shopeeHeaders = {
@@ -66,65 +66,66 @@ let shopeeGetFriendIdRequest = {
   headers: shopeeHeaders,
 };
 
-let shopeeGetDeviceIdRequest = {
-  url: 'https://shopee.tw/sw.js',
-  headers: shopeeHeaders,
-};
+// let shopeeGetDeviceIdRequest = {
+//   url: 'https://shopee.tw/sw.js',
+//   headers: shopeeHeaders,
+// };
 
-// 取得DeviceID
-function shopeeGetDeviceId() {
-  $httpClient.get(shopeeGetDeviceIdRequest, function (error, response, data) {
-    console.log(response.status);
-    if (error) {
-      console.log(error);
-      surgeNotify(
-        'DeviceId取得失敗 ‼️',
-        '連線錯誤'
-      );
-      $done();
-    } else {
-      if (response.status === 200) {
-        const cookie = response.headers['Set-Cookie'] || response.headers['set-cookie'];
-        if (cookie) {
-          console.log('1.............');
-          console.log(cookie);
-          const filteredCookie = cookie.replaceAll('HttpOnly;', '').replaceAll('Secure,', '');
-          const cookieObject = parseCookie(filteredCookie);
+// // 取得DeviceID
+// function shopeeGetDeviceId() {
+//   $httpClient.get(shopeeGetDeviceIdRequest, function (error, response, data) {
+//     console.log(response.status);
+//     if (error) {
+//       console.log(error);
+//       surgeNotify(
+//         'DeviceId取得失敗 ‼️',
+//         '連線錯誤'
+//       );
+//       $done();
+//     } else {
+//       if (response.status === 200) {
+//         const cookie = response.headers['Set-Cookie'] || response.headers['set-cookie'];
+//         if (cookie) {
+//           console.log('1.............');
+//           console.log(cookie);
+//           const filteredCookie = cookie.replaceAll('HttpOnly;', '').replaceAll('Secure,', '');
+//           const cookieObject = parseCookie(filteredCookie);
 
-          // 舊方法，2/1 之後廢棄
-          const spcClientId = cookieObject.SPC_CLIENTID;
-          const saveSpcClientId = $persistentStore.write(spcClientId, 'SPC_ClientId');
+//           // 舊方法，2/1 之後廢棄
+//           const spcClientId = cookieObject.SPC_CLIENTID;
+//           const saveSpcClientId = $persistentStore.write(spcClientId, 'SPC_ClientId');
 
-          if (!(saveSpcClientId)) {
-            surgeNotify(
-              'DeviceId取得失敗1 ‼️'
-            );
-            $done();
-          } else {
-            surgeNotify(
-              'DeviceId保存成功'
-            );          }
-            $done();
-          } else {
-          surgeNotify(
-            'DeviceId取得失敗2 ‼️'
-          );
-          $done();
-      }        
-      } else {
-        surgeNotify(
-          'Cookie 已過期 ‼️',
-          '請重新登入'
-        );
-        $done();
-      }
-    }
-  });
-}
+//           if (!(saveSpcClientId)) {
+//             surgeNotify(
+//               'DeviceId取得失敗1 ‼️'
+//             );
+//             $done();
+//           } else {
+//             surgeNotify(
+//               'DeviceId保存成功'
+//             );          }
+//             $done();
+//           } else {
+//           surgeNotify(
+//             'DeviceId取得失敗2 ‼️'
+//           );
+//           $done();
+//       }        
+//       } else {
+//         surgeNotify(
+//           'Cookie 已過期 ‼️',
+//           '請重新登入'
+//         );
+//         $done();
+//       }
+//     }
+//   });
+// }
   // 取得朋友列表
 async function shopeeGetFriendId() {
   return new Promise((resolve, reject) => {
     const FriendsInfo_old = JSON.parse($persistentStore.read('ShopeeCropFriends'));
+    console.log(shopeeGetFriendIdRequest);
     $httpClient.get(shopeeGetFriendIdRequest, function (error, response, data) {
       if (error) {
         surgeNotify(
@@ -210,7 +211,7 @@ async function shopeeGetFriendId() {
   console.log('🍤 蝦皮果園朋友列表 v20230128.1');
   try {
     await preCheck();
-    console.log('✅ 檢查成功');
+    console.log('✅ 檢查token成功');
     const itemName = await shopeeGetFriendId();
     console.log(`✅ 取得蝦皮果園朋友列表成功: + ${result}` );
 
