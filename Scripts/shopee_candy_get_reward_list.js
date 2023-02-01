@@ -86,53 +86,56 @@ let shopeeCandyGetRewardListRequest = {
 
   // 取得獎勵兌換列表
 function shopeeCandyGetRewardList() {
-  $httpClient.get(shopeeCandyGetRewardListRequest, function (error, response, data) {
-    if (error) {
-      surgeNotify(
-        '獎勵兌換列表取得失敗 ‼️',
-        '連線錯誤'
-      );
-      // $done();
-      return reject('獎勵兌換列表取得失敗1');
-
-    } else {
-      if (response.status === 200) {
-        const obj = JSON.parse(data);
-        try {
-          if (obj.msg === 'success') {
-            RewardList = obj.data.item_list;
-            console.log('可兌換項目數:' + RewardList.length);
-            // $done();
-            return resolve();
-
-          } else {
-            surgeNotify(
-              '獎勵兌換列表取得失敗1 ‼️',
-              obj.msg
-            );
-            // $done();
-            return reject('獎勵兌換列表取得失敗1 ‼️');
-          }
-        } catch (error) {
-          surgeNotify(
-            '獎勵兌換列表取得失敗2 ‼️',
-            error
-          );
-          // $done();
-          return reject('獎勵兌換列表取得失敗2 ‼️');
-
-        }
-      } else {
+  return new Promise((resolve, reject) => {
+    $httpClient.get(shopeeCandyGetRewardListRequest, function (error, response, data) {
+      if (error) {
         surgeNotify(
-          'Cookie 已過期 ‼️',
-          '請重新登入'
+          '獎勵兌換列表取得失敗 ‼️',
+          '連線錯誤'
         );
         // $done();
-        return reject('Cookie 已過期 ‼️');
-
+        return reject('獎勵兌換列表取得失敗1');
+  
+      } else {
+        if (response.status === 200) {
+          const obj = JSON.parse(data);
+          try {
+            if (obj.msg === 'success') {
+              RewardList = obj.data.item_list;
+              console.log('可兌換項目數:' + RewardList.length);
+              // $done();
+              return resolve();
+  
+            } else {
+              surgeNotify(
+                '獎勵兌換列表取得失敗1 ‼️',
+                obj.msg
+              );
+              // $done();
+              return reject('獎勵兌換列表取得失敗1 ‼️');
+            }
+          } catch (error) {
+            surgeNotify(
+              '獎勵兌換列表取得失敗2 ‼️',
+              error
+            );
+            // $done();
+            return reject('獎勵兌換列表取得失敗2 ‼️');
+  
+          }
+        } else {
+          surgeNotify(
+            'Cookie 已過期 ‼️',
+            '請重新登入'
+          );
+          // $done();
+          return reject('Cookie 已過期 ‼️');
+  
+        }
       }
-    }
+    });
   });
+
 }
 
 // shopeeCandyGetRewardList();
