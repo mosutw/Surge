@@ -1,4 +1,4 @@
-//20230201-3
+//20230201-4
 const shopeeCookie = $persistentStore.read('CookieSP') + ';SPC_EC=' + $persistentStore.read('SPC_EC') + ';';
 const shopeeCSRFToken = $persistentStore.read('CSRFTokenSP');
 const shopeeHeaders = {
@@ -123,81 +123,84 @@ function shopeeGetDeviceId() {
 }
   // 取得朋友列表
 async function shopeeGetFriendId() {
-  const FriendsInfo_old = JSON.parse($persistentStore.read('ShopeeCropFriends'));
-  $httpClient.get(shopeeGetFriendIdRequest, function (error, response, data) {
-    if (error) {
-      surgeNotify(
-        '朋友列表取得失敗 ‼️',
-        '連線錯誤'
-      );
-      return reject('朋友列表取得失敗1 ‼️');
-      // $done();
-    } else {
-      if (response.status === 200) {
-        const obj = JSON.parse(data);
-        try {
-          if (obj.msg === 'success') {
-            let uniqueData = obj.data.messages.filter(function(item, index, self) {
-              return self.findIndex(function(i) {
-                  //console.log(i.data.FriendID);
-                return i.data.FriendID === item.data.FriendID;
-              }) === index;
-            });            
-            const FriendsInfo_new = uniqueData.map(item =>({FriendId: item.data.FriendID, FriendName: item.data.name}));
-            
-            let FriendsInfo = [...FriendsInfo_old, ...FriendsInfo_new].reduce((acc, curr) => {
-              const existing = acc.find(item => item.FriendId === curr.FriendId);
-              if (!existing) {
-                acc.push(curr);
+  return new Promise((resolve, reject) => {
+    const FriendsInfo_old = JSON.parse($persistentStore.read('ShopeeCropFriends'));
+    $httpClient.get(shopeeGetFriendIdRequest, function (error, response, data) {
+      if (error) {
+        surgeNotify(
+          '朋友列表取得失敗 ‼️',
+          '連線錯誤'
+        );
+        return reject('朋友列表取得失敗1 ‼️');
+        // $done();
+      } else {
+        if (response.status === 200) {
+          const obj = JSON.parse(data);
+          try {
+            if (obj.msg === 'success') {
+              let uniqueData = obj.data.messages.filter(function(item, index, self) {
+                return self.findIndex(function(i) {
+                    //console.log(i.data.FriendID);
+                  return i.data.FriendID === item.data.FriendID;
+                }) === index;
+              });            
+              const FriendsInfo_new = uniqueData.map(item =>({FriendId: item.data.FriendID, FriendName: item.data.name}));
+              
+              let FriendsInfo = [...FriendsInfo_old, ...FriendsInfo_new].reduce((acc, curr) => {
+                const existing = acc.find(item => item.FriendId === curr.FriendId);
+                if (!existing) {
+                  acc.push(curr);
+                } else {
+                  Object.assign(existing, curr);
+                }
+                return acc;
+              }, []);
+  
+              FriendsInfo = FriendsInfo.filter(item => item.FriendId !== undefined);
+              const saveCronFriends = $persistentStore.write(JSON.stringify(FriendsInfo), 'ShopeeCropFriends');
+              if (!saveCronFriends) {
+                surgeNotify(
+                  '朋友列表保存失敗 ‼️',
+                  saveCronFriends 
+                );
+                return reject('朋友列表取得失敗2 ‼️');
               } else {
-                Object.assign(existing, curr);
-              }
-              return acc;
-            }, []);
-
-            FriendsInfo = FriendsInfo.filter(item => item.FriendId !== undefined);
-            const saveCronFriends = $persistentStore.write(JSON.stringify(FriendsInfo), 'ShopeeCropFriends');
-            if (!saveCronFriends) {
-              surgeNotify(
-                '朋友列表保存失敗 ‼️',
-                saveCronFriends 
-              );
-              return reject('朋友列表取得失敗2 ‼️');
+                surgeNotify(
+                  '朋友列表保存成功'
+                );
+                console.log('朋友數目:' + FriendsInfo.length);
+                return resolve('朋友數目:' + FriendsInfo.length);
+                }   
+              // console.log(FriendsInfo);                 
+  
             } else {
               surgeNotify(
-                '朋友列表保存成功'
+                '朋友列表取得失敗3 ‼️',
+                obj.msg
               );
-              console.log('朋友數目:' + FriendsInfo.length);
-              return resolve('朋友數目:' + FriendsInfo.length);
-              }   
-            // console.log(FriendsInfo);                 
-
-          } else {
+              return reject('朋友列表取得失敗3 ‼️');
+              // $done();
+            }
+          } catch (error) {
             surgeNotify(
-              '朋友列表取得失敗3 ‼️',
-              obj.msg
+              '朋友列表取得失敗4 ‼️',
+              error
             );
-            return reject('朋友列表取得失敗3 ‼️');
             // $done();
+            return reject('朋友列表取得失敗4 ‼️');
+  
           }
-        } catch (error) {
+        } else {
           surgeNotify(
-            '朋友列表取得失敗4 ‼️',
-            error
+            'Cookie 已過期 ‼️',
+            '請重新登入'
           );
-          // $done();
-          return reject('朋友列表取得失敗4 ‼️');
-
+          return reject(['Cookie 已過期 ‼️','請重新登入']);
         }
-      } else {
-        surgeNotify(
-          'Cookie 已過期 ‼️',
-          '請重新登入'
-        );
-        $done();
       }
-    }
+    });    
   });
+
 }
 
 // shopeeGetDeviceId();
