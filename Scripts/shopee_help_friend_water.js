@@ -1,4 +1,4 @@
-// 20230201-2
+// 20230201-3
 // const shopeeCookie = $persistentStore.read('CookieSP') + ';SPC_EC=' + $persistentStore.read('SPC_EC') + ';SPC_F=61D8A54AC8FE46CFnexuighucearlvaz; SPC_CLIENTID=61D8A54AC8FE46CFnexuighucearlvaz'   ;
 const shopeeCookie = $persistentStore.read('CookieSP') + ';SPC_EC=' + $persistentStore.read('SPC_EC') ;
 const shopeeCSRFToken = $persistentStore.read('CSRFTokenSP');
@@ -68,7 +68,6 @@ async function GetFriendCropiId(Friend) {
       };
       // console.log(request);
       $httpClient.get(request, function (error, response, data) {
-        console.log( obj.data);
         if (error) {
           console.log('取得朋友CronId失敗1 ‼️');
           // return reject(['取得朋友CronId失敗1 ‼️']);
@@ -78,6 +77,7 @@ async function GetFriendCropiId(Friend) {
           if (response.status === 200) {
             const obj = JSON.parse(data);
             if (obj.msg === 'success') {
+              console.log( obj.data);
               shopeeHelpFriendWaterRequest.body.cropId = obj.data.crops[0].id;
               // console.log(shopeeHelpFriendWaterRequest.body);
               CropId = obj.data.crops[0].id;
