@@ -1,4 +1,4 @@
-//20230201-1
+//20230201-2
 const shopeeCookie = $persistentStore.read('CookieSP') + ';SPC_EC=' + $persistentStore.read('SPC_EC') + ';';
 const shopeeCSRFToken = $persistentStore.read('CSRFTokenSP');
 const shopeeHeaders = {
@@ -7,9 +7,6 @@ const shopeeHeaders = {
 };
 
 
-function shopeeNotify(subtitle = '', message = '') {
-  $notification.post('🍤 蝦皮果園朋友列表', subtitle, message, { 'url': 'shopeetw://' });
-};
 
 function surgeNotify(subtitle = '', message = '') {
   $notification.post('🍤 蝦皮果園朋友列表', subtitle, message, { 'url': 'shopeetw://' });
@@ -80,7 +77,7 @@ function shopeeGetDeviceId() {
     console.log(response.status);
     if (error) {
       console.log(error);
-      shopeeNotify(
+      surgeNotify(
         'DeviceId取得失敗 ‼️',
         '連線錯誤'
       );
@@ -99,23 +96,23 @@ function shopeeGetDeviceId() {
           const saveSpcClientId = $persistentStore.write(spcClientId, 'SPC_ClientId');
 
           if (!(saveSpcClientId)) {
-            shopeeNotify(
+            surgeNotify(
               'DeviceId取得失敗1 ‼️'
             );
             $done();
           } else {
-            shopeeNotify(
+            surgeNotify(
               'DeviceId保存成功'
             );          }
             $done();
           } else {
-          shopeeNotify(
+          surgeNotify(
             'DeviceId取得失敗2 ‼️'
           );
           $done();
       }        
       } else {
-        shopeeNotify(
+        surgeNotify(
           'Cookie 已過期 ‼️',
           '請重新登入'
         );
