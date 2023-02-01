@@ -1,4 +1,4 @@
-// 20230201-14
+// 20230201-15
 // const shopeeCookie = $persistentStore.read('CookieSP') + ';SPC_EC=' + $persistentStore.read('SPC_EC') + ';SPC_F=61D8A54AC8FE46CFnexuighucearlvaz; SPC_CLIENTID=61D8A54AC8FE46CFnexuighucearlvaz'   ;
 // const shopeeCookie = $persistentStore.read('CookieSP') + ';SPC_EC=' + $persistentStore.read('SPC_EC') ;
 // const shopeeCSRFToken = $persistentStore.read('CSRFTokenSP');
@@ -237,8 +237,7 @@ async function delay(seconds) {
       console.log(i);
       await delay(0.2);
       await GetFriendCropiId(Friends[i]);
-      console.log('a-------------');
-      if (CropId !== underfined || CropId !== '') {
+      if (CropId !== undefined || CropId !== '') {
         // console.log(shopeeHelpFriendWaterRequest.body);
 
         await HelpFriendWater(shopeeHelpFriendWaterRequest);
