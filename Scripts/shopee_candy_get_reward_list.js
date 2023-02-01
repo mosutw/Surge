@@ -1,4 +1,4 @@
-//20230201-20
+//20230201-21
 // const shopeeCookie = $persistentStore.read('CookieSP') + ';SPC_EC=' + $persistentStore.read('SPC_EC') + ';';
 // const shopeeCSRFToken = $persistentStore.read('CSRFTokenSP');
 // const shopeeHeaders = {
@@ -81,7 +81,8 @@ async function preCheck() {
       shopeeInfo: shopeeInfo,
       shopeeHeaders: shopeeHeaders,
     }
-    // console.log(config);
+    console.log(config.shopeeHeaders);
+
     return resolve();
   });
 
