@@ -1,4 +1,4 @@
-// 20230201-5
+// 20230201-6
 // const shopeeCookie = $persistentStore.read('CookieSP') + ';SPC_EC=' + $persistentStore.read('SPC_EC') + ';SPC_F=61D8A54AC8FE46CFnexuighucearlvaz; SPC_CLIENTID=61D8A54AC8FE46CFnexuighucearlvaz'   ;
 const shopeeCookie = $persistentStore.read('CookieSP') + ';SPC_EC=' + $persistentStore.read('SPC_EC') ;
 const shopeeCSRFToken = $persistentStore.read('CSRFTokenSP');
@@ -66,7 +66,7 @@ async function GetFriendCropiId(Friend) {
         url: `https://games.shopee.tw/farm/api/friend/orchard/context/get?friendId=` + Friend.FriendId,
         headers: shopeeHeaders
       };
-      // console.log(request);
+      console.log(request);
       $httpClient.get(request, function (error, response, data) {
         console.log(data);
         console.log(error);
