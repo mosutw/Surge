@@ -1,4 +1,4 @@
-//20230201-14
+//20230201-15
 // const shopeeCookie = $persistentStore.read('CookieSP') + ';SPC_EC=' + $persistentStore.read('SPC_EC') + ';';
 // const shopeeCSRFToken = $persistentStore.read('CSRFTokenSP');
 // const shopeeHeaders = {
@@ -105,7 +105,7 @@ let shopeeCandyGetRewardListRequest = {
 
 
   // 取得獎勵兌換列表
-function shopeeCandyGetRewardList() {
+async function shopeeCandyGetRewardList() {
   return new Promise((resolve, reject) => {
     $httpClient.get(shopeeCandyGetRewardListRequest, function (error, response, data) {
       if (error) {
@@ -162,7 +162,47 @@ function shopeeCandyGetRewardList() {
       }
     });
   });
+}
 
+async function redeemReward() {
+  return new Promise((resolve, reject) => {
+    $httpClient.post(redeemRewardRequest, function (error, response, data) {
+      if (error) {
+        surgeNotify(
+          '獎勵兌換失敗 ‼️',
+          '連線錯誤'
+        );
+        // $done();
+        return reject('獎勵兌換失敗1');
+  
+      } else {
+        if (response.status === 200) {
+          const obj = JSON.parse(data);
+          try {
+            if (obj.msg === 'success') {
+              console.log(obj);
+              return resolve();  
+            }
+          } catch (error) {
+            surgeNotify(
+              '獎勵兌換失敗2 ‼️',
+              error
+            );
+            return reject('獎勵兌換失敗2 ‼️');
+  
+          }
+        } else {
+          surgeNotify(
+            'Cookie 已過期 ‼️',
+            '請重新登入'
+          );
+          // $done();
+          return reject('Cookie 已過期 ‼️');
+  
+        }
+      }
+    });
+  });
 }
 
 (async () => {
@@ -173,6 +213,7 @@ function shopeeCandyGetRewardList() {
     await shopeeCandyGetRewardList();
     // await shopeeCandyGetRewardList
     // .then
+    // await redeemReward();
     console.log(`✅ 蝦皮消消樂獎勵兌換列表成功: ${JSON.stringify(RewardList[0])}` );
     console.log(redeemRewardRequest);
 
