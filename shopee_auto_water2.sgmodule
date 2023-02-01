@@ -12,7 +12,8 @@
 [蝦蝦果園]取得作物資料 = type=http-request, pattern=^https:\/\/games\.shopee\.tw\/farm\/api\/orchard\/crop\/water(.*),script-path=https://kinta.ma/surge/scripts/shopee_get_crop.js, requires-body=true
 [蝦蝦果園]取得道具商店token = type=http-request, pattern=^https:\/\/games\.shopee\.tw\/farm\/api\/grocery_store\/claim,script-path=https://kinta.ma/surge/scripts/shopee_get_grocery_store_token.js, requires-body=true
 [蝦蝦果園]取得朋友列表 = type=cron, cronexp="50 23 * * *", script-path=https://raw.githubusercontent.com/mosutw/Surge/main/Scripts/shopee_get_friend_list.js, wake-system=1, timeout=15
-[蝦蝦果園]幫朋友澆水 = type=cron, cronexp="50 06,10,14,18,22 * * *", script-path=https://raw.githubusercontent.com/mosutw/Surge/main/Scripts/shopee_help_friend_water.js,  wake-system=1, timeout=15
+#[蝦蝦果園]幫朋友澆水 = type=cron, cronexp="50 06,10,14,18,22 * * *", script-path=https://raw.githubusercontent.com/mosutw/Surge/main/Scripts/shopee_help_friend_water.js,  wake-system=1, timeout=15
+[蝦蝦果園]幫朋友澆水 = script-path=https://raw.githubusercontent.com/mosutw/Surge/main/Scripts/shopee_help_friend_water.js,  requires-body=true timeout=15
 
 [蝦皮消消樂]取得獎勵兌換列表 = script-path=https://raw.githubusercontent.com/mosutw/Surge/main/Scripts/shopee_candy_get_reward_list.js, requires-body=true
 

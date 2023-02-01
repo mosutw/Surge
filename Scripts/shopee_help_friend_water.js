@@ -1,17 +1,18 @@
 // 20230201-6
 // const shopeeCookie = $persistentStore.read('CookieSP') + ';SPC_EC=' + $persistentStore.read('SPC_EC') + ';SPC_F=61D8A54AC8FE46CFnexuighucearlvaz; SPC_CLIENTID=61D8A54AC8FE46CFnexuighucearlvaz'   ;
-const shopeeCookie = $persistentStore.read('CookieSP') + ';SPC_EC=' + $persistentStore.read('SPC_EC') ;
-const shopeeCSRFToken = $persistentStore.read('CSRFTokenSP');
-const shopeeFriendsInfo = $persistentStore.read('ShopeeCropFriends');
-const shopeeCropToken = $persistentStore.read('ShopeeCropToken') || '';
-// const shopeeInfo = $persistentStore.read('ShopeeInfo');
-const shopeeHeaders = {
-  'Cookie': shopeeCookie,
-  'X-CSRFToken': shopeeCSRFToken,
-};
-function shopeeNotify(subtitle = '', message = '') {
-  $notification.post('🍤 蝦皮果園幫朋友澆水', subtitle, message, { 'url': 'shopeetw://' });
-};
+// const shopeeCookie = $persistentStore.read('CookieSP') + ';SPC_EC=' + $persistentStore.read('SPC_EC') ;
+// const shopeeCSRFToken = $persistentStore.read('CSRFTokenSP');
+// const shopeeFriendsInfo = $persistentStore.read('ShopeeCropFriends');
+// const shopeeCropToken = $persistentStore.read('ShopeeCropToken') || '';
+// // const shopeeInfo = $persistentStore.read('ShopeeInfo');
+// const shopeeHeaders = {
+//   'Cookie': shopeeCookie,
+//   'X-CSRFToken': shopeeCSRFToken,
+// };
+
+
+let showNotification = true;
+let config = null;
 
 let shopeeGetFriendCropIdRequest = {
   url: 'https://games.shopee.tw/farm/api/friend/orchard/context/get?friendId=103989402',
@@ -36,7 +37,8 @@ let CropFail = 0;
 let CropId = '';
 
 function surgeNotify(subtitle = '', message = '') {
-  $notification.post('🍤 蝦蝦果園領取任務獎勵', subtitle, message, { 'url': 'shopeetw://' });
+  $notification.post('🍤 蝦皮果園幫朋友澆水', subtitle, message, { 'url': 'shopeetw://' });
+
 };
 
 function handleError(error) {
@@ -137,7 +139,7 @@ async function HelpFriendWater(shopeeHelpFriendWaterRequest) {
     } 
     catch (error) {
       console.log('幫朋友澆水失敗5');
-      shopeeNotify(
+      surgeNotify(
         '幫澆水失敗 ‼️',
         error
       );
