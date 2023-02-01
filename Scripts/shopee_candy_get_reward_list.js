@@ -1,4 +1,4 @@
-//20230201-2
+//20230201-3
 // const shopeeCookie = $persistentStore.read('CookieSP') + ';SPC_EC=' + $persistentStore.read('SPC_EC') + ';';
 // const shopeeCSRFToken = $persistentStore.read('CSRFTokenSP');
 // const shopeeHeaders = {
@@ -8,7 +8,7 @@
 
 let showNotification = true;
 let config = null;
-let FriendsInfo = 0;
+let RewardList = null;
 
 config = {
   shopeeInfo: null,
@@ -86,7 +86,7 @@ let shopeeCandyGetRewardListRequest = {
 
   // 取得獎勵兌換列表
 function shopeeCandyGetRewardList() {
-  const RewardList = $httpClient.get(shopeeCandyGetRewardListRequest, function (error, response, data) {
+  $httpClient.get(shopeeCandyGetRewardListRequest, function (error, response, data) {
     if (error) {
       surgeNotify(
         '獎勵兌換列表取得失敗 ‼️',
@@ -139,7 +139,7 @@ function shopeeCandyGetRewardList() {
     await preCheck();
     console.log('✅ 檢查token成功');
     const itemName = await shopeeCandyGetRewardList();
-    console.log(`✅ 蝦皮消消樂獎勵兌換列表成功: ${FriendsInfo.length}` );
+    console.log(`✅ 蝦皮消消樂獎勵兌換列表成功: ${RewardList.length}` );
 
   } catch (error) {
     handleError(error);
