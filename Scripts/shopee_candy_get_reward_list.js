@@ -1,4 +1,4 @@
-//20230201-24
+//20230201-25
 // const shopeeCookie = $persistentStore.read('CookieSP') + ';SPC_EC=' + $persistentStore.read('SPC_EC') + ';';
 // const shopeeCSRFToken = $persistentStore.read('CSRFTokenSP');
 // const shopeeHeaders = {
@@ -238,7 +238,7 @@ console.log(shopeeInfo.token);
 let redeemRewardRequest = {
   // url: `https://games.shopee.tw/farm/api/orchard/crop/create?t=${new Date().getTime()}`,
   url: `https://games.shopee.tw/gameplatform/api/v2/redeem_store/redeem_item/store/115/item/26165?appid=AxJMo8pm7cs5ca7OM8&activity=1731357eb13431cb`,
-  headers: null,
+  headers: config.shopeeHeaders,
   body: {
     "request_id":"userId_115_26165_1675256652051",
   }
