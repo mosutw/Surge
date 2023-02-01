@@ -1,10 +1,4 @@
-//20230201-11
-// const shopeeCookie = $persistentStore.read('CookieSP') + ';SPC_EC=' + $persistentStore.read('SPC_EC') + ';';
-// const shopeeCSRFToken = $persistentStore.read('CSRFTokenSP');
-// const shopeeHeaders = {
-//   'Cookie': shopeeCookie,
-//   'X-CSRFToken': shopeeCSRFToken,
-// };
+//20230201-12
 
 let showNotification = true;
 let config = null;
@@ -80,7 +74,6 @@ async function shopeeGetFriendId() {
       headers: config.shopeeHeaders,
     };    
     const FriendsInfo_old = JSON.parse($persistentStore.read('ShopeeCropFriends'));
-    console.log(shopeeGetFriendIdRequest);
     $httpClient.get(shopeeGetFriendIdRequest, function (error, response, data) {
       if (error) {
         surgeNotify(
@@ -159,9 +152,6 @@ async function shopeeGetFriendId() {
 
 }
 
-// shopeeGetDeviceId();
-// shopeeGetFriendId();
-
 (async () => {
   console.log('🍤 蝦皮果園朋友列表 v20230128.1');
   try {
@@ -169,7 +159,7 @@ async function shopeeGetFriendId() {
     // console.log(config);
     console.log('✅ 檢查token成功');
     const itemName = await shopeeGetFriendId();
-    console.log(`✅ 取得蝦皮果園朋友列表成功: ${FriendsInfo}` );
+    console.log(`✅ 取得蝦皮果園朋友列表成功: ${FriendsInfo.length}` );
 
   } catch (error) {
     handleError(error);
