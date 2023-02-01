@@ -1,4 +1,4 @@
-//20230201-7
+//20230201-8
 // const shopeeCookie = $persistentStore.read('CookieSP') + ';SPC_EC=' + $persistentStore.read('SPC_EC') + ';';
 // const shopeeCSRFToken = $persistentStore.read('CSRFTokenSP');
 // const shopeeHeaders = {
@@ -62,8 +62,8 @@ async function preCheck() {
   });
 }
 
-let shopeeGetFriendIdRequest = {
-  url: 'https://games.shopee.tw/farm/api/message/get?page=1&pageSize=100',
+ shopeeGetFriendIdRequest = {
+  url: `https://games.shopee.tw/farm/api/message/get?page=1&pageSize=100`,
   headers: config.shopeeHeaders,
 };
 
@@ -212,6 +212,8 @@ async function shopeeGetFriendId() {
   console.log('🍤 蝦皮果園朋友列表 v20230128.1');
   try {
     await preCheck();
+    console.log(config);
+    $done();
     console.log('✅ 檢查token成功');
     const itemName = await shopeeGetFriendId();
     console.log(`✅ 取得蝦皮果園朋友列表成功: + ${result}` );
