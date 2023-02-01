@@ -1,4 +1,4 @@
-//20230201-8
+//20230201-9
 // const shopeeCookie = $persistentStore.read('CookieSP') + ';SPC_EC=' + $persistentStore.read('SPC_EC') + ';';
 // const shopeeCSRFToken = $persistentStore.read('CSRFTokenSP');
 // const shopeeHeaders = {
@@ -74,6 +74,15 @@ async function preCheck() {
     }
     return resolve();
   });
+
+  let redeemRewardRequest = {
+    // url: `https://games.shopee.tw/farm/api/orchard/crop/create?t=${new Date().getTime()}`,
+    url: `https://games.shopee.tw/gameplatform/api/v2/redeem_store/redeem_item/store/115/item/26165?appid=AxJMo8pm7cs5ca7OM8&activity=1731357eb13431cb`,
+    headers: config.shopeeHeaders,
+    body: {
+      request_id: `${userId}_115_${rewrardId}_${new Date().getTime()}`,
+    }
+  }  
 }
 
 // ---------------------------
@@ -101,7 +110,7 @@ function shopeeCandyGetRewardList() {
           const obj = JSON.parse(data);
           try {
             if (obj.msg === 'success') {
-              RewardList = obj.data.item_list.filter(item => item.name.includes("蝦幣"));
+              RewardList = obj.data.item_list.filter(item => item.name.includes("0.1蝦幣"));
               console.log('可兌換項目數:' + RewardList.length);
               // $done();
               return resolve();
@@ -148,7 +157,8 @@ function shopeeCandyGetRewardList() {
     await shopeeCandyGetRewardList();
     await shopeeCandyGetRewardList
     .then
-    console.log(`✅ 蝦皮消消樂獎勵兌換列表成功: ${JSON.stringify(RewardList)}` );
+    console.log(`✅ 蝦皮消消樂獎勵兌換列表成功: ${JSON.stringify(RewardList[0])}` );
+    console.log(shopeeCandyGetRewardListRequest);
 
   } catch (error) {
     handleError(error);
