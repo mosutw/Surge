@@ -1,4 +1,4 @@
-//20230201-3
+//20230201-4
 // const shopeeCookie = $persistentStore.read('CookieSP') + ';SPC_EC=' + $persistentStore.read('SPC_EC') + ';';
 // const shopeeCSRFToken = $persistentStore.read('CSRFTokenSP');
 // const shopeeHeaders = {
@@ -98,8 +98,8 @@ function shopeeCandyGetRewardList() {
         const obj = JSON.parse(data);
         try {
           if (obj.msg === 'success') {
-            const ItemList = obj.data.item_list;
-            console.log('可兌換項目數:' + ItemList.length);
+            RewardList = obj.data.item_list;
+            console.log('可兌換項目數:' + RewardList.length);
             $done();
           } else {
             surgeNotify(
