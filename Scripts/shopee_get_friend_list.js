@@ -1,12 +1,13 @@
-//20230201-5
-const shopeeCookie = $persistentStore.read('CookieSP') + ';SPC_EC=' + $persistentStore.read('SPC_EC') + ';';
-const shopeeCSRFToken = $persistentStore.read('CSRFTokenSP');
-const shopeeHeaders = {
-  'Cookie': shopeeCookie,
-  'X-CSRFToken': shopeeCSRFToken,
-};
+//20230201-6
+// const shopeeCookie = $persistentStore.read('CookieSP') + ';SPC_EC=' + $persistentStore.read('SPC_EC') + ';';
+// const shopeeCSRFToken = $persistentStore.read('CSRFTokenSP');
+// const shopeeHeaders = {
+//   'Cookie': shopeeCookie,
+//   'X-CSRFToken': shopeeCSRFToken,
+// };
 
-
+let showNotification = true;
+let config = null;
 
 function surgeNotify(subtitle = '', message = '') {
   $notification.post('🍤 蝦皮果園朋友列表', subtitle, message, { 'url': 'shopeetw://' });
@@ -63,7 +64,7 @@ async function preCheck() {
 
 let shopeeGetFriendIdRequest = {
   url: 'https://games.shopee.tw/farm/api/message/get?page=1&pageSize=100',
-  headers: shopeeHeaders,
+  headers: config.shopeeHeaders,
 };
 
 // let shopeeGetDeviceIdRequest = {
