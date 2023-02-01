@@ -1,4 +1,4 @@
-//20230201-17
+//20230201-18
 // const shopeeCookie = $persistentStore.read('CookieSP') + ';SPC_EC=' + $persistentStore.read('SPC_EC') + ';';
 // const shopeeCSRFToken = $persistentStore.read('CSRFTokenSP');
 // const shopeeHeaders = {
@@ -173,6 +173,7 @@ async function redeemReward() {
           '連線錯誤'
         );
         // $done();
+        console.log('獎勵兌換失敗1');
         return reject('獎勵兌換失敗1');
   
       } else {
@@ -188,6 +189,8 @@ async function redeemReward() {
               '獎勵兌換失敗2 ‼️',
               error
             );
+            console.log('獎勵兌換失敗2');
+
             return reject('獎勵兌換失敗2 ‼️');
   
           }
