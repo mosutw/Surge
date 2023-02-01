@@ -111,7 +111,7 @@ function shopeeCandyGetRewardList() {
           const obj = JSON.parse(data);
           try {
             if (obj.msg === 'success') {
-              RewardList = obj.data.item_list.filter(item => item.name.includes("0.1蝦幣"));
+              RewardList = obj.data.item_list.filter(item => item.name.includes("0.01 蝦幣"));
               console.log('可兌換項目數:' + RewardList.length);
               // $done();
               let redeemRewardRequest = {
