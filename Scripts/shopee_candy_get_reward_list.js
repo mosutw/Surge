@@ -1,4 +1,4 @@
-//20230201-26
+//20230201-27
 // const shopeeCookie = $persistentStore.read('CookieSP') + ';SPC_EC=' + $persistentStore.read('SPC_EC') + ';';
 // const shopeeCSRFToken = $persistentStore.read('CSRFTokenSP');
 // const shopeeHeaders = {
@@ -223,7 +223,7 @@ function cookieToString(cookieObject) {
 // })();
 
 const shopeeInfo = $persistentStore.read('shopeeInfo');
-
+console.log(shopeeInfo);
 const shopeeHeaders = {
   'Cookie': cookieToString(shopeeInfo.token),
   'Content-Type': 'application/json',
