@@ -1,4 +1,4 @@
-//20230201-18
+//20230201-19
 // const shopeeCookie = $persistentStore.read('CookieSP') + ';SPC_EC=' + $persistentStore.read('SPC_EC') + ';';
 // const shopeeCSRFToken = $persistentStore.read('CSRFTokenSP');
 // const shopeeHeaders = {
@@ -165,6 +165,8 @@ async function shopeeCandyGetRewardList() {
 }
 
 async function redeemReward() {
+  console.log('redeemReward');
+  console.log(redeemRewardRequest);
   return new Promise((resolve, reject) => {
     $httpClient.post(redeemRewardRequest, function (error, response, data) {
       if (error) {
