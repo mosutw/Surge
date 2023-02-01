@@ -1,12 +1,68 @@
+//20230201-1
 const shopeeCookie = $persistentStore.read('CookieSP') + ';SPC_EC=' + $persistentStore.read('SPC_EC') + ';';
 const shopeeCSRFToken = $persistentStore.read('CSRFTokenSP');
 const shopeeHeaders = {
   'Cookie': shopeeCookie,
   'X-CSRFToken': shopeeCSRFToken,
 };
+
+
 function shopeeNotify(subtitle = '', message = '') {
   $notification.post('🍤 蝦皮果園朋友列表', subtitle, message, { 'url': 'shopeetw://' });
 };
+
+function surgeNotify(subtitle = '', message = '') {
+  $notification.post('🍤 蝦皮果園朋友列表', subtitle, message, { 'url': 'shopeetw://' });
+};
+
+function handleError(error) {
+  if (Array.isArray(error)) {
+    console.log(`❌ ${error[0]} ${error[1]}`);
+    if (showNotification) {
+      surgeNotify(error[0], error[1]);
+    }
+  } else {
+    console.log(`❌ ${error}`);
+    if (showNotification) {
+      surgeNotify(error);
+    }
+  }
+}
+
+function getSaveObject(key) {
+  const string = $persistentStore.read(key);
+  return !string || string.length === 0 ? {} : JSON.parse(string);
+}
+
+function isEmptyObject(obj) {
+  return Object.keys(obj).length === 0 && obj.constructor === Object ? true : false;
+}
+
+function cookieToString(cookieObject) {
+  let string = '';
+  for (const [key, value] of Object.entries(cookieObject)) {
+    string += `${key}=${value};`
+  }
+  return string;
+}
+
+async function preCheck() {
+  return new Promise((resolve, reject) => {
+    const shopeeInfo = getSaveObject('ShopeeInfo');
+    if (isEmptyObject(shopeeInfo)) {
+      return reject(['檢查失敗 ‼️', '沒有新版 token']);
+    }
+    const shopeeHeaders = {
+      'Cookie': cookieToString(shopeeInfo.token),
+      'Content-Type': 'application/json',
+    }
+    config = {
+      shopeeInfo: shopeeInfo,
+      shopeeHeaders: shopeeHeaders,
+    }
+    return resolve();
+  });
+}
 
 let shopeeGetFriendIdRequest = {
   url: 'https://games.shopee.tw/farm/api/message/get?page=1&pageSize=100',
@@ -69,15 +125,16 @@ function shopeeGetDeviceId() {
   });
 }
   // 取得朋友列表
-function shopeeGetFriendId() {
+async function shopeeGetFriendId() {
   const FriendsInfo_old = JSON.parse($persistentStore.read('ShopeeCropFriends'));
   $httpClient.get(shopeeGetFriendIdRequest, function (error, response, data) {
     if (error) {
-      shopeeNotify(
+      surgeNotify(
         '朋友列表取得失敗 ‼️',
         '連線錯誤'
       );
-      $done();
+      return reject('朋友列表取得失敗1 ‼️');
+      // $done();
     } else {
       if (response.status === 200) {
         const obj = JSON.parse(data);
@@ -104,34 +161,39 @@ function shopeeGetFriendId() {
             FriendsInfo = FriendsInfo.filter(item => item.FriendId !== undefined);
             const saveCronFriends = $persistentStore.write(JSON.stringify(FriendsInfo), 'ShopeeCropFriends');
             if (!saveCronFriends) {
-              shopeeNotify(
+              surgeNotify(
                 '朋友列表保存失敗 ‼️',
                 saveCronFriends 
               );
+              return reject('朋友列表取得失敗2 ‼️');
             } else {
-              shopeeNotify(
+              surgeNotify(
                 '朋友列表保存成功'
               );
-            }   
+              console.log('朋友數目:' + FriendsInfo.length);
+              return resolve('朋友數目:' + FriendsInfo.length);
+              }   
             // console.log(FriendsInfo);                 
-            console.log('朋友數目:' + FriendsInfo.length);
-            $done();
+
           } else {
-            shopeeNotify(
-              '朋友列表取得失敗1 ‼️',
+            surgeNotify(
+              '朋友列表取得失敗3 ‼️',
               obj.msg
             );
-            $done();
+            return reject('朋友列表取得失敗3 ‼️');
+            // $done();
           }
         } catch (error) {
-          shopeeNotify(
-            '朋友列表取得失敗2 ‼️',
+          surgeNotify(
+            '朋友列表取得失敗4 ‼️',
             error
           );
-          $done();
+          // $done();
+          return reject('朋友列表取得失敗4 ‼️');
+
         }
       } else {
-        shopeeNotify(
+        surgeNotify(
           'Cookie 已過期 ‼️',
           '請重新登入'
         );
@@ -142,4 +204,18 @@ function shopeeGetFriendId() {
 }
 
 // shopeeGetDeviceId();
-shopeeGetFriendId();
+// shopeeGetFriendId();
+
+(async () => {
+  console.log('🍤 蝦皮果園朋友列表 v20230128.1');
+  try {
+    await preCheck();
+    console.log('✅ 檢查成功');
+    const itemName = await shopeeGetFriendId();
+    console.log('✅ 取得蝦皮果園朋友列表成功');
+
+  } catch (error) {
+    handleError(error);
+  }
+  $done();
+})();
