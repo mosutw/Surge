@@ -1,4 +1,4 @@
-// 20230201-11
+// 20230201-12
 // const shopeeCookie = $persistentStore.read('CookieSP') + ';SPC_EC=' + $persistentStore.read('SPC_EC') + ';SPC_F=61D8A54AC8FE46CFnexuighucearlvaz; SPC_CLIENTID=61D8A54AC8FE46CFnexuighucearlvaz'   ;
 // const shopeeCookie = $persistentStore.read('CookieSP') + ';SPC_EC=' + $persistentStore.read('SPC_EC') ;
 // const shopeeCSRFToken = $persistentStore.read('CSRFTokenSP');
@@ -10,6 +10,7 @@
 //   'X-CSRFToken': shopeeCSRFToken,
 // };
 
+const shopeeFriendsInfo = $persistentStore.read('ShopeeCropFriends');
 const shopeeCropToken = $persistentStore.read('ShopeeCropToken') || '';
 
 
