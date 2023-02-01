@@ -1,4 +1,4 @@
-//20230201-19
+//20230201-20
 // const shopeeCookie = $persistentStore.read('CookieSP') + ';SPC_EC=' + $persistentStore.read('SPC_EC') + ';';
 // const shopeeCSRFToken = $persistentStore.read('CSRFTokenSP');
 // const shopeeHeaders = {
@@ -125,7 +125,8 @@ async function shopeeCandyGetRewardList() {
               console.log('可兌換項目數:' + RewardList.length);
               // $done();
               redeemRewardRequest = {
-                url: `https://games.shopee.tw/gameplatform/api/v2/redeem_store/redeem_item/store/115/item/${RewardList[0].id}?appid=AxJMo8pm7cs5ca7OM8&activity=1731357eb13431cb`,
+                // url: `https://games.shopee.tw/gameplatform/api/v2/redeem_store/redeem_item/store/115/item/${RewardList[0].id}?appid=AxJMo8pm7cs5ca7OM8&activity=1731357eb13431cb`,
+                url: `https://games.shopee.tw/gameplatform/api/v2/redeem_store/redeem_item/store/115/item/26165?appid=AxJMo8pm7cs5ca7OM8&activity=1731357eb13431cb`,
                 headers: config.shopeeHeaders,
                 body: {
                   request_id: `userId_115_${RewardList[0].id}_${new Date().getTime()}`,
@@ -174,9 +175,9 @@ async function redeemReward() {
           '獎勵兌換失敗 ‼️',
           '連線錯誤'
         );
-        // $done();
         console.log('獎勵兌換失敗1');
-        return reject('獎勵兌換失敗1');
+        // return reject('獎勵兌換失敗1');
+        $done();
   
       } else {
         if (response.status === 200) {
