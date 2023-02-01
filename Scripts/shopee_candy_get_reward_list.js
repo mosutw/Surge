@@ -1,4 +1,4 @@
-//20230201-13
+//20230201-14
 // const shopeeCookie = $persistentStore.read('CookieSP') + ';SPC_EC=' + $persistentStore.read('SPC_EC') + ';';
 // const shopeeCSRFToken = $persistentStore.read('CSRFTokenSP');
 // const shopeeHeaders = {
@@ -14,6 +14,15 @@ config = {
   shopeeInfo: null,
   shopeeHeaders: null,
 }
+
+let redeemRewardRequest = {
+  // url: `https://games.shopee.tw/farm/api/orchard/crop/create?t=${new Date().getTime()}`,
+  url: `https://games.shopee.tw/gameplatform/api/v2/redeem_store/redeem_item/store/115/item/26165?appid=AxJMo8pm7cs5ca7OM8&activity=1731357eb13431cb`,
+  headers: null,
+  body: {
+    request_id: null,
+  }
+}  
 
 function surgeNotify(subtitle = '', message = '') {
   $notification.post('🍤 蝦皮消消樂獎勵兌換列表', subtitle, message, { 'url': 'shopeetw://' });
@@ -76,7 +85,7 @@ async function preCheck() {
     return resolve();
   });
 
-  let redeemRewardRequest = {
+  redeemRewardRequest = {
     // url: `https://games.shopee.tw/farm/api/orchard/crop/create?t=${new Date().getTime()}`,
     url: `https://games.shopee.tw/gameplatform/api/v2/redeem_store/redeem_item/store/115/item/26165?appid=AxJMo8pm7cs5ca7OM8&activity=1731357eb13431cb`,
     headers: config.shopeeHeaders,
