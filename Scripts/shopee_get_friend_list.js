@@ -1,4 +1,4 @@
-//20230201-9
+//20230201-10
 // const shopeeCookie = $persistentStore.read('CookieSP') + ';SPC_EC=' + $persistentStore.read('SPC_EC') + ';';
 // const shopeeCSRFToken = $persistentStore.read('CSRFTokenSP');
 // const shopeeHeaders = {
@@ -70,10 +70,10 @@ async function preCheck() {
   });
 }
 
- shopeeGetFriendIdRequest = {
-  url: `https://games.shopee.tw/farm/api/message/get?page=1&pageSize=100`,
-  headers: config.shopeeHeaders,
-};
+//  shopeeGetFriendIdRequest = {
+//   url: `https://games.shopee.tw/farm/api/message/get?page=1&pageSize=100`,
+//   headers: config.shopeeHeaders,
+// };
 
 // let shopeeGetDeviceIdRequest = {
 //   url: 'https://shopee.tw/sw.js',
@@ -133,6 +133,10 @@ async function preCheck() {
   // 取得朋友列表
 async function shopeeGetFriendId() {
   return new Promise((resolve, reject) => {
+    const shopeeGetFriendIdRequest = {
+      url: `https://games.shopee.tw/farm/api/message/get?page=1&pageSize=100`,
+      headers: config.shopeeHeaders,
+    };    
     const FriendsInfo_old = JSON.parse($persistentStore.read('ShopeeCropFriends'));
     console.log(shopeeGetFriendIdRequest);
     $httpClient.get(shopeeGetFriendIdRequest, function (error, response, data) {
