@@ -1,4 +1,4 @@
-//20230201-4
+//20230201-5
 // const shopeeCookie = $persistentStore.read('CookieSP') + ';SPC_EC=' + $persistentStore.read('SPC_EC') + ';';
 // const shopeeCSRFToken = $persistentStore.read('CSRFTokenSP');
 // const shopeeHeaders = {
@@ -92,7 +92,9 @@ function shopeeCandyGetRewardList() {
         '獎勵兌換列表取得失敗 ‼️',
         '連線錯誤'
       );
-      $done();
+      // $done();
+      return reject('獎勵兌換列表取得失敗1');
+
     } else {
       if (response.status === 200) {
         const obj = JSON.parse(data);
@@ -100,7 +102,9 @@ function shopeeCandyGetRewardList() {
           if (obj.msg === 'success') {
             RewardList = obj.data.item_list;
             console.log('可兌換項目數:' + RewardList.length);
-            $done();
+            // $done();
+            return resolve();
+
           } else {
             surgeNotify(
               '獎勵兌換列表取得失敗1 ‼️',
@@ -138,7 +142,9 @@ function shopeeCandyGetRewardList() {
   try {
     await preCheck();
     console.log('✅ 檢查token成功');
-    const itemName = await shopeeCandyGetRewardList();
+    await shopeeCandyGetRewardList();
+    await shopeeCandyGetRewardList
+    .then
     console.log(`✅ 蝦皮消消樂獎勵兌換列表成功: ${RewardList.length}` );
 
   } catch (error) {
