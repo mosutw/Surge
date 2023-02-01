@@ -1,4 +1,4 @@
-//20230201-2
+//20230201-3
 const shopeeCookie = $persistentStore.read('CookieSP') + ';SPC_EC=' + $persistentStore.read('SPC_EC') + ';';
 const shopeeCSRFToken = $persistentStore.read('CSRFTokenSP');
 const shopeeHeaders = {
@@ -209,7 +209,7 @@ async function shopeeGetFriendId() {
     await preCheck();
     console.log('✅ 檢查成功');
     const itemName = await shopeeGetFriendId();
-    console.log('✅ 取得蝦皮果園朋友列表成功');
+    console.log(`✅ 取得蝦皮果園朋友列表成功: + ${result}` );
 
   } catch (error) {
     handleError(error);
