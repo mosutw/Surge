@@ -1,4 +1,4 @@
-//20230202-4
+//20230202-5
 let showNotification = true;
 let config = null;
 let RewardList = null;
@@ -85,7 +85,7 @@ async function preCheck() {
   });
 
   redeemRewardRequest = {
-    url: `https://games.shopee.tw/gameplatform/api/v2/redeem_store/redeem_item/store/397/event/0a470ca24ec80fe6/item/item_id??appid=LcqcAMvwNcX8MR63xX`,
+    url: `https://games.shopee.tw/gameplatform/api/v2/redeem_store/redeem_item/store/397/event/0a470ca24ec80fe6/item/item_id?appid=LcqcAMvwNcX8MR63xX`,
 
     headers: config.shopeeHeaders,
     body: {
@@ -213,7 +213,7 @@ async function redeemReward() {
         console.log(RewardList[i].name);
         RewardList[i].id = 26368;
       redeemRewardRequest = {
-        url: `https://games.shopee.tw/gameplatform/api/v2/redeem_store/redeem_item/store/397/event/0a470ca24ec80fe6/item/${RewardList[i].id}??appid=LcqcAMvwNcX8MR63xX`,
+        url: `https://games.shopee.tw/gameplatform/api/v2/redeem_store/redeem_item/store/397/event/0a470ca24ec80fe6/item/${RewardList[i].id}?appid=LcqcAMvwNcX8MR63xX`,
 
         headers: config.shopeeHeaders,
         body: {
