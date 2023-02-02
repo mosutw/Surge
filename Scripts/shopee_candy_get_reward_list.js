@@ -1,4 +1,4 @@
-//20230201-15
+//20230202-1
 // const shopeeCookie = $persistentStore.read('CookieSP') + ';SPC_EC=' + $persistentStore.read('SPC_EC') + ';';
 // const shopeeCSRFToken = $persistentStore.read('CSRFTokenSP');
 // const shopeeHeaders = {
@@ -124,7 +124,7 @@ async function shopeeCandyGetRewardList() {
               RewardList = obj.data.item_list.filter(item => item.name.includes("0.01 蝦幣"));
               console.log('可兌換項目數:' + RewardList.length);
               // $done();
-              let redeemRewardRequest = {
+              redeemRewardRequest = {
                 url: `https://games.shopee.tw/gameplatform/api/v2/redeem_store/redeem_item/store/115/item/${RewardList[0].id}?appid=AxJMo8pm7cs5ca7OM8&activity=1731357eb13431cb`,
                 headers: config.shopeeHeaders,
                 body: {
@@ -181,7 +181,13 @@ async function redeemReward() {
           try {
             if (obj.msg === 'success') {
               console.log(obj);
-              return resolve();  
+              // return resolve();  
+              $done();
+            }
+            else {
+              console.log(obj);
+              // return reject();  
+              $done();
             }
           } catch (error) {
             surgeNotify(
@@ -192,8 +198,9 @@ async function redeemReward() {
   
           }
         } else {
+          console.log(data);
           surgeNotify(
-            'Cookie 已過期 ‼️',
+            '兌換失敗',
             '請重新登入'
           );
           // $done();
