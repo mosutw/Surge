@@ -1,4 +1,4 @@
-//20230202-3
+//20230202-4
 let showNotification = true;
 let config = null;
 let RewardList = null;
@@ -15,7 +15,7 @@ let shopeePetsGetRewardListRequest = {
 };
 
 let redeemRewardRequest = {
-  url: `https://games.shopee.tw/gameplatform/api/v2/redeem_store/redeem_item/store/397/event/0a470ca24ec80fe6/item/item_id??appid=LcqcAMvwNcX8MR63xX`,
+  url: `https://games.shopee.tw/gameplatform/api/v2/redeem_store/redeem_item/store/397/event/0a470ca24ec80fe6/item/item_id?appid=LcqcAMvwNcX8MR63xX`,
   headers: null,
   body: {
     request_id: null,
@@ -211,7 +211,7 @@ async function redeemReward() {
     // for (let i = 0; i < RewardList.length; i++) {
       for (let i = 0; i < 1; i++) {
         console.log(RewardList[i].name);
-        RewardList[i].id = 26351;
+        RewardList[i].id = 26368;
       redeemRewardRequest = {
         url: `https://games.shopee.tw/gameplatform/api/v2/redeem_store/redeem_item/store/397/event/0a470ca24ec80fe6/item/${RewardList[i].id}??appid=LcqcAMvwNcX8MR63xX`,
 
