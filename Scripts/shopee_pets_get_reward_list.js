@@ -219,8 +219,8 @@ async function redeemReward() {
       // for (let i = 0; i < 2; i++) {
         console.log(i);
         await delay(0.2);
-        // const result = await redeemReward();
-        // console.log(result);
+        const result = await redeemReward();
+        console.log(result);
       }
 
     // console.log(`✅ 蝦皮寵物村獎勵兌換列表成功: ${JSON.stringify(RewardList[0])}` );
