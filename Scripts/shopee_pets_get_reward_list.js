@@ -155,7 +155,7 @@ async function shopeePetsGetRewardList() {
 async function redeemReward() {
   return new Promise((resolve, reject) => {
     $httpClient.post(redeemRewardRequest, function (error, response, data) {
-      console.log(redeemRewardRequest);
+      // console.log(redeemRewardRequest);
       if (error) {
         surgeNotify(
           '獎勵兌換失敗 ‼️',
