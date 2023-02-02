@@ -1,4 +1,4 @@
-//20230202-5
+//20230202-6
 let showNotification = true;
 let config = null;
 let RewardList = null;
