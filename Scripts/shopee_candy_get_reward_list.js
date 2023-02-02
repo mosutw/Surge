@@ -1,4 +1,4 @@
-//20230202-3
+//20230202-4
 // const shopeeCookie = $persistentStore.read('CookieSP') + ';SPC_EC=' + $persistentStore.read('SPC_EC') + ';';
 // const shopeeCSRFToken = $persistentStore.read('CSRFTokenSP');
 // const shopeeHeaders = {
@@ -242,10 +242,10 @@ console.log(shopeeInfo.token);
 
 let redeemRewardRequest = {
   // url: `https://games.shopee.tw/farm/api/orchard/crop/create?t=${new Date().getTime()}`,
-  url: `https://games.shopee.tw/gameplatform/api/v2/redeem_store/redeem_item/store/115/item/26165?appid=AxJMo8pm7cs5ca7OM8&activity=1731357eb13431cb`,
+  url: `https://games.shopee.tw/gameplatform/api/v2/redeem_store/redeem_item/store/115/item/26170?appid=AxJMo8pm7cs5ca7OM8&activity=1731357eb13431cb`,
   headers: config.shopeeHeaders,
   body: {
-    "request_id":"userId_115_26165_1675256652051",
+    "request_id":"userId_115_26170_1675256652051",
   }
 }  
 $httpClient.post(redeemRewardRequest, function (error, response, data) {
@@ -283,9 +283,9 @@ $httpClient.post(redeemRewardRequest, function (error, response, data) {
       }
     } else {
       surgeNotify(
-        'Cookie 已過期 ‼️',
-        '請重新登入'
+        '兌換失敗 ‼️',
       );
+      console.log(data);
       $done();
       // return reject('Cookie 已過期 ‼️');
     }
