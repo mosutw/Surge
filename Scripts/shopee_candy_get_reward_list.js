@@ -9,6 +9,7 @@
 let showNotification = true;
 let config = null;
 let RewardList = null;
+let userId = null;
 
 config = {
   shopeeInfo: null,
@@ -87,6 +88,8 @@ async function preCheck() {
       shopeeInfo: shopeeInfo,
       shopeeHeaders: shopeeHeaders,
     }
+
+    userId = shopeeInfo.token.SPC_U;
     return resolve();
   });
 
@@ -96,7 +99,7 @@ async function preCheck() {
     headers: config.shopeeHeaders,
     body: {
       // request_id: `${userId}_115_${rewrardId}_${new Date().getTime()}`,
-      request_id: `userId_115_rewrardId_${new Date().getTime()}`,
+      request_id: `${userId}_115_rewrardId_${new Date().getTime()}`,
     }
   }  
 }
@@ -223,7 +226,7 @@ async function redeemReward() {
         // url: `https://games.shopee.tw/gameplatform/api/v2/redeem_store/redeem_item/store/115/item/26165?appid=AxJMo8pm7cs5ca7OM8&activity=1731357eb13431cb`,
         headers: config.shopeeHeaders,
         body: {
-          request_id: `userId_115_${RewardList[i].id}_${new Date().getTime()}`,
+          request_id: `${userId}_115_${RewardList[i].id}_${new Date().getTime()}`,
         }
       }              
 

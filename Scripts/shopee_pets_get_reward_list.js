@@ -2,6 +2,7 @@
 let showNotification = true;
 let config = null;
 let RewardList = null;
+let userId = null;
 
 config = {
   shopeeInfo: null,
@@ -79,6 +80,7 @@ async function preCheck() {
       shopeeInfo: shopeeInfo,
       shopeeHeaders: shopeeHeaders,
     }
+    userId = shopeeInfo.token.SPC_U;    
     return resolve();
   });
 
@@ -88,7 +90,7 @@ async function preCheck() {
     headers: config.shopeeHeaders,
     body: {
       // request_id: `${userId}_397_${rewrardId}_${new Date().getTime()}`,
-      request_id: `userId_397_rewardId_${new Date().getTime()}`,
+      request_id: `${userId}_397_rewardId_${new Date().getTime()}`,
     }
   }  
 }
@@ -215,7 +217,7 @@ async function redeemReward() {
 
         headers: config.shopeeHeaders,
         body: {
-          request_id: `userId_397_${RewardList[i].id}_${new Date().getTime()}`,
+          request_id: `${userId}_397_${RewardList[i].id}_${new Date().getTime()}`,
         }
       }              
 
