@@ -108,24 +108,23 @@ function cookieToString(cookieObject) {
 //         );
 //         // $done();
 //         return reject('獎勵兌換列表取得失敗1');
-  
-      } else {
-        if (response.status === 200) {
-          const obj = JSON.parse(data);
-          try {
-            if (obj.msg === 'success') {
-              RewardList = obj.data.item_list.filter(item => item.name.includes("0.01 蝦幣"));
-              console.log('可兌換項目數:' + RewardList.length);
-              // $done();
-              redeemRewardRequest = {
-                url: `https://games.shopee.tw/gameplatform/api/v2/redeem_store/redeem_item/store/115/item/${RewardList[0].id}?appid=AxJMo8pm7cs5ca7OM8&activity=1731357eb13431cb`,
-                headers: config.shopeeHeaders,
-                body: {
-                  request_id: `userId_115_${RewardList[0].id}_${new Date().getTime()}`,
-                }
-              }              
-              return resolve();
-
+//       } else {
+//         if (response.status === 200) {
+//           const obj = JSON.parse(data);
+//           try {
+//             if (obj.msg === 'success') {
+//               RewardList = obj.data.item_list.filter(item => item.name.includes("0.01 蝦幣"));
+//               console.log('可兌換項目數:' + RewardList.length);
+//               // $done();
+//               redeemRewardRequest = {
+//                 // url: `https://games.shopee.tw/gameplatform/api/v2/redeem_store/redeem_item/store/115/item/${RewardList[0].id}?appid=AxJMo8pm7cs5ca7OM8&activity=1731357eb13431cb`,
+//                 url: `https://games.shopee.tw/gameplatform/api/v2/redeem_store/redeem_item/store/115/item/26165?appid=AxJMo8pm7cs5ca7OM8&activity=1731357eb13431cb`,
+//                 headers: config.shopeeHeaders,
+//                 body: {
+//                   request_id: `userId_115_${RewardList[0].id}_${new Date().getTime()}`,
+//                 }
+//               }              
+//               return resolve();
   
 //             } else {
 //               surgeNotify(
@@ -172,7 +171,36 @@ function cookieToString(cookieObject) {
 //         // return reject('獎勵兌換失敗1');
 //         $done();
   
-
+      } else {
+        if (response.status === 200) {
+          const obj = JSON.parse(data);
+          try {
+            if (obj.msg === 'success') {
+              console.log(obj);
+              // return resolve();  
+              $done();
+            }
+            else {
+              console.log(obj);
+              // return reject();  
+              $done();
+            }
+          } catch (error) {
+            surgeNotify(
+              '獎勵兌換失敗2 ‼️',
+              error
+            );
+            return reject('獎勵兌換失敗2 ‼️');
+  
+          }
+        } else {
+          console.log(data);
+          surgeNotify(
+            '兌換失敗',
+            '請重新登入'
+          );
+          // $done();
+          return reject('Cookie 已過期 ‼️');
   
 //         }
 //       }
@@ -238,12 +266,6 @@ $httpClient.post(redeemRewardRequest, function (error, response, data) {
           console.log(obj);
           // return resolve();  
           $done();
-        }
-        else {
-          console.log(obj);
-          // return reject();  
-          $done();
-
         }
       } catch (error) {
         surgeNotify(
