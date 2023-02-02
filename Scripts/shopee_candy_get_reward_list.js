@@ -1,11 +1,11 @@
-//20230202-2
+//20230202-3
 // const shopeeCookie = $persistentStore.read('CookieSP') + ';SPC_EC=' + $persistentStore.read('SPC_EC') + ';';
 // const shopeeCSRFToken = $persistentStore.read('CSRFTokenSP');
 // const shopeeHeaders = {
 //   'Cookie': shopeeCookie,
 //   'X-CSRFToken': shopeeCSRFToken,
 // };
-gig
+
 let showNotification = true;
 let config = null;
 let RewardList = null;
