@@ -200,7 +200,7 @@ async function redeemReward() {
 }
 
 (async () => {
-  console.log('🍤 蝦皮消消樂獎勵兌換列表 v20230201.1');
+  console.log('🍤 蝦皮寵物村獎勵兌換列表 v20230201.1');
   try {
     await preCheck();
     console.log('✅ 檢查token成功');
