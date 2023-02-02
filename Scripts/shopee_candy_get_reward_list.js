@@ -1,4 +1,4 @@
-//20230202-12
+//20230202-13
 // const shopeeCookie = $persistentStore.read('CookieSP') + ';SPC_EC=' + $persistentStore.read('SPC_EC') + ';';
 // const shopeeCSRFToken = $persistentStore.read('CSRFTokenSP');
 // const shopeeHeaders = {
@@ -74,7 +74,6 @@ async function delay(seconds) {
 }
 
 async function preCheck() {
-  console.log('preCheck');
   return new Promise((resolve, reject) => {
     const shopeeInfo = getSaveObject('ShopeeInfo');
     if (isEmptyObject(shopeeInfo)) {
@@ -88,8 +87,6 @@ async function preCheck() {
       shopeeInfo: shopeeInfo,
       shopeeHeaders: shopeeHeaders,
     }
-    console.log(shopeeInfo.token);
-
     return resolve();
   });
 
