@@ -115,7 +115,7 @@ async function shopeePetsGetRewardList() {
               // RewardList = obj.data.item_list.filter(item => item.name.includes("0.01 蝦幣"));
               // RewardList = obj.data.item_list.filter(item => item.name.includes("蝦幣") || item.name.includes("免運寶箱"));
               RewardList = obj.data.item_list.filter(item => item.name.includes("蝦幣"))
-                .sort((a, b) => parseFloat(b.item.split(' ')[0]) - parseFloat(a.item.split(' ')[0]));
+                .sort((a, b) => parseFloat(b.name.split(' ')[0]) - parseFloat(a.name.split(' ')[0]));
               console.log('可兌換項目數:' + RewardList.length);
               // $done();
               return resolve();
