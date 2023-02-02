@@ -119,7 +119,6 @@ async function shopeePetsGetRewardList() {
               RewardList = obj.data.item_list.filter(item => item.name.includes("1.5 蝦幣")).sort((a, b) => parseFloat(b.name.split(' ')[0]) - parseFloat(a.name.split(' ')[0]));
               console.log('可兌換項目數:' + RewardList.length);
               // $done();
-              console.log(RewardList);
               return resolve();
   
             } else {
@@ -144,7 +143,7 @@ async function shopeePetsGetRewardList() {
             '兌換失敗',
           );
           // $done();
-          return reject('C兌換失敗');
+          return reject('兌換失敗');
   
         }
       }
@@ -222,7 +221,7 @@ async function redeemReward() {
       // for (let i = 0; i < 2; i++) {
         console.log(i);
         await delay(0.2);
-        for (let j = 0; j < RewardList[j].redeem_limit; j++) {
+        for (let j = 0; j < RewardList[i].redeem_limit; j++) {
           const result = await redeemReward();
           console.log(result);  
         }
