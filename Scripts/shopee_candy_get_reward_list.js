@@ -239,6 +239,12 @@ $httpClient.post(redeemRewardRequest, function (error, response, data) {
           // return resolve();  
           $done();
         }
+        else {
+          console.log(obj);
+          // return reject();  
+          $done();
+
+        }
       } catch (error) {
         surgeNotify(
           '獎勵兌換失敗2 ‼️',
