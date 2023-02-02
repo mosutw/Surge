@@ -1,11 +1,4 @@
-//20230202-13
-// const shopeeCookie = $persistentStore.read('CookieSP') + ';SPC_EC=' + $persistentStore.read('SPC_EC') + ';';
-// const shopeeCSRFToken = $persistentStore.read('CSRFTokenSP');
-// const shopeeHeaders = {
-//   'Cookie': shopeeCookie,
-//   'X-CSRFToken': shopeeCSRFToken,
-// };
-
+//20230202-1
 let showNotification = true;
 let config = null;
 let RewardList = null;
@@ -15,14 +8,13 @@ config = {
   shopeeHeaders: null,
 }
 
-let shopeeCandyGetRewardListRequest = {
-  url: 'https://games.shopee.tw/gameplatform/api/v2/redeem_store/item_list/store/115?guest=1&limit=50&offset=0&appid=AxJMo8pm7cs5ca7OM8&activity=1731357eb13431cb',
+let shopeePetsGetRewardListRequest = {
+  url: 'https://games.shopee.tw/gameplatform/api/v2/redeem_store/item_list/store/397/event/0a470ca24ec80fe6/?appid=LcqcAMvwNcX8MR63xX&guest=1&limit=100&offset=0',
   headers: config.shopeeHeaders,
 };
 
 let redeemRewardRequest = {
-  // url: `https://games.shopee.tw/farm/api/orchard/crop/create?t=${new Date().getTime()}`,
-  url: `https://games.shopee.tw/gameplatform/api/v2/redeem_store/redeem_item/store/115/item/26165?appid=AxJMo8pm7cs5ca7OM8&activity=1731357eb13431cb`,
+  url: `https://games.shopee.tw/gameplatform/api/v2/redeem_store/redeem_item/store/397/event/0a470ca24ec80fe6/item/item_id??appid=LcqcAMvwNcX8MR63xX`,
   headers: null,
   body: {
     request_id: null,
@@ -30,7 +22,7 @@ let redeemRewardRequest = {
 }  
 
 function surgeNotify(subtitle = '', message = '') {
-  $notification.post('🍤 蝦皮消消樂獎勵兌換列表', subtitle, message, { 'url': 'shopeetw://' });
+  $notification.post('🍤 蝦皮寵物村獎勵兌換列表', subtitle, message, { 'url': 'shopeetw://' });
 };
 
 function handleError(error) {
@@ -91,12 +83,12 @@ async function preCheck() {
   });
 
   redeemRewardRequest = {
-    // url: `https://games.shopee.tw/farm/api/orchard/crop/create?t=${new Date().getTime()}`,
-    url: `https://games.shopee.tw/gameplatform/api/v2/redeem_store/redeem_item/store/115/item/item=id?appid=AxJMo8pm7cs5ca7OM8&activity=1731357eb13431cb`,
+    url: `https://games.shopee.tw/gameplatform/api/v2/redeem_store/redeem_item/store/397/event/0a470ca24ec80fe6/item/item_id??appid=LcqcAMvwNcX8MR63xX`,
+
     headers: config.shopeeHeaders,
     body: {
-      // request_id: `${userId}_115_${rewrardId}_${new Date().getTime()}`,
-      request_id: `userId_115_rewrardId_${new Date().getTime()}`,
+      // request_id: `${userId}_397_${rewrardId}_${new Date().getTime()}`,
+      request_id: `userId_397_rewardId_${new Date().getTime()}`,
     }
   }  
 }
@@ -105,9 +97,9 @@ async function preCheck() {
 
 
   // 取得獎勵兌換列表
-async function shopeeCandyGetRewardList() {
+async function shopeePetsGetRewardList() {
   return new Promise((resolve, reject) => {
-    $httpClient.get(shopeeCandyGetRewardListRequest, function (error, response, data) {
+    $httpClient.get(shopeePetsGetRewardListRequest, function (error, response, data) {
       if (error) {
         surgeNotify(
           '獎勵兌換列表取得失敗 ‼️',
@@ -211,28 +203,27 @@ async function redeemReward() {
   try {
     await preCheck();
     console.log('✅ 檢查token成功');
-    await shopeeCandyGetRewardList();
-    // await shopeeCandyGetRewardList
-    // .then
+    await shopeePetsGetRewardList();
     for (let i = 0; i < RewardList.length; i++) {
       console.log(RewardList[i].name);
       redeemRewardRequest = {
-        url: `https://games.shopee.tw/gameplatform/api/v2/redeem_store/redeem_item/store/115/item/${RewardList[i].id}?appid=AxJMo8pm7cs5ca7OM8&activity=1731357eb13431cb`,
-        // url: `https://games.shopee.tw/gameplatform/api/v2/redeem_store/redeem_item/store/115/item/26165?appid=AxJMo8pm7cs5ca7OM8&activity=1731357eb13431cb`,
+        // url: `https://games.shopee.tw/gameplatform/api/v2/redeem_store/redeem_item/store/115/item/${RewardList[0].id}?appid=AxJMo8pm7cs5ca7OM8&activity=1731357eb13431cb`,
+        url: `https://games.shopee.tw/gameplatform/api/v2/redeem_store/redeem_item/store/397/event/0a470ca24ec80fe6/item/${RewardList[i].id}??appid=LcqcAMvwNcX8MR63xX`,
+
         headers: config.shopeeHeaders,
         body: {
-          request_id: `userId_115_${RewardList[i].id}_${new Date().getTime()}`,
+          request_id: `userId_397_${RewardList[i].id}_${new Date().getTime()}`,
         }
       }              
 
       // for (let i = 0; i < 2; i++) {
         console.log(i);
         await delay(0.2);
-        const result = await redeemReward();
-        console.log(result);
+        // const result = await redeemReward();
+        // console.log(result);
       }
 
-    // console.log(`✅ 蝦皮消消樂獎勵兌換列表成功: ${JSON.stringify(RewardList[0])}` );
+    // console.log(`✅ 蝦皮寵物村獎勵兌換列表成功: ${JSON.stringify(RewardList[0])}` );
     // console.log(redeemRewardRequest);
 
   } catch (error) {
@@ -241,68 +232,3 @@ async function redeemReward() {
   $done();
 })();
 
-// let shopeeInfo = JSON.parse($persistentStore.read('ShopeeInfo'));
-// // console.log(shopeeInfo);
-// shopeeInfo.token.userid = shopeeInfo.token.SPC_U;
-// const shopeeHeaders = {
-//   'Cookie': cookieToString(shopeeInfo.token),
-//   'Content-Type': 'application/json',
-// }
-// config = {
-//   shopeeInfo: shopeeInfo,
-//   shopeeHeaders: shopeeHeaders,
-// }
-// console.log(shopeeInfo.token);
-
-
-// let redeemRewardRequest = {
-//   // url: `https://games.shopee.tw/farm/api/orchard/crop/create?t=${new Date().getTime()}`,
-//   url: `https://games.shopee.tw/gameplatform/api/v2/redeem_store/redeem_item/store/115/item/261?appid=AxJMo8pm7cs5ca7OM8&activity=1731357eb13431cb`,
-//   headers: config.shopeeHeaders,
-//   body: {
-//     "request_id":"userId_115_26170_1675256652051",
-//   }
-// }  
-// $httpClient.post(redeemRewardRequest, function (error, response, data) {
-//   if (error) {
-//     surgeNotify(
-//       '獎勵兌換失敗 ‼️',
-//       '連線錯誤'
-//     );
-//     console.log('獎勵兌換失敗1');
-//     // return reject('獎勵兌換失敗1');
-//     $done();
-
-//   } else {
-//     if (response.status === 200) {
-//       const obj = JSON.parse(data);
-//       try {
-//         if (obj.msg === 'success') {
-//           console.log(obj);
-//           // return resolve();  
-//           $done();
-//         }
-//         else {
-//           console.log(obj);
-//           // return resolve();  
-//           $done();
-//         }
-//       } catch (error) {
-//         surgeNotify(
-//           '獎勵兌換失敗2 ‼️',
-//           error
-//         );
-//         console.log('獎勵兌換失敗2');
-//         // return reject('獎勵兌換失敗2 ‼️');
-//         $done();
-//       }
-//     } else {
-//       surgeNotify(
-//         '兌換失敗 ‼️',
-//       );
-//       console.log(data);
-//       $done();
-//       // return reject('Cookie 已過期 ‼️');
-//     }
-//   }  
-// });
