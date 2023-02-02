@@ -208,10 +208,8 @@ async function redeemReward() {
     await preCheck();
     console.log('✅ 檢查token成功');
     await shopeePetsGetRewardList();
-    // for (let i = 0; i < RewardList.length; i++) {
-      for (let i = 0; i < 1; i++) {
+    for (let i = 0; i < RewardList.length; i++) {
         console.log(RewardList[i].name);
-        RewardList[i].id = 26368;
       redeemRewardRequest = {
         url: `https://games.shopee.tw/gameplatform/api/v2/redeem_store/redeem_item/store/397/event/0a470ca24ec80fe6/item/${RewardList[i].id}?appid=LcqcAMvwNcX8MR63xX`,
 
