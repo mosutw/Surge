@@ -1,4 +1,4 @@
-//20230202-5
+//20230202-6
 // const shopeeCookie = $persistentStore.read('CookieSP') + ';SPC_EC=' + $persistentStore.read('SPC_EC') + ';';
 // const shopeeCSRFToken = $persistentStore.read('CSRFTokenSP');
 // const shopeeHeaders = {
@@ -212,12 +212,12 @@ async function redeemReward() {
   try {
     await preCheck();
     console.log('✅ 檢查token成功');
-    await shopeeCandyGetRewardList();
+    // await shopeeCandyGetRewardList();
     // await shopeeCandyGetRewardList
     // .then
-    await redeemReward();
-    console.log(`✅ 蝦皮消消樂獎勵兌換列表成功: ${JSON.stringify(RewardList[0])}` );
-    console.log(redeemRewardRequest);
+    // await redeemReward();
+    // console.log(`✅ 蝦皮消消樂獎勵兌換列表成功: ${JSON.stringify(RewardList[0])}` );
+    // console.log(redeemRewardRequest);
 
   } catch (error) {
     handleError(error);
