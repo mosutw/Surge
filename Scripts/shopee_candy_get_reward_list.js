@@ -115,17 +115,9 @@ async function shopeeCandyGetRewardList() {
           try {
             if (obj.msg === 'success') {
               // RewardList = obj.data.item_list.filter(item => item.name.includes("0.01 蝦幣"));
-              RewardList = obj.data.item_list.filter(item => item.name.includes("蝦幣"));
+              RewardList = obj.data.item_list.filter(item => item.name.includes("蝦幣") || item.name.includes("免運寶箱"));
               console.log('可兌換項目數:' + RewardList.length);
               // $done();
-              redeemRewardRequest = {
-                url: `https://games.shopee.tw/gameplatform/api/v2/redeem_store/redeem_item/store/115/item/${RewardList[0].id}?appid=AxJMo8pm7cs5ca7OM8&activity=1731357eb13431cb`,
-                // url: `https://games.shopee.tw/gameplatform/api/v2/redeem_store/redeem_item/store/115/item/26165?appid=AxJMo8pm7cs5ca7OM8&activity=1731357eb13431cb`,
-                headers: config.shopeeHeaders,
-                body: {
-                  request_id: `userId_115_${RewardList[0].id}_${new Date().getTime()}`,
-                }
-              }              
               return resolve();
   
             } else {
@@ -159,7 +151,6 @@ async function shopeeCandyGetRewardList() {
 }
 
 async function redeemReward() {
-  console.log('redeemReward');
   console.log(redeemRewardRequest);
   return new Promise((resolve, reject) => {
     $httpClient.post(redeemRewardRequest, function (error, response, data) {
@@ -217,7 +208,23 @@ async function redeemReward() {
     await shopeeCandyGetRewardList();
     // await shopeeCandyGetRewardList
     // .then
-    await redeemReward();
+    for (let i = 0; i < RewardList.length; i++) {
+      console.log(RewardList[i].name);
+      redeemRewardRequest = {
+        url: `https://games.shopee.tw/gameplatform/api/v2/redeem_store/redeem_item/store/115/item/${RewardList[0].id}?appid=AxJMo8pm7cs5ca7OM8&activity=1731357eb13431cb`,
+        // url: `https://games.shopee.tw/gameplatform/api/v2/redeem_store/redeem_item/store/115/item/26165?appid=AxJMo8pm7cs5ca7OM8&activity=1731357eb13431cb`,
+        headers: config.shopeeHeaders,
+        body: {
+          request_id: `userId_115_${RewardList[i].id}_${new Date().getTime()}`,
+        }
+      }              
+
+      // for (let i = 0; i < 2; i++) {
+        console.log(i);
+        await delay(0.2);
+        await redeemReward();
+      }
+
     // console.log(`✅ 蝦皮消消樂獎勵兌換列表成功: ${JSON.stringify(RewardList[0])}` );
     // console.log(redeemRewardRequest);
 
