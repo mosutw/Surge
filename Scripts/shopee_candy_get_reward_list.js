@@ -1,4 +1,4 @@
-//20230202-1
+//20230202-2
 // const shopeeCookie = $persistentStore.read('CookieSP') + ';SPC_EC=' + $persistentStore.read('SPC_EC') + ';';
 // const shopeeCSRFToken = $persistentStore.read('CSRFTokenSP');
 // const shopeeHeaders = {
@@ -171,36 +171,36 @@ function cookieToString(cookieObject) {
 //         // return reject('獎勵兌換失敗1');
 //         $done();
   
-      } else {
-        if (response.status === 200) {
-          const obj = JSON.parse(data);
-          try {
-            if (obj.msg === 'success') {
-              console.log(obj);
-              // return resolve();  
-              $done();
-            }
-            else {
-              console.log(obj);
-              // return reject();  
-              $done();
-            }
-          } catch (error) {
-            surgeNotify(
-              '獎勵兌換失敗2 ‼️',
-              error
-            );
-            return reject('獎勵兌換失敗2 ‼️');
+      // } else {
+      //   if (response.status === 200) {
+      //     const obj = JSON.parse(data);
+      //     try {
+      //       if (obj.msg === 'success') {
+      //         console.log(obj);
+      //         // return resolve();  
+      //         $done();
+      //       }
+      //       else {
+      //         console.log(obj);
+      //         // return reject();  
+      //         $done();
+      //       }
+      //     } catch (error) {
+      //       surgeNotify(
+      //         '獎勵兌換失敗2 ‼️',
+      //         error
+      //       );
+      //       return reject('獎勵兌換失敗2 ‼️');
   
-          }
-        } else {
-          console.log(data);
-          surgeNotify(
-            '兌換失敗',
-            '請重新登入'
-          );
-          // $done();
-          return reject('Cookie 已過期 ‼️');
+      //     }
+      //   } else {
+      //     console.log(data);
+      //     surgeNotify(
+      //       '兌換失敗',
+      //       '請重新登入'
+      //     );
+      //     // $done();
+      //     return reject('Cookie 已過期 ‼️');
   
 //         }
 //       }
@@ -263,6 +263,11 @@ $httpClient.post(redeemRewardRequest, function (error, response, data) {
       const obj = JSON.parse(data);
       try {
         if (obj.msg === 'success') {
+          console.log(obj);
+          // return resolve();  
+          $done();
+        }
+        else {
           console.log(obj);
           // return resolve();  
           $done();
