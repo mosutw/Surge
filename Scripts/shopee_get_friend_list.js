@@ -1,8 +1,9 @@
-//20230201-12
+//20230203-1
 
 let showNotification = true;
 let config = null;
-let FriendsInfo = 0;
+let FriendsInfo = null;
+
 
 function surgeNotify(subtitle = '', message = '') {
   $notification.post('🍤 蝦皮果園朋友列表', subtitle, message, { 'url': 'shopeetw://' });
@@ -73,7 +74,89 @@ async function shopeeGetFriendId() {
       url: `https://games.shopee.tw/farm/api/message/get?page=1&pageSize=100`,
       headers: config.shopeeHeaders,
     };    
-    const FriendsInfo_old = JSON.parse($persistentStore.read('ShopeeCropFriends'));
+    // const FriendsInfo_old = JSON.parse($persistentStore.read('ShopeeCropFriends'));
+    const FriendsInfo_old = [
+      {
+        FriendId : 4892729,
+        FriendName : tbofjl,
+      },
+      {
+        FriendId : 263000541,
+        FriendName : "kenny.kusuma",
+      },
+      {
+      FriendId : 266067962,
+      FriendName : "moyo_0912"
+      },
+      {
+        FriendId : 889102129,
+        FriendName : "rj998_ifng",
+      },
+      {
+        FriendId : 2622464,
+        FriendName : kai211,
+      },
+      {
+        FriendId : 931381580,
+        FriendName : "_dn6_6x5pn"
+      },
+      {
+        FriendId : 103989402,
+        FriendName : kys5312
+      },
+      {
+        FriendId : 28415692,
+        FriendName : sss2940twtwtw
+      },
+      {
+        FriendId : 284152179,
+        FriendName : t7966294
+      },
+      {
+        FriendId : 152932349,
+        FriendName : wen9895
+      },
+      {
+        FriendId : 9162654,
+        FriendName : besselmiy,
+      },
+      {
+        FriendId : 1490612,
+        FriendName : cindy074
+      },
+      {
+        FriendId : 153993009,
+        FriendName : candylin
+      },
+      {
+        FriendId : 511932160,
+        FriendName : s671222
+      },
+      {
+        FriendId : 32923503,
+        FriendName : ttvmttvm,
+      },
+      {
+        FriendId : 4991740,
+        FriendName : inlin186,
+      },
+      {
+        FriendId : 35675954,
+        FriendName : w6851836,
+      },
+      {
+        FriendId : 210601074,
+        FriendName : jacksonsh0406,
+      },
+      {
+        FriendId : 80215172,
+        FriendName : qabcvicky2008
+      },
+      {
+        FriendId : 38658359,
+        FriendName : s10201021
+      },
+    ];
     $httpClient.get(shopeeGetFriendIdRequest, function (error, response, data) {
       if (error) {
         surgeNotify(
