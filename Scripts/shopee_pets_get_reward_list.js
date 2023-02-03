@@ -221,7 +221,7 @@ async function redeemReward() {
       // for (let i = 0; i < 2; i++) {
         console.log(i);
         await delay(0.2);
-        console.log(RewardList[i].redeem_limit.length);
+        console.log(RewardList[i].redeem_limit);
         for (let j = 0; j < RewardList[i].redeem_limit; j++) {
           const result = await redeemReward();
           console.log(result);  
