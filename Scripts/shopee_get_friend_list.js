@@ -1,4 +1,4 @@
-//20230203-1
+//20230203-2
 
 let showNotification = true;
 let config = null;
@@ -78,7 +78,7 @@ async function shopeeGetFriendId() {
     const FriendsInfo_old = [
       {
         FriendId : 4892729,
-        FriendName : tbofjl,
+        FriendName : "tbofjl",
       },
       {
         FriendId : 263000541,
@@ -94,7 +94,7 @@ async function shopeeGetFriendId() {
       },
       {
         FriendId : 2622464,
-        FriendName : kai211,
+        FriendName : "kai211",
       },
       {
         FriendId : 931381580,
@@ -102,59 +102,59 @@ async function shopeeGetFriendId() {
       },
       {
         FriendId : 103989402,
-        FriendName : kys5312
+        FriendName : "kys5312"
       },
       {
         FriendId : 28415692,
-        FriendName : sss2940twtwtw
+        FriendName : "sss2940twtwtw"
       },
       {
         FriendId : 284152179,
-        FriendName : t7966294
+        FriendName : "t7966294"
       },
       {
         FriendId : 152932349,
-        FriendName : wen9895
+        FriendName : "wen9895"
       },
       {
         FriendId : 9162654,
-        FriendName : besselmiy,
+        FriendName : "besselmiy",
       },
       {
         FriendId : 1490612,
-        FriendName : cindy074
+        FriendName : "cindy074"
       },
       {
         FriendId : 153993009,
-        FriendName : candylin
+        FriendName : "candylin"
       },
       {
         FriendId : 511932160,
-        FriendName : s671222
+        FriendName : "s671222"
       },
       {
         FriendId : 32923503,
-        FriendName : ttvmttvm,
+        FriendName : "ttvmttvm",
       },
       {
         FriendId : 4991740,
-        FriendName : inlin186,
+        FriendName : "inlin186",
       },
       {
         FriendId : 35675954,
-        FriendName : w6851836,
+        FriendName : "w6851836",
       },
       {
         FriendId : 210601074,
-        FriendName : jacksonsh0406,
+        FriendName : "jacksonsh0406",
       },
       {
         FriendId : 80215172,
-        FriendName : qabcvicky2008
+        FriendName : "qabcvicky2008"
       },
       {
         FriendId : 38658359,
-        FriendName : s10201021
+        FriendName : "s10201021"
       },
     ];
     $httpClient.get(shopeeGetFriendIdRequest, function (error, response, data) {
