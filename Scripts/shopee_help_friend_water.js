@@ -1,4 +1,4 @@
-// 20230201-14
+// 20230207-1
 const shopeeFriendsInfo = $persistentStore.read('ShopeeCropFriends');
 const shopeeCropToken = $persistentStore.read('ShopeeCropToken') || '';
 
@@ -79,17 +79,17 @@ async function preCheck() {
 }
 
 
-let shopeeHelpFriendWaterRequest = {
-  url: 'https://games.shopee.tw/farm/api/friend/help',
-  headers: config.shopeeHeaders  ,
-  body: {
-    friendId: '',
-    cropId: '',
-    //devicdId: '61D8A54AC8FE46CFnexuighucearlvaz',
-    friendName: '',
-    s: config.shopeeFarmInfo.currentCrop.s,
-  },
-};
+// let shopeeHelpFriendWaterRequest = {
+//   url: 'https://games.shopee.tw/farm/api/friend/help',
+//   headers: config.shopeeHeaders  ,
+//   body: {
+//     friendId: '',
+//     cropId: '',
+//     //devicdId: '61D8A54AC8FE46CFnexuighucearlvaz',
+//     friendName: '',
+//     s: config.shopeeFarmInfo.currentCrop.s,
+//   },
+// };
 
 
 
@@ -99,8 +99,20 @@ async function GetFriendCropiId(Friend) {
   return new Promise((resolve, reject) => {
     try {
       console.log(Friend.FriendId + '-' + Friend.FriendName);
-      shopeeHelpFriendWaterRequest.body.friendId = Friend.FriendId;
-      shopeeHelpFriendWaterRequest.body.friendName = Friend.FriendName;
+      let shopeeHelpFriendWaterRequest = {
+        url: 'https://games.shopee.tw/farm/api/friend/help',
+        headers: config.shopeeHeaders  ,
+        body: {
+          friendId: Friend.FriendId,
+          cropId: '',
+          //devicdId: '61D8A54AC8FE46CFnexuighucearlvaz',
+          friendName: Friend.FriendName,
+          s: config.shopeeFarmInfo.currentCrop.s,
+        },
+      };
+      
+      // shopeeHelpFriendWaterRequest.body.friendId = Friend.FriendId;
+      // shopeeHelpFriendWaterRequest.body.friendName = Friend.FriendName;
       // shopeeHelpFriendWaterRequest.body.deviceId = '';
       const request = {
         url: `https://games.shopee.tw/farm/api/friend/orchard/context/get?friendId=` + Friend.FriendId,
