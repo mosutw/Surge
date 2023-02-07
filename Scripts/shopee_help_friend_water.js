@@ -1,27 +1,17 @@
-// 20230201-15
-// const shopeeCookie = $persistentStore.read('CookieSP') + ';SPC_EC=' + $persistentStore.read('SPC_EC') + ';SPC_F=61D8A54AC8FE46CFnexuighucearlvaz; SPC_CLIENTID=61D8A54AC8FE46CFnexuighucearlvaz'   ;
-// const shopeeCookie = $persistentStore.read('CookieSP') + ';SPC_EC=' + $persistentStore.read('SPC_EC') ;
-// const shopeeCSRFToken = $persistentStore.read('CSRFTokenSP');
-// const shopeeFriendsInfo = $persistentStore.read('ShopeeCropFriends');
-// const shopeeCropToken = $persistentStore.read('ShopeeCropToken') || '';
-// // const shopeeInfo = $persistentStore.read('ShopeeInfo');
-// const shopeeHeaders = {
-//   'Cookie': shopeeCookie,
-//   'X-CSRFToken': shopeeCSRFToken,
-// };
-
+// 20230201-14
 const shopeeFriendsInfo = $persistentStore.read('ShopeeCropFriends');
 const shopeeCropToken = $persistentStore.read('ShopeeCropToken') || '';
 
-
 let showNotification = true;
 let config = null;
+
 let CropOK = 0;
 let CropFail = 0;
 let CropId = '';
 
 config = {
   shopeeInfo: null,
+  shopeeFarmInfo: null,
   shopeeHeaders: null,
 }
 function surgeNotify(subtitle = '', message = '') {
@@ -73,12 +63,15 @@ async function preCheck() {
     if (isEmptyObject(shopeeInfo)) {
       return reject(['檢查失敗 ‼️', '沒有新版 token']);
     }
+    let shopeeFarmInfo = getSaveObject('ShopeeFarmInfo');
+
     const shopeeHeaders = {
       'Cookie': cookieToString(shopeeInfo.token),
       'Content-Type': 'application/json',
     }
     config = {
       shopeeInfo: shopeeInfo,
+      shopeeFarmInfo: shopeeFarmInfo,
       shopeeHeaders: shopeeHeaders,
     }
     return resolve();
@@ -94,7 +87,7 @@ let shopeeHelpFriendWaterRequest = {
     cropId: '',
     //devicdId: '61D8A54AC8FE46CFnexuighucearlvaz',
     friendName: '',
-    s: shopeeCropToken,
+    s: config.shopeeFarmInfo.currentCrop.s,
   },
 };
 
