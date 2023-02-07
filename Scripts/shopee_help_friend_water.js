@@ -99,17 +99,6 @@ async function GetFriendCropiId(Friend) {
   return new Promise((resolve, reject) => {
     try {
       console.log(Friend.FriendId + '-' + Friend.FriendName);
-      // let shopeeHelpFriendWaterRequest = {
-      //   url: 'https://games.shopee.tw/farm/api/friend/help',
-      //   headers: config.shopeeHeaders  ,
-      //   body: {
-      //     friendId: Friend.FriendId,
-      //     cropId: '',
-      //     //devicdId: '61D8A54AC8FE46CFnexuighucearlvaz',
-      //     friendName: Friend.FriendName,
-      //     s: config.shopeeFarmInfo.currentCrop.s,
-      //   },
-      // };
       
       shopeeHelpFriendWaterRequest.body.friendId = Friend.FriendId;
       shopeeHelpFriendWaterRequest.body.friendName = Friend.FriendName;
