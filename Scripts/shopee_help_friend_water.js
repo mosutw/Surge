@@ -1,4 +1,4 @@
-// 20230207-1
+// 20230207-2
 const shopeeFriendsInfo = $persistentStore.read('ShopeeCropFriends');
 const shopeeCropToken = $persistentStore.read('ShopeeCropToken') || '';
 
@@ -64,7 +64,7 @@ async function preCheck() {
       return reject(['檢查失敗 ‼️', '沒有新版 token']);
     }
     let shopeeFarmInfo = getSaveObject('ShopeeFarmInfo');
-
+    
     const shopeeHeaders = {
       'Cookie': cookieToString(shopeeInfo.token),
       'Content-Type': 'application/json',
@@ -201,23 +201,24 @@ async function HelpFriendWater(shopeeHelpFriendWaterRequest) {
   })
 }
 
-async function preCheck() {
-  return new Promise((resolve, reject) => {
-    const shopeeInfo = getSaveObject('ShopeeInfo');
-    if (isEmptyObject(shopeeInfo)) {
-      return reject(['檢查失敗 ‼️', '沒有新版 token']);
-    }
-    const shopeeHeaders = {
-      'Cookie': cookieToString(shopeeInfo.token),
-      'Content-Type': 'application/json',
-    }
-    config = {
-      shopeeInfo: shopeeInfo,
-      shopeeHeaders: shopeeHeaders,
-    }
-    return resolve();
-  });
-}
+// async function preCheck() {
+//   return new Promise((resolve, reject) => {
+//     const shopeeInfo = getSaveObject('ShopeeInfo');
+    
+//     if (isEmptyObject(shopeeInfo)) {
+//       return reject(['檢查失敗 ‼️', '沒有新版 token']);
+//     }
+//     const shopeeHeaders = {
+//       'Cookie': cookieToString(shopeeInfo.token),
+//       'Content-Type': 'application/json',
+//     }
+//     config = {
+//       shopeeInfo: shopeeInfo,
+//       shopeeHeaders: shopeeHeaders,
+//     }
+//     return resolve();
+//   });
+// }
 
 async function delay(seconds) {
   console.log(`⏰ 等待 ${seconds} 秒`);
