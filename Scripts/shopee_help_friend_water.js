@@ -1,4 +1,4 @@
-// 20230207-3
+// 20230207-4
 const shopeeFriendsInfo = $persistentStore.read('ShopeeCropFriends');
 const shopeeCropToken = $persistentStore.read('ShopeeCropToken') || '';
 
@@ -87,7 +87,7 @@ let shopeeHelpFriendWaterRequest = {
     cropId: '',
     //devicdId: '61D8A54AC8FE46CFnexuighucearlvaz',
     friendName: '',
-    s: config.shopeeFarmInfo.currentCrop.s,
+    s: '',
   },
 };
 
@@ -114,6 +114,7 @@ async function GetFriendCropiId(Friend) {
       shopeeHelpFriendWaterRequest.body.friendId = Friend.FriendId;
       shopeeHelpFriendWaterRequest.body.friendName = Friend.FriendName;
       shopeeHelpFriendWaterRequest.body.deviceId = '';
+      shopeeHelpFriendWaterRequest.body.s = config.shopeeFarmInfo.currentCrop.s;
       const request = {
         url: `https://games.shopee.tw/farm/api/friend/orchard/context/get?friendId=` + Friend.FriendId,
         headers: config.shopeeHeaders
