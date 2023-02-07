@@ -1,4 +1,4 @@
-// 20230207-2
+// 20230207-3
 const shopeeFriendsInfo = $persistentStore.read('ShopeeCropFriends');
 const shopeeCropToken = $persistentStore.read('ShopeeCropToken') || '';
 
