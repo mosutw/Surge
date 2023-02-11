@@ -50,12 +50,21 @@ async function preCheck() {
   return new Promise((resolve, reject) => {
     const shopeeInfo = getSaveObject('ShopeeInfo');
     if (isEmptyObject(shopeeInfo)) {
-      return reject(['檢查失敗 ‼️', '找不到 token']);
+      return reject(['檢查失敗 ‼️', '沒有新版 token']);
     }
 
+    let currentCrop = null;
+    let autoCropSeedName = null;
     const shopeeFarmInfo = getSaveObject('ShopeeFarmInfo');
     if (isEmptyObject(shopeeFarmInfo)) {
-      return reject(['檢查失敗 ‼️', '找不到蝦蝦果園資料']);
+      console.log('⚠️ 沒有新版蝦蝦果園資訊，使用舊版');
+      currentCrop = JSON.parse($persistentStore.read('ShopeeCrop')) || {};
+      autoCropSeedName = $persistentStore.read('ShopeeCropName') || '';
+      // return reject(['檢查失敗 ‼️', '沒有新版 token']);
+    } else {
+      currentCrop = shopeeFarmInfo.currentCrop;
+      autoCropSeedName = shopeeFarmInfo.autoCropSeedName;
+      console.log('ℹ️ 找到新版蝦蝦果園資訊');
     }
 
     const shopeeHeaders = {
@@ -63,20 +72,18 @@ async function preCheck() {
       'Content-Type': 'application/json',
     }
 
-    const autoCropSeedName = $persistentStore.read('ShopeeAutoCropSeedName') || '';
-
-    if (!shopeeFarmInfo.currentCrop || !shopeeFarmInfo.currentCrop.s || shopeeFarmInfo.currentCrop.s.length < 64) {
+    if (currentCrop.s.length < 64) {
       return reject(['檢查失敗 ‼️', '請先種植任意種子以取得 token']);
     }
-    if (!autoCropSeedName || !autoCropSeedName.length) {
+    if (!autoCropSeedName.length) {
       return reject(['檢查失敗 ‼️', '沒有指定作物名稱']);
     }
 
     config = {
       shopeeInfo: shopeeInfo,
-      shopeeFarmInfo: shopeeFarmInfo,
       shopeeHeaders: shopeeHeaders,
-      autoCropSeedNames: autoCropSeedName.split(','),
+      currentCrop: currentCrop,
+      autoCropSeedNames: autoCropSeedName.split(',')
     }
     return resolve();
   });
@@ -116,7 +123,7 @@ async function getSeedList() {
                           headers: config.shopeeHeaders,
                           body: {
                             metaId: crop.id,
-                            s: config.shopeeFarmInfo.currentCrop.s,
+                            s: config.currentCrop.s,
                           }
                         }
                         return resolve(crop.name);
@@ -157,12 +164,13 @@ async function createCrop() {
             const obj = JSON.parse(data);
             if (obj.msg === 'success') {
               const cropId = obj.data.crop.id;
-              let shopeeFarmInfo = getSaveObject('ShopeeFarmInfo');
-              shopeeFarmInfo.currentCrop.cropId = cropId;
-              const save = $persistentStore.write(JSON.stringify(shopeeFarmInfo, null, 4), 'ShopeeFarmInfo');
-              if (!save) {
-                return reject(['保存失敗 ‼️', '無法儲存作物資料']);
+              let shopeeCrop = JSON.parse($persistentStore.read('ShopeeCrop'));
+              if (shopeeCrop) {
+                shopeeCrop.cropId = cropId;
+              } else {
+                shopeeCrop = { 'cropId': cropId };
               }
+              const saveShopeeCrop = $persistentStore.write(JSON.stringify(shopeeCrop), 'ShopeeCrop');
               return resolve();
             } else if (obj.code === 409003) {
               return reject(['自動種植失敗 ‼️', `目前有正在種的作物「${obj.data.crop.meta.name}」`]);
@@ -183,7 +191,7 @@ async function createCrop() {
 }
 
 (async () => {
-  console.log('ℹ️ 蝦蝦果園自動種植 v20230206.2');
+  console.log('ℹ️ 蝦蝦果園自動種植 v20230128.1');
   try {
     await preCheck();
     console.log('✅ 檢查成功');
