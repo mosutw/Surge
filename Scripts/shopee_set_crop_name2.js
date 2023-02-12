@@ -34,6 +34,7 @@ async function saveAutoCropName() {
       }
       let shopeeFarmInfo = getSaveObject('ShopeeFarmInfo');
       shopeeFarmInfo.autoCropSeedName = cropName;
+      const save1 = $persistentStore.write(cropName, 'autoCronSeedName');
       const save = $persistentStore.write(JSON.stringify(shopeeFarmInfo, null, 4), 'ShopeeFarmInfo');
       if (!save) {
         return reject(['保存失敗 ‼️', '無法儲存目標作物']);
