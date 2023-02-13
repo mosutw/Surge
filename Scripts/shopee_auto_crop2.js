@@ -114,13 +114,9 @@ async function getSeedList() {
                   console.log(`🔍 找到「${crop.name}」種子`);
                   console.log(cropName);
                   if (crop.name.includes(cropName)) {
-                    console.log(new Date().getTime() );                   
-                    console.log(crop.config.startTime);
-                    console.log(crop.config.endTime);
                     if (crop.config.startTime < new Date().getTime() && crop.config.endTime > new Date().getTime()) {
                       found = true;
-                      console.log(crop.totalNum);
-                      console.log(crop.curNum);
+                      console.log(crop);
                       if (crop.totalNum <= crop.curNum) {
                         haveSeed = false;
                         console.log(`❌「${crop.name}」已經被搶購一空！`);
