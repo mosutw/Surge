@@ -116,8 +116,8 @@ async function getSeedList() {
                     if (crop.config.startTime < new Date().getTime() && crop.config.endTime > new Date().getTime()) {
                       found = true;
                       // console.log(crop);
-                      if (crop.totalNum <= crop.curNum) {
-                        if (crop.harvestNum <= 0) {
+                      // if (crop.totalNum <= crop.curNum) {
+                      if (crop.harvestNum <= 0) {
                           haveSeed = false;
                         console.log(`❌「${crop.name}」已經被搶購一空！`);
                       }
