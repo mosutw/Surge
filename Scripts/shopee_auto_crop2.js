@@ -115,7 +115,7 @@ async function getSeedList() {
                   if (crop.name.includes(cropName)) {
                     if (crop.config.startTime < new Date().getTime() && crop.config.endTime > new Date().getTime()) {
                       found = true;
-                      // console.log(crop);
+                      console.log(crop);
                       // if (crop.totalNum <= crop.curNum) {
                       if (crop.harvestNum <= 0) {
                           haveSeed = false;
