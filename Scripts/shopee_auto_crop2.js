@@ -122,13 +122,14 @@ async function getSeedList() {
                         console.log(`❌「${crop.name}」已經被搶購一空！`);
                       }
                       else {
-                        createCropRequest = {
-                          url: `https://games.shopee.tw/farm/api/orchard/crop/create?t=${new Date().getTime()}`,
-                          headers: config.shopeeHeaders,
-                          body: {
-                            metaId: crop.id,
-                            s: config.currentCrop.s,
-                          }
+                        console.log('種植')
+                        // createCropRequest = {
+                        //   url: `https://games.shopee.tw/farm/api/orchard/crop/create?t=${new Date().getTime()}`,
+                        //   headers: config.shopeeHeaders,
+                        //   body: {
+                        //     metaId: crop.id,
+                        //     s: config.currentCrop.s,
+                        //   }
                         }
                         return resolve(crop.name);
                       }
