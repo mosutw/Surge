@@ -109,16 +109,16 @@ async function getSeedList() {
               let found = false;
               let haveSeed = true;
               for (const cropName of config.autoCropSeedNames) {
-                console.log(cropName);
+                // console.log(cropName);
                 for (const crop of cropMetas) {
                   console.log(`🔍 找到「${crop.name}」種子`);
-                  console.log(cropName);
                   if (crop.name.includes(cropName)) {
                     if (crop.config.startTime < new Date().getTime() && crop.config.endTime > new Date().getTime()) {
                       found = true;
-                      console.log(crop);
+                      // console.log(crop);
                       if (crop.totalNum <= crop.curNum) {
-                        haveSeed = false;
+                        if (crop.harvestNum <= 0) {
+                          haveSeed = false;
                         console.log(`❌「${crop.name}」已經被搶購一空！`);
                       }
                       else {
