@@ -109,7 +109,7 @@ async function getSeedList() {
               let found = false;
               let haveSeed = true;
               for (const cropName of config.autoCropSeedNames) {
-                // console.log(cropName);
+                console.log(cropName);
                 for (const crop of cropMetas) {
                   // console.log(`🔍 找到「${crop.name}」種子`);
                   if (crop.name.includes(cropName)) {
