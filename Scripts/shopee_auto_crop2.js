@@ -111,7 +111,7 @@ async function getSeedList() {
               for (const cropName of config.autoCropSeedNames) {
                 // console.log(cropName);
                 for (const crop of cropMetas) {
-                  console.log(`🔍 找到「${crop.name}」種子`);
+                  // console.log(`🔍 找到「${crop.name}」種子`);
                   if (crop.name.includes(cropName)) {
                     if (crop.config.startTime < new Date().getTime() && crop.config.endTime > new Date().getTime()) {
                       found = true;
