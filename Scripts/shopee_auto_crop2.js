@@ -131,7 +131,7 @@ async function getSeedList() {
                             s: config.currentCrop.s,
                           }
                         }
-                        console.log(createRequest);
+                        console.log(createCropRequest);
                         return resolve(crop.name);
                       }
                     }
