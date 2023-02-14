@@ -97,7 +97,7 @@ async function getSeedList() {
         url: `https://games.shopee.tw/farm/api/orchard/crop/meta/get?t=${new Date().getTime()}`,
         headers: config.shopeeHeaders,
       };
-      $httpClient.get(request, function (error, response, data) {
+      $httpClient.get(request, async function (error, response, data) {
         if (error) {
           return reject(['取得種子列表失敗 ‼️', '請重新登入']);
         }
@@ -116,12 +116,12 @@ async function getSeedList() {
                     if (crop.config.startTime < new Date().getTime() && crop.config.endTime > new Date().getTime()) {
                       found = true;
                       console.log(crop);
-                      if (crop.totalNum <= crop.curNum) {
-                      // if (crop.harvestNum <= 0) {
-                          haveSeed = false;
-                        console.log(`❌「${crop.name}」已經被搶購一空！`);
-                      }
-                      else {
+                      // if (crop.totalNum <= crop.curNum) {
+                      // // if (crop.harvestNum <= 0) {
+                      //     haveSeed = false;
+                      //   console.log(`❌「${crop.name}」已經被搶購一空！`);
+                      // }
+                      // else {
                         // console.log('種植')
                         createCropRequest = {
                           url: `https://games.shopee.tw/farm/api/orchard/crop/create?t=${new Date().getTime()}`,
@@ -131,9 +131,10 @@ async function getSeedList() {
                             s: config.currentCrop.s,
                           }
                         }
-                        console.log(createCropRequest);
+                        await createCrop();                        
+                        // console.log(createCropRequest);
                         return resolve(crop.name);
-                      }
+                      // }
                     }
                   }
                 }
@@ -181,9 +182,11 @@ async function createCrop() {
             } else if (obj.code === 409003) {
               return reject(['自動種植失敗 ‼️', `目前有正在種的作物「${obj.data.crop.meta.name}」`]);
             } else if (obj.code === 409009) {
-              return reject(['自動種植失敗 ‼️', `尚未開放種植「${obj.data.crop.meta.name}」`]);
+              // return reject(['自動種植失敗 ‼️', `尚未開放種植「${obj.data.crop.meta.name}」`]);
+              return resolve(['自動種植失敗 ‼️', `尚未開放種植「${obj.data.crop.meta.name}」`]);
             } else {
-              return reject(['自動種植失敗 ‼️', `錯誤代號：${obj.code}，訊息：${obj.msg}`]);
+              // return reject(['自動種植失敗 ‼️', `錯誤代號：${obj.code}，訊息：${obj.msg}`]);
+              return resolve(['自動種植失敗 ‼️', `錯誤代號：${obj.code}，訊息：${obj.msg}`]);
             }
           } else {
             return reject(['自動種植失敗 ‼️', response.status]);
@@ -203,8 +206,8 @@ async function createCrop() {
     console.log('✅ 檢查成功');
     await delay(0.5);
     const cropName = await getSeedList();
-    console.log('✅ 取得種子成功');
-    await createCrop();
+    // console.log('✅ 取得種子成功');
+    // await createCrop();
     surgeNotify(
       '自動種植成功 🌱',
       `正在種植「${cropName}」`
