@@ -145,6 +145,9 @@ async function getSeedList() {
                   }
                 }
               }
+              if (harvestStatus === null) {
+                found = false;
+              }
               if (found === false) {
                 return reject(['取得種子失敗 ‼️', `今天沒有${config.autoCropSeedNames.join('或')}的種子`]);
               }
