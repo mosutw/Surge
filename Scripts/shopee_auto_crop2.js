@@ -1,6 +1,7 @@
 let showNotification = true;
 let config = null;
 let createCropRequest = null;
+let harvestStatus = null;
 
 function surgeNotify(subtitle = '', message = '') {
   $notification.post('🍤 蝦蝦果園自動種植', subtitle, message, { 'url': 'shopeetw://' });
@@ -115,7 +116,7 @@ async function getSeedList() {
                   if (crop.name.includes(cropName)) {
                     if (crop.config.startTime < new Date().getTime() && crop.config.endTime > new Date().getTime()) {
                       found = true;
-                      console.log(crop);
+                      // console.log(crop);
                       // if (crop.totalNum <= crop.curNum) {
                       // // if (crop.harvestNum <= 0) {
                       //     haveSeed = false;
@@ -131,9 +132,14 @@ async function getSeedList() {
                             s: config.currentCrop.s,
                           }
                         }
-                        await createCrop();                        
+                        const harvestMsg = await createCrop();                        
                         // console.log(createCropRequest);
-                        return resolve(crop.name);
+                        if (harvestStatus == true) {
+                          return resolve(harvestMsg);
+                        } else {
+                          return reject(harvestMsg);                          
+                        }
+                        // return resolve(crop.name);
                       // }
                     }
                   }
@@ -162,9 +168,11 @@ async function getSeedList() {
 async function createCrop() {
   return new Promise((resolve, reject) => {
     try {
+      harvestStatus = true;
       $httpClient.post(createCropRequest, function (error, response, data) {
         if (error) {
-          return reject(['自動種植失敗 ‼️', '連線錯誤']);
+          harvestStatus = false;
+          return resolve(['自動種植失敗 ‼️', '連線錯誤']);
         }
         else {
           if (response.status === 200) {
@@ -180,21 +188,26 @@ async function createCrop() {
               const saveShopeeCrop = $persistentStore.write(JSON.stringify(shopeeCrop), 'ShopeeCrop');
               return resolve();
             } else if (obj.code === 409003) {
-              return reject(['自動種植失敗 ‼️', `目前有正在種的作物「${obj.data.crop.meta.name}」`]);
+              harvestStatus = false;
+              return resolve(['自動種植失敗 ‼️', `目前有正在種的作物「${obj.data.crop.meta.name}」`]);
             } else if (obj.code === 409009) {
+              harvestStatus = false;
               // return reject(['自動種植失敗 ‼️', `尚未開放種植「${obj.data.crop.meta.name}」`]);
               return resolve(['自動種植失敗 ‼️', `尚未開放種植「${obj.data.crop.meta.name}」`]);
             } else {
+              harvestStatus = false;
               // return reject(['自動種植失敗 ‼️', `錯誤代號：${obj.code}，訊息：${obj.msg}`]);
               return resolve(['自動種植失敗 ‼️', `錯誤代號：${obj.code}，訊息：${obj.msg}`]);
             }
           } else {
-            return reject(['自動種植失敗 ‼️', response.status]);
+            harvestStatus = false;
+            return resolve(['自動種植失敗 ‼️', response.status]);
           }
         }
       });
     } catch (error) {
-      return reject(['自動種植失敗 ‼️', error]);
+      harvestStatus = false;
+      return resolve(['自動種植失敗 ‼️', error]);
     }
   });
 }
