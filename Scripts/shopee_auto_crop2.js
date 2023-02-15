@@ -169,7 +169,7 @@ async function getSeedList() {
 async function createCrop() {
   return new Promise((resolve, reject) => {
     try {
-      // harvestStatus = true;
+      harvestStatus = null;
       $httpClient.post(createCropRequest, function (error, response, data) {
         if (error) {
           harvestStatus = false;
