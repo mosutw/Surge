@@ -136,7 +136,7 @@ async function getSeedList() {
                         // console.log(createCropRequest);
                         if (harvestStatus == true) {
                           return resolve(harvestMsg);
-                        } else if (harvestStatus == false){
+                        } else {
                           return reject(harvestMsg);                          
                         }
                         // return resolve(crop.name);
@@ -144,9 +144,6 @@ async function getSeedList() {
                     }
                   }
                 }
-              }
-              if (harvestStatus === null) {
-                found = false;
               }
               if (found === false) {
                 return reject(['取得種子失敗 ‼️', `今天沒有${config.autoCropSeedNames.join('或')}的種子`]);
@@ -171,6 +168,7 @@ async function getSeedList() {
 async function createCrop() {
   return new Promise((resolve, reject) => {
     try {
+      harvestStatus = true;
       $httpClient.post(createCropRequest, function (error, response, data) {
         if (error) {
           harvestStatus = false;
@@ -197,7 +195,7 @@ async function createCrop() {
               // return reject(['自動種植失敗 ‼️', `尚未開放種植「${obj.data.crop.meta.name}」`]);
               return resolve(['自動種植失敗 ‼️', `尚未開放種植「${obj.data.crop.meta.name}」`]);
             } else {
-              harvestStatus = false;
+              // harvestStatus = false;
               // return reject(['自動種植失敗 ‼️', `錯誤代號：${obj.code}，訊息：${obj.msg}`]);
               return resolve(['自動種植失敗 ‼️', `錯誤代號：${obj.code}，訊息：${obj.msg}`]);
             }
