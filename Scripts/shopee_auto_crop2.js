@@ -134,9 +134,10 @@ async function getSeedList() {
                         }
                         const harvestMsg = await createCrop();                        
                         // console.log(createCropRequest);
+                        console.log(harvestStatus);
                         if (harvestStatus == true) {
                           return resolve(harvestMsg);
-                        } else if (havrestStatus == false) {
+                        } else if (harvestStatus == false) {
                           return reject(harvestMsg);                          
                         }
                         // return resolve(crop.name);
@@ -168,7 +169,7 @@ async function getSeedList() {
 async function createCrop() {
   return new Promise((resolve, reject) => {
     try {
-      harvestStatus = true;
+      // harvestStatus = true;
       $httpClient.post(createCropRequest, function (error, response, data) {
         if (error) {
           harvestStatus = false;
