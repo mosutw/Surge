@@ -136,7 +136,7 @@ async function getSeedList() {
                         // console.log(createCropRequest);
                         if (harvestStatus == true) {
                           return resolve(harvestMsg);
-                        } else {
+                        } else if (havrestStatus == false) {
                           return reject(harvestMsg);                          
                         }
                         // return resolve(crop.name);
