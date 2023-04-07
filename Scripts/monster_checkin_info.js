@@ -4,6 +4,7 @@ function surgeNotify(subtitle = '', message = '') {
 
 if ($request.method === 'POST') {
   const cookie = $request.headers['Cookie'] || $request.headers['cookie'];
+  console.log($request);
   if (cookie && $request.body) {
     try {
       let body = JSON.parse($request.body);
