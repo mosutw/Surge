@@ -1,5 +1,5 @@
 function surgeNotify(subtitle = '', message = '') {
-  $notification.post('🍑 MonsterInvoice token', subtitle, message, { 'url': 'monster.app://' });
+  $notification.post('🍑 MonsterInvoice token', subtitle, message, { 'url': 'InvoiceMonster.app://' });
 };
 
 if ($request.method === 'POST') {
@@ -7,8 +7,9 @@ if ($request.method === 'POST') {
   // const cookie = $request.headers['Cookie'] || $request.headers['cookie'];
   if ($request.body) {
     try {
+      let headers = JSON.parse($request.headers);
       let body = JSON.parse($request.body);
-      // const saveCookie = $persistentStore.write(cookie, 'monsterCookie');
+      const saveCookie = $persistentStore.write(JSON.stringify(headers), 'monsterHeaders');
       const saveBody = $persistentStore.write(JSON.stringify(body), 'monsterBody');
       console.log(saveBody);
       if (!(saveBody)) {
