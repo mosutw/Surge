@@ -8,23 +8,19 @@ if ($request.method === 'POST') {
   if ($request.body) {
     try {
       let body = JSON.parse($request.body);
-      if (body.doAction === 'list') {
-        body.pNo = '';
-        body.doAction = 'reg';
-        // const saveCookie = $persistentStore.write(cookie, 'monsterCookie');
-        const saveBody = $persistentStore.write(JSON.stringify(body), 'monsterBody');
-        console.log(saveBody);
-        if (!(saveBody)) {
-          surgeNotify(
-            '保存失敗 ‼️',
-            '請稍後嘗試'
-          );
-        } else {
-          surgeNotify(
-            '保存成功 🍪',
-            ''
-          );
-        }
+      // const saveCookie = $persistentStore.write(cookie, 'monsterCookie');
+      const saveBody = $persistentStore.write(JSON.stringify(body), 'monsterBody');
+      console.log(saveBody);
+      if (!(saveBody)) {
+        surgeNotify(
+          '保存失敗 ‼️',
+          '請稍後嘗試'
+        );
+      } else {
+        surgeNotify(
+          '保存成功 🍪',
+          ''
+        );
       }
     } catch (error) {
       surgeNotify(
