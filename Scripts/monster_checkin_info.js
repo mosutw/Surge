@@ -3,7 +3,7 @@ function surgeNotify(subtitle = '', message = '') {
 };
 
 if ($request.method === 'POST') {
-  console.log($request.body);
+  console.log($request);
   // const cookie = $request.headers['Cookie'] || $request.headers['cookie'];
   if ($request.body) {
     try {
