@@ -13,6 +13,7 @@ if ($request.method === 'POST') {
         body.doAction = 'reg';
         // const saveCookie = $persistentStore.write(cookie, 'monsterCookie');
         const saveBody = $persistentStore.write(JSON.stringify(body), 'monsterBody');
+        console.log(saveBody);
         if (!(saveBody)) {
           surgeNotify(
             '保存失敗 ‼️',
