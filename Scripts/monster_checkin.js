@@ -1,17 +1,27 @@
-const monsterHeaders = {
-  'Content-Type': 'application/json;charset=utf-8',
-};
+const monsterHeaders = $persistentStore.read('monsterHeaders');
+const monsterBody = $persistentStore.read('monsterBody');
+
+// const monsterHeaders = {
+//   'Content-Type': 'application/json;charset=utf-8',
+// };
 function surgeNotify(subtitle = '', message = '') {
   $notification.post('🍑 發票怪獸 每日簽到', subtitle, message, { 'url': 'InvoiceMonster.app://' });
 };
 
-const mainPageRequest = {
+// const mainPageRequest = {
+//   url: 'https://monsterapi.qscan.me/v1/member/drawCarrierInvBonus',
+//   headers: monsterHeaders,
+//   body: {
+//     'member_id': '',
+//   }
+// }
+
+const luckyDrawBonusRequest = {
   url: 'https://monsterapi.qscan.me/v1/member/drawCarrierInvBonus',
   headers: monsterHeaders,
-  body: {
-    'member_id': '',
-  }
+  body: monsterBody,
 }
+
 
 let eventPageRequest = {
   url: '',
@@ -34,7 +44,7 @@ let checkinRequest = {
 };
 
 function getEventPageUrl() {
-  $httpClient.post(mainPageRequest, function (error, response, data) {
+  $httpClient.post(luckyDrawBonusRequest, function (error, response, data) {
     if (error) {
       surgeNotify(
         '取得活動頁面失敗 ‼️',
@@ -43,6 +53,7 @@ function getEventPageUrl() {
       $done();
     } else {
       if (response.status === 200) {
+        console.log(data);
         try {
           const obj = JSON.parse(data);
           if (obj.success === true) {
@@ -57,18 +68,6 @@ function getEventPageUrl() {
                 checkinRequest.headers.Referer = actionUrl;
                 eventPageRequest.url = actionUrl;
                 eventPageRequest.headers.cookie = '';
-                getJavascriptUrl();
-                // 舊版
-                // for (const adInfo of info.adInfo) {
-                //   if (adInfo.adTitle && adInfo.adTitle === '天天簽到') {
-                //     const actionUrl = adInfo.action.actionValue;
-                //     console.log('發票怪獸 簽到活動頁面 👉' + actionUrl);
-                //     found = true;
-                //     eventPageRequest.url = actionUrl;
-                //     eventPageRequest.headers.cookie = '';
-                //     getJavascriptUrl();
-                //   }
-                // }
               }
             }
             if (!found) {
@@ -137,7 +136,7 @@ function getJavascriptUrl() {
   });
 }
 
-function getluckyDraw() {
+function getluckyDrawBonud() {
   $httpClient.get(jsCodeRequest, function (error, response, data) {
     if (error) {
       surgeNotify(

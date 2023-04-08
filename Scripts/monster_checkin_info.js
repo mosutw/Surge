@@ -8,15 +8,9 @@ if ($request.method === 'POST') {
   if ($request.body) {
     try {
       // let headers = JSON.parse($request.headers);
-      // let headers1 = $request.headers;
-      const headers1 = '{"accept":"*\/*","content-type":"application\/json","accept-encoding":"gzip, deflate, br","user-agent":"InvoiceMonster\/3.30.4 (iPhone; iOS 16.3.1; Scale\/3.00)","content-length":"52","accept-language":"zh-Hant-TW;q=1, en-TW;q=0.9, zh-Hans-TW;q=0.8","authorization":"yfDEN17pEB5TO5aPgfJx5LsRBEL06DvR"}'
-      let headers = JSON.parse(headers1);
+      let headers = $request.headers;
       let body = JSON.parse($request.body);
-      console.log("----------------");
-      console.log(body);
-      console.log("----------------");
-      console.log(headers);
-      // const saveCookie = $persistentStore.write(headers, 'monsterHeaders');
+      const saveCookie = $persistentStore.write(headers, 'monsterHeaders');
       const saveBody = $persistentStore.write(JSON.stringify(body), 'monsterBody');
       console.log(saveBody);
       if (!(saveBody)) {
