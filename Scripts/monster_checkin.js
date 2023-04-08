@@ -1,5 +1,5 @@
-const monsterHeaders = $persistentStore.read('monsterHeaders');
-const monsterBody = $persistentStore.read('monsterBody');
+const monsterHeaders = JSON.parse($persistentStore.read('monsterHeaders'));
+const monsterBody = JSON.parse($persistentStore.read('monsterBody'));
 console.log(monsterHeaders);
 
 // const monsterHeaders = {
