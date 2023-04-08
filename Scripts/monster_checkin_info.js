@@ -8,7 +8,8 @@ if ($request.method === 'POST') {
   if ($request.body) {
     try {
       // let headers = JSON.parse($request.headers);
-      let headers = $request.headers;
+      let headers1 = $request.headers;
+      let headers = JSON.parse(headers1);
       let body = JSON.parse($request.body);
       console.log("----------------");
       console.log(body);
