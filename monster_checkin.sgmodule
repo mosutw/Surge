@@ -3,7 +3,7 @@
 
 [Script]
 [發票怪獸]自動簽到 = type=cron, cronexp="16 0 * * *" script-path=https://raw.githubusercontent.com/mosutw/Surge/master/Scripts/monster_checkin.js, wake-system=1, timeout=10
-[發票怪獸1]自動收成 = type=cron, cronexp="0 * * * *", script-path=https://kinta.ma/surge/scripts/shopee_auto_harvest.js, wake-system=1, timeout=5
+[發票怪獸2]自動收成 = type=cron, cronexp="0 * * * *", script-path=https://raw.githubusercontent.com/mosutw/Surge/master/Scripts/monster_checkin.js, wake-system=1, timeout=5
 [發票怪獸]取得cookie = type=http-request,pattern=^https:\/\/monsterapi\.qscan\.me\/v1\/member\/myExp$,script-path=https://raw.githubusercontent.com/mosutw/Surge/master/Scripts/monster_checkin_info.js,requires-body=true,script-update-interval=-1
 
 [MITM]
