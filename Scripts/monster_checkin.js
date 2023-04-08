@@ -1,6 +1,6 @@
 const monsterHeaders = JSON.parse($persistentStore.read('monsterHeaders'));
 const monsterBody = JSON.parse($persistentStore.read('monsterBody'));
-console.log(monsterHeaders);
+// console.log(monsterHeaders);
 
 // const monsterHeaders = {
 //   'Content-Type': 'application/json;charset=utf-8',
@@ -54,7 +54,7 @@ function getEventPageUrl() {
       $done();
     } else {
       if (response.status === 200) {
-        console.log(data);
+        // console.log(data);
         try {
           const obj = JSON.parse(data);
           if (obj.errorCode === 2000) {
