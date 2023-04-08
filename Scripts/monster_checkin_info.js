@@ -25,6 +25,8 @@ if ($request.method === 'POST') {
           '保存成功 🍪',
           ''
         );
+        let mh = $persistentStore.read('monsterHeaders');
+        console.log(mh);
       }
     } catch (error) {
       surgeNotify(
