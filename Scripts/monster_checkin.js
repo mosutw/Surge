@@ -57,27 +57,17 @@ function getEventPageUrl() {
         console.log(data);
         try {
           const obj = JSON.parse(data);
-          if (obj.success === true) {
-            const mainInfo = obj.mainInfo;
-            let found = false;
-            for (const info of mainInfo) {
-              if (info.adInfo && info.columnType === "3") {
-                const adInfo = info.adInfo[0];
-                const actionUrl = adInfo.action.actionValue;
-                console.log('發票怪獸 簽到活動頁面 👉' + actionUrl);
-                found = true;
-                checkinRequest.headers.Referer = actionUrl;
-                eventPageRequest.url = actionUrl;
-                eventPageRequest.headers.cookie = '';
-              }
-            }
-            if (!found) {
-              console.log('找不到簽到活動頁面');
-              $done();
-            }
+          if (obj.errorCode === "2000") {
+            let magnification = obj.data.magnification;
+            surgeNotify(
+              '翻倍樂成功 ‼️ - ',
+              magnification
+            );
+            $done();
+
           } else {
             surgeNotify(
-              '取得活動頁面失敗 ‼️',
+              '取得翻倍樂頁面失敗 ‼️',
               obj.resultMessage
             );
             $done();
@@ -85,7 +75,7 @@ function getEventPageUrl() {
         }
         catch (error) {
           surgeNotify(
-            '取得活動頁面失敗 ‼️',
+            '取得翻倍樂頁面失敗 ‼️',
             error
           );
           $done();
