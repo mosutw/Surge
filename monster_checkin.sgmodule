@@ -6,4 +6,5 @@
 [發票怪獸]取得cookie = type=http-request,pattern=^https:\/\/monsterapi\.qscan\.me\/v1\/member\/myExp$,script-path=https://raw.githubusercontent.com/mosutw/Surge/master/Scripts/monster_checkin_info.js,requires-body=true,script-update-interval=-1
 
 [MITM]
+h2 = true
 hostname = %APPEND% monsterapi.qscan.me
