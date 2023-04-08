@@ -1,5 +1,6 @@
 const monsterHeaders = $persistentStore.read('monsterHeaders');
 const monsterBody = $persistentStore.read('monsterBody');
+console.log(monsterHeaders);
 
 // const monsterHeaders = {
 //   'Content-Type': 'application/json;charset=utf-8',

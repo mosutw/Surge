@@ -10,8 +10,9 @@ if ($request.method === 'POST') {
       // let headers = JSON.parse($request.headers);
       let headers = $request.headers;
       let body = JSON.parse($request.body);
-      const saveCookie = $persistentStore.write(headers, 'monsterHeaders');
+      const savehHeaders = $persistentStore.write(headers, 'monsterHeaders');
       const saveBody = $persistentStore.write(JSON.stringify(body), 'monsterBody');
+      console.log(saveHeaders);
       console.log(saveBody);
       if (!(saveBody)) {
         surgeNotify(
