@@ -7,11 +7,14 @@ if ($request.method === 'POST') {
   // const cookie = $request.headers['Cookie'] || $request.headers['cookie'];
   if ($request.body) {
     try {
-      let headers = JSON.parse($request.headers);
+      // let headers = JSON.parse($request.headers);
+      let headers = $request.headers;
+      let body = JSON.parse($request.body);
+      console.log("----------------");
+      console.log(body);
       console.log("----------------");
       console.log(headers);
-      let body = JSON.parse($request.body);
-      const saveCookie = $persistentStore.write(headers, 'monsterHeaders');
+      // const saveCookie = $persistentStore.write(headers, 'monsterHeaders');
       const saveBody = $persistentStore.write(JSON.stringify(body), 'monsterBody');
       console.log(saveBody);
       if (!(saveBody)) {
