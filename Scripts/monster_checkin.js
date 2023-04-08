@@ -36,7 +36,7 @@ let checkinRequest = {
 function getEventPageUrl() {
   $httpClient.post(mainPageRequest, function (error, response, data) {
     if (error) {
-      momoNotify(
+      surgeNotify(
         '取得活動頁面失敗 ‼️',
         '連線錯誤'
       );
@@ -52,7 +52,7 @@ function getEventPageUrl() {
               if (info.adInfo && info.columnType === "3") {
                 const adInfo = info.adInfo[0];
                 const actionUrl = adInfo.action.actionValue;
-                console.log('Momo 簽到活動頁面 👉' + actionUrl);
+                console.log('發票怪獸 簽到活動頁面 👉' + actionUrl);
                 found = true;
                 checkinRequest.headers.Referer = actionUrl;
                 eventPageRequest.url = actionUrl;
@@ -62,7 +62,7 @@ function getEventPageUrl() {
                 // for (const adInfo of info.adInfo) {
                 //   if (adInfo.adTitle && adInfo.adTitle === '天天簽到') {
                 //     const actionUrl = adInfo.action.actionValue;
-                //     console.log('Momo 簽到活動頁面 👉' + actionUrl);
+                //     console.log('發票怪獸 簽到活動頁面 👉' + actionUrl);
                 //     found = true;
                 //     eventPageRequest.url = actionUrl;
                 //     eventPageRequest.headers.cookie = '';
@@ -76,7 +76,7 @@ function getEventPageUrl() {
               $done();
             }
           } else {
-            momoNotify(
+            surgeNotify(
               '取得活動頁面失敗 ‼️',
               obj.resultMessage
             );
@@ -84,14 +84,14 @@ function getEventPageUrl() {
           }
         }
         catch (error) {
-          momoNotify(
+          surgeNotify(
             '取得活動頁面失敗 ‼️',
             error
           );
           $done();
         }
       } else {
-        momoNotify(
+        surgeNotify(
           'Cookie 已過期 ‼️',
           '請重新登入'
         );
@@ -104,7 +104,7 @@ function getEventPageUrl() {
 function getJavascriptUrl() {
   $httpClient.get(eventPageRequest, function (error, response, data) {
     if (error) {
-      momoNotify(
+      surgeNotify(
         '取得 JS URL 失敗 ‼️',
         '連線錯誤'
       );
@@ -120,14 +120,14 @@ function getJavascriptUrl() {
           getPromoCloudConfig();
         }
         catch (error) {
-          momoNotify(
+          surgeNotify(
             '取得 JS URL 失敗 ‼️',
             error
           );
           $done();
         }
       } else {
-        momoNotify(
+        surgeNotify(
           '取得 JS URL 失敗 ‼️',
           response.status
         );
@@ -137,10 +137,10 @@ function getJavascriptUrl() {
   });
 }
 
-function getPromoCloudConfig() {
+function getluckyDraw() {
   $httpClient.get(jsCodeRequest, function (error, response, data) {
     if (error) {
-      momoNotify(
+      surgeNotify(
         '取得活動 ID 失敗 ‼️',
         '連線錯誤'
       );
@@ -150,21 +150,21 @@ function getPromoCloudConfig() {
         try {
           const pNoRe = /punchConfig\.pNo(.*)"(.*)"/i;
           const pNo = data.match(pNoRe)[2];
-          console.log('Momo 活動 ID 👉' + pNo);
+          console.log('發票怪獸 活動 ID 👉' + pNo);
           let body = JSON.parse(checkinRequest.body);
           body.pNo = pNo;
           checkinRequest.body = body;
           checkIn();
         }
         catch (error) {
-          momoNotify(
+          surgeNotify(
             '取得活動 ID 失敗 ‼️',
             error
           );
           $done();
         }
       } else {
-        momoNotify(
+        surgeNotify(
           'Cookie 已過期 ‼️',
           '請重新登入'
         );
@@ -177,7 +177,7 @@ function getPromoCloudConfig() {
 function checkIn() {
   $httpClient.post(checkinRequest, function (error, response, data) {
     if (error) {
-      momoNotify(
+      surgeNotify(
         '簽到失敗 ‼️',
         '連線錯誤'
       );
@@ -185,39 +185,39 @@ function checkIn() {
       if (response.status === 200) {
         const obj = JSON.parse(data);
         if (obj.data.status === 'OK') {
-          momoNotify(
+          surgeNotify(
             '今日簽到成功 ✅',
             ''
           );
         } else if (obj.data.status === 'RA') {
           console.log('本日已簽到');
-          // momoNotify(
+          // surgeNotify(
           //   '簽到失敗 ‼️',
           //   '本日已簽到'
           // );
         } else if (obj.data.status === 'D') {
-          momoNotify(
+          surgeNotify(
             '簽到失敗 ‼️',
             '活動已到期'
           );
         } else if (obj.data.status === 'MAX') {
-          momoNotify(
+          surgeNotify(
             '簽到失敗 ‼️',
             '簽到人數達到上限'
           );
         } else if (obj.data.status === 'EPN2') {
-          momoNotify(
+          surgeNotify(
             '簽到失敗 ‼️',
             '活動不存在'
           );
         } else {
-          momoNotify(
+          surgeNotify(
             '簽到失敗 ‼️',
             obj.data.status
           );
         }
       } else {
-        momoNotify(
+        surgeNotify(
           'Cookie 已過期 ‼️',
           '請重新登入'
         );

@@ -8,7 +8,8 @@ if ($request.method === 'POST') {
   if ($request.body) {
     try {
       // let headers = JSON.parse($request.headers);
-      let headers1 = $request.headers;
+      // let headers1 = $request.headers;
+      const headers1 = '{"accept":"*\/*","content-type":"application\/json","accept-encoding":"gzip, deflate, br","user-agent":"InvoiceMonster\/3.30.4 (iPhone; iOS 16.3.1; Scale\/3.00)","content-length":"52","accept-language":"zh-Hant-TW;q=1, en-TW;q=0.9, zh-Hans-TW;q=0.8","authorization":"yfDEN17pEB5TO5aPgfJx5LsRBEL06DvR"}'
       let headers = JSON.parse(headers1);
       let body = JSON.parse($request.body);
       console.log("----------------");
