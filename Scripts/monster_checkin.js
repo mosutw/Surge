@@ -64,6 +64,14 @@ function getEventPageUrl() {
               magnification + "倍"
             );
             $done();
+          }
+          else if (obj.errorCode === 4000) {
+            let magnification = obj.data.magnification;
+            surgeNotify(
+              '今日無抽獎資料 ‼️ ',
+              ''
+            );
+            $done();
 
           } else {
             surgeNotify(
