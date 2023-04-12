@@ -59,12 +59,14 @@ function getEventPageUrl() {
           const obj = JSON.parse(data);
           if (obj.errorCode === 2000) {
             let magnification = obj.data.magnification;
+            console.log('翻倍樂成功 ‼️ -' +  magnification + '倍');
             surgeNotify(
               '翻倍樂成功 ‼️ - ',
               magnification + "倍"
             );
             $done();
           } else if (obj.errorCode === 4000) {
+            console.log('今日無抽獎資料 ‼️ ');
             surgeNotify(
               '今日無抽獎資料 ‼️ ',
               ''
@@ -72,6 +74,7 @@ function getEventPageUrl() {
             $done();
 
           } else {
+            console.log('取得翻倍樂頁面失敗 ‼️');
             surgeNotify(
               '取得翻倍樂頁面失敗 ‼️',
               obj.resultMessage
@@ -80,6 +83,7 @@ function getEventPageUrl() {
           }
         }
         catch (error) {
+          console.log('取得翻倍樂頁面失敗 ‼️');
           surgeNotify(
             '取得翻倍樂頁面失敗 ‼️',
             error
@@ -87,6 +91,7 @@ function getEventPageUrl() {
           $done();
         }
       } else {
+        console.log('Cookie 已過期 ‼️,請重新登入');
         surgeNotify(
           'Cookie 已過期 ‼️',
           '請重新登入'
