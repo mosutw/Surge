@@ -59,7 +59,7 @@ function getEventPageUrl() {
           const obj = JSON.parse(data);
           if (obj.errorCode === 2000) {
             let magnification = obj.data.magnification;
-            console.log('翻倍樂成功 ‼️ -' +  magnification + '倍');
+            console.log('翻倍樂成功 ‼️' +  magnification + '倍');
             surgeNotify(
               '翻倍樂成功 ‼️ - ',
               magnification + "倍"
