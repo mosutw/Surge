@@ -19,7 +19,7 @@ let shopeePetsGetRewardListRequest = {
 };
 
 let redeemRewardRequest = {
-  url: `https://games.shopee.tw/gameplatform/api/v2/redeem_store/redeem_item/store/397/item/item_id?appid=LcqcAMvwNcX8MR63xX`,
+  url: `https://games.shopee.tw/gameplatform/api/v2/redeem_store/redeem_item/store/397/item/item_id?appid=LcqcAMvwNcX8MR63xX&activity=b711c6148c210f8f`,
   headers: null,
   body: {
     request_id: null,
