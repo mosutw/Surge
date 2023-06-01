@@ -14,7 +14,7 @@ config = {
 }
 
 let shopeePetsGetRewardListRequest = {
-  url: 'https://games.shopee.tw/gameplatform/api/v2/redeem_store/item_list/store/397?appid=LcqcAMvwNcX8MR63xX&guest=1&limit=100&offset=0',
+  url: 'https://games.shopee.tw/gameplatform/api/v2/redeem_store/item_list/store/397?appid=LcqcAMvwNcX8MR63xX&guest=1&limit=100&offset=0&activity=b711c6148c210f8f',
   headers: config.shopeeHeaders,
 };
 
@@ -116,6 +116,7 @@ async function shopeePetsGetRewardList() {
       } else {
         if (response.status === 200) {
           const obj = JSON.parse(data);
+          
           try {
             if (obj.msg === 'success') {
               // RewardList = obj.data.item_list.filter(item => item.name.includes("蝦幣"))
