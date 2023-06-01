@@ -4,9 +4,9 @@ let config = null;
 let RewardList = null;
 let userId = null;
 
-Coin3_id = 30222;
-Coin1_5_id = 30221;
-item_id = Coin3_id;
+// Coin3_id = 30222;
+// Coin1_5_id = 30221;
+// item_id = Coin3_id;
 
 config = {
   shopeeInfo: null,
@@ -89,7 +89,7 @@ async function preCheck() {
   });
 
   redeemRewardRequest = {
-    url: `https://games.shopee.tw/gameplatform/api/v2/redeem_store/redeem_item/store/397/item'/item_id?appid=LcqcAMvwNcX8MR63xX`,
+    url: `https://games.shopee.tw/gameplatform/api/v2/redeem_store/redeem_item/store/397/item'/item_id?appid=LcqcAMvwNcX8MR63xX&activity=b711c6148c210f8f`,
 
     headers: config.shopeeHeaders,
     body: {
@@ -213,16 +213,17 @@ async function redeemReward() {
     console.log('✅ 檢查token成功');
     await shopeePetsGetRewardList();
     for (let i = 0; i < RewardList.length; i++) {      
-      console.log(RewardList[i]);
+      // console.log(RewardList[i]);
       console.log(RewardList[i].name);
-      // redeemRewardRequest = {
-      //   url: `https://games.shopee.tw/gameplatform/api/v2/redeem_store/redeem_item/store/397/event/0a470ca24ec80fe6/item/${RewardList[i].id}?appid=LcqcAMvwNcX8MR63xX`,
+      item_id = RewardList[i].id;
+      redeemRewardRequest = {
+        url: `https://games.shopee.tw/gameplatform/api/v2/redeem_store/redeem_item/store/397/item/${RewardList[i].id}?appid=LcqcAMvwNcX8MR63xX&activity=b711c6148c210f8f`,
 
-      //   headers: config.shopeeHeaders,
-      //   body: {
-      //     request_id: `${userId}_397_${RewardList[i].id}_${new Date().getTime()}`,
-      //   }
-      // }              
+        headers: config.shopeeHeaders,
+        body: {
+          request_id: `${userId}_397_${RewardList[i].id}_${new Date().getTime()}`,
+        }
+      }              
 
       // for (let i = 0; i < 2; i++) {
         console.log(i);
