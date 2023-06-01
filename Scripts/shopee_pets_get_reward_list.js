@@ -4,18 +4,22 @@ let config = null;
 let RewardList = null;
 let userId = null;
 
+Coin3_id = 30222;
+Coin1_5_id = 30221;
+get_Coin = Coin3_id;
+
 config = {
   shopeeInfo: null,
   shopeeHeaders: null,
 }
 
 let shopeePetsGetRewardListRequest = {
-  url: 'https://games.shopee.tw/gameplatform/api/v2/redeem_store/item_list/store/397/event/0a470ca24ec80fe6/?appid=LcqcAMvwNcX8MR63xX&guest=1&limit=100&offset=0',
+  url: 'https://games.shopee.tw/gameplatform/api/v2/redeem_store/item_list/store/397?appid=LcqcAMvwNcX8MR63xX&guest=1&limit=100&offset=0',
   headers: config.shopeeHeaders,
 };
 
 let redeemRewardRequest = {
-  url: `https://games.shopee.tw/gameplatform/api/v2/redeem_store/redeem_item/store/397/event/0a470ca24ec80fe6/item/item_id?appid=LcqcAMvwNcX8MR63xX`,
+  url: `https://games.shopee.tw/gameplatform/api/v2/redeem_store/redeem_item/store/397/item/item_id?appid=LcqcAMvwNcX8MR63xX`,
   headers: null,
   body: {
     request_id: null,
@@ -116,7 +120,7 @@ async function shopeePetsGetRewardList() {
             if (obj.msg === 'success') {
               // RewardList = obj.data.item_list.filter(item => item.name.includes("蝦幣"))
               // RewardList = obj.data.item_list.filter(item => item.name.includes("蝦幣") || item.name.includes("免運寶箱"));
-              RewardList = obj.data.item_list.filter(item => item.name.includes("1.5 蝦幣")).sort((a, b) => parseFloat(b.name.split(' ')[0]) - parseFloat(a.name.split(' ')[0]));
+              RewardList = obj.data.item_list.filter(item => item.name.includes("3 蝦幣")).sort((a, b) => parseFloat(b.name.split(' ')[0]) - parseFloat(a.name.split(' ')[0]));
               console.log('可兌換項目數:' + RewardList.length);
               // $done();
               return resolve();
@@ -222,10 +226,10 @@ async function redeemReward() {
         console.log(i);
         await delay(0.2);
         console.log(RewardList[i].redeem_limit);
-        for (let j = 0; j < RewardList[i].redeem_limit; j++) {
-          const result = await redeemReward();
-          console.log(result);  
-        }
+        // for (let j = 0; j < RewardList[i].redeem_limit; j++) {
+        //   const result = await redeemReward();
+        //   console.log(result);  
+        // }
       }
 
     // console.log(`✅ 蝦皮寵物村獎勵兌換列表成功: ${JSON.stringify(RewardList[0])}` );
