@@ -216,6 +216,8 @@ async function redeemReward() {
       // console.log(RewardList[i]);
       console.log(RewardList[i].name);
       item_id = RewardList[i].id;
+      url1 =  `https://games.shopee.tw/gameplatform/api/v2/redeem_store/redeem_item/store/397/item/${RewardList[i].id}?appid=LcqcAMvwNcX8MR63xX&activity=b711c6148c210f8f`;
+      console.log(url1);
       redeemRewardRequest = {
         url: `https://games.shopee.tw/gameplatform/api/v2/redeem_store/redeem_item/store/397/item/${RewardList[i].id}?appid=LcqcAMvwNcX8MR63xX&activity=b711c6148c210f8f`,
 
