@@ -185,6 +185,7 @@ async function redeemReward() {
               // $done();
             }
           } catch (error) {
+            console.log('獎勵兌換失敗2 ‼️');
             surgeNotify(
               '獎勵兌換失敗2 ‼️',
               error
@@ -216,14 +217,8 @@ async function redeemReward() {
     for (let i = 0; i < RewardList.length; i++) {      
       // console.log(RewardList[i]);
       console.log(RewardList[i].name);
-      item_id = '30322';
-      // url1 =  `https://games.shopee.tw/gameplatform/api/v2/redeem_store/redeem_item/store/397/item/${RewardList[i].id}?appid=LcqcAMvwNcX8MR63xX&activity=b711c6148c210f8f`;
-      url1 =  `https://games.shopee.tw/gameplatform/api/v2/redeem_store/redeem_item/store/397/item/30322?appid=LcqcAMvwNcX8MR63xX&activity=b711c6148c210f8f`;
-      console.log(url1);
       redeemRewardRequest = {
-        // url: `https://games.shopee.tw/gameplatform/api/v2/redeem_store/redeem_item/store/397/item/${RewardList[i].id}?appid=LcqcAMvwNcX8MR63xX&activity=b711c6148c210f8f`,
-        url: `https://games.shopee.tw/gameplatform/api/v2/redeem_store/redeem_item/store/397/item/30322?appid=LcqcAMvwNcX8MR63xX&activity=b711c6148c210f8f`,
-
+        url: `https://games.shopee.tw/gameplatform/api/v2/redeem_store/redeem_item/store/397/item/${RewardList[i].id}?appid=LcqcAMvwNcX8MR63xX&activity=b711c6148c210f8f`,
         headers: config.shopeeHeaders,
         body: {
           request_id: `${userId}_397_${RewardList[i].id}_${new Date().getTime()}`,
