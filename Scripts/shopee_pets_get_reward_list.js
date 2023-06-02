@@ -121,6 +121,7 @@ async function shopeePetsGetRewardList() {
             if (obj.msg === 'success') {
               // RewardList = obj.data.item_list.filter(item => item.name.includes("蝦幣"))
               // RewardList = obj.data.item_list.filter(item => item.name.includes("蝦幣") || item.name.includes("免運寶箱"));
+              // RewardList = obj.data.item_list.filter(item => item.name.includes("3 蝦幣","1.5 蝦幣")).sort((a, b) => parseFloat(b.name.split(' ')[0]) - parseFloat(a.name.split(' ')[0]));
               RewardList = obj.data.item_list.filter(item => item.name.includes("3 蝦幣")).sort((a, b) => parseFloat(b.name.split(' ')[0]) - parseFloat(a.name.split(' ')[0]));
               console.log('可兌換項目數:' + RewardList.length);
               // $done();
@@ -231,10 +232,10 @@ async function redeemReward() {
         console.log(i);
         await delay(0.2);
         console.log(RewardList[i].redeem_limit);
-        // for (let j = 0; j < RewardList[i].redeem_limit; j++) {
-        //   const result = await redeemReward();
-        //   console.log(result);  
-        // }
+        for (let j = 0; j < RewardList[i].redeem_limit; j++) {
+          const result = await redeemReward();
+          console.log(result);  
+        }
       }
 
     // console.log(`✅ 蝦皮寵物村獎勵兌換列表成功: ${JSON.stringify(RewardList[0])}` );
