@@ -1,4 +1,4 @@
-//20230602-1
+//20230602-2
 let showNotification = true;
 let config = null;
 let RewardList = null;
@@ -219,7 +219,7 @@ async function redeemReward() {
     for (let i = 0; i < RewardList.length; i++) {      
       // console.log(RewardList[i]);
       console.log(RewardList[i].name);
-      console.log(`https://games.shopee.tw/gameplatform/api/v2/redeem_store/redeem_item/store/397/item/${RewardList[i].id}?appid=LcqcAMvwNcX8MR63xX&activity=b711c6148c210f8f`);
+      // console.log(`https://games.shopee.tw/gameplatform/api/v2/redeem_store/redeem_item/store/397/item/${RewardList[i].id}?appid=LcqcAMvwNcX8MR63xX&activity=b711c6148c210f8f`);
       redeemRewardRequest = {
         url: `https://games.shopee.tw/gameplatform/api/v2/redeem_store/redeem_item/store/397/item/${RewardList[i].id}?appid=LcqcAMvwNcX8MR63xX&activity=b711c6148c210f8f`,
         headers: config.shopeeHeaders,
