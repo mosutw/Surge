@@ -1,4 +1,4 @@
-//20230602-2
+let pet_version = '20230605-1';
 let showNotification = true;
 let config = null;
 let RewardList = null;
@@ -210,11 +210,12 @@ async function redeemReward() {
 }
 
 (async () => {
-  console.log('🍤 蝦皮寵物村獎勵兌換列表 v20230201.1');
+  console.log('🍤 蝦皮寵物村獎勵兌換列表' + pet_version);
   try {
     await preCheck();
     console.log('✅ 檢查token成功');
     await shopeePetsGetRewardList();
+    console.log(RewardList);
     for (let i = 0; i < RewardList.length; i++) {      
       // console.log(RewardList[i]);
       console.log(RewardList[i].name);
