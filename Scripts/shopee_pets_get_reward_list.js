@@ -215,7 +215,7 @@ async function redeemReward() {
     await preCheck();
     console.log('✅ 檢查token成功');
     await shopeePetsGetRewardList();
-    console.log(RewardList);
+    // console.log(RewardList);
     for (let i = 0; i < RewardList.length; i++) {      
       // console.log(RewardList[i]);
       console.log(RewardList[i].name);
