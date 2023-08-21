@@ -1,5 +1,5 @@
 // 寵物村餵食
-let pet_version = '20230821-2202';
+let pet_version = '20230821-2214';
 let showNotification = true;
 let config = null;
 let petsId = [];
@@ -15,13 +15,13 @@ let shopeePetsGetPetsInfoRequest = {
   headers: config.shopeeHeaders,
 };
 
-let shopeePetsFoodFeed = {
-  url: `https://games.shopee.tw/api-gateway/pet/food/feed?activityCode=b711c6148c210f8f&eventCode`,
-  headers: null,
-  body: {
-    request_id: null,
-  }
-}  
+// let shopeePetsFoodFeed = {
+//   url: `https://games.shopee.tw/api-gateway/pet/food/feed?activityCode=b711c6148c210f8f&eventCode`,
+//   headers: null,
+//   body: {
+//     request_id: null,
+//   }
+// }  
 
 function surgeNotify(subtitle = '', message = '') {
   $notification.post('🍤 蝦皮寵物村餵食', subtitle, message, { 'url': 'shopeetw://' });
@@ -148,7 +148,7 @@ async function shopeePetsGetPetsInfo() {
 }
 
 // 餵食寵物
-async function PetFoodFeed() {
+async function petFoodFeed() {
   return new Promise((resolve, reject) => {
     $httpClient.post(petFoodFeedRequest, function (error, response, data) {
       console.log(response.status);
@@ -242,14 +242,16 @@ async function PetFoodFeed() {
         url: `https://games.shopee.tw/api-gateway/pet/food/feed?activityCode=b711c6148c210f8f&eventCode=${eventCode}`,
         headers: config.shopeeHeaders,
         body: {
-          token: Date.now(),
+          token: Date.now().valueOf(),
           petID: petsId[i] ,
           foodID : 11001
 
         }
       }      
       // console.log(petFoodFeedRequest);  
-      await petFoodFeed();      
+      // console.log(Date.now());
+      await petFoodFeed(petFooldFeedRequest);      
+      await delay(0.5);      
 
 
     }
