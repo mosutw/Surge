@@ -243,9 +243,9 @@ async function petFoodFeed() {
       // console.log(Date.now().toString());
       await petFoodFeed(petFoodFeedRequest);      
       await delay(0.5);      
-
-
     }
+    console.log('✅ 完成餵食')
+    surgeNotify('已餵食寵物 ✅', '');
 
   } catch (error) {
     handleError(error);
