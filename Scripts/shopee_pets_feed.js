@@ -100,9 +100,9 @@ async function preCheck() {
 
 
   // 取得寵物村PetId 和eventCode
-async function shopeePetsGetPetInfo() {
+async function shopeePetsGetPetsInfo() {
   return new Promise((resolve, reject) => {
-    $httpClient.get(shopeePetsGetPetInfoRequest, function (error, response, data) {
+    $httpClient.get(shopeePetsGetPetsInfoRequest, function (error, response, data) {
       if (error) {
         surgeNotify(
           '寵物列表取得失敗 ‼️',
