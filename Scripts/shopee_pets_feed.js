@@ -1,5 +1,5 @@
 // 寵物村餵食
-let pet_version = '20230821-2119';
+let pet_version = '20230821-2126';
 let showNotification = true;
 let config = null;
 let petsId = [];
@@ -148,6 +148,62 @@ async function shopeePetsGetPetsInfo() {
 }
 
 
+  // 取得寵物村餵食
+  async function shopeePetsFoodFeed() {
+    return new Promise((resolve, reject) => {
+      $httpClient.get(shopeePetsGetPetsInfoRequest, function (error, response, data) {
+        if (error) {
+          surgeNotify(
+            '寵物列表取得失敗 ‼️',
+            '連線錯誤'
+          );
+          // $done();
+          return reject('寵物列表取得失敗');
+        } else {
+          if (response.status === 200) {
+            const obj = JSON.parse(data);          
+            try {
+              if (obj.code === 0) {
+                eventCode = obj.data.eventCode;
+                console.log(eventCode);
+                PetsList = obj.data.pets;
+                for (let i = 0; i < PetsList.length; i++) {
+                  petsId.push(PetsList[i].petID);
+                }
+  
+                console.log('寵物數:' + petsId.length);
+                // $done();
+                return resolve();
+    
+              } else {
+                surgeNotify(
+                  '服役寵物列表取得失敗1 ‼️',
+                  obj.msg
+                );
+                // $done();
+                return reject('服役寵物列表取得失敗1-1 ‼️');
+              }
+            } catch (error) {
+              surgeNotify(
+                '服役寵物列表取得失敗2 ‼️',
+                error
+              );
+              // $done();
+              return reject('服役寵物列表取得失敗2-1 ‼️');
+    
+            }
+          } else {
+            surgeNotify(
+              '取得寵物列表失敗',
+            );
+            // $done();
+            return reject('兌取得寵物列表失敗');
+    
+          }
+        }
+      });
+    });
+  }
 
 (async () => {
   console.log('🍤 蝦皮寵物村餵食寵物' + pet_version);
@@ -157,28 +213,37 @@ async function shopeePetsGetPetsInfo() {
     await shopeePetsGetPetsInfo();
     console.log(petsId);
     console.log(Date.now());
-    // for (let i = 0; i < petsId.length; i++) {      
-    // //   // console.log(`https://games.shopee.tw/gameplatform/api/v2/redeem_store/redeem_item/store/397/item/${RewardList[i].id}?appid=LcqcAMvwNcX8MR63xX&activity=b711c6148c210f8f`);
-    //   petFoodFeedRequest = {
-    //     url: `https://games.shopee.tw/api-gateway/pet/food/feed?activityCode=b711c6148c210f8f&eventCode=${eventCode}`,
-    //     headers: config.shopeeHeaders,
-    //     body: {
-    //       token: "",
-    //       petID: ${petsId[i]},
-    //       foodID : 11001
+    for (let i = 0; i < petsId.length; i++) {      
+    //   // console.log(`https://games.shopee.tw/gameplatform/api/v2/redeem_store/redeem_item/store/397/item/${RewardList[i].id}?appid=LcqcAMvwNcX8MR63xX&activity=b711c6148c210f8f`);
+      petFoodFeedRequest = {
+        url: `https://games.shopee.tw/api-gateway/pet/food/feed?activityCode=b711c6148c210f8f&eventCode=${eventCode}`,
+        headers: config.shopeeHeaders,
+        body: {
+          token: Date.now(),
+          petID: petsId[i] ,
+          foodID : 11001
 
-    //     }
-    //   }              
+        }
+      }              
 
-    //   // for (let i = 0; i < 2; i++) {
-    //     console.log(i);
-    //     await delay(0.2);
-    //     console.log(RewardList[i].redeem_limit);
-    //     for (let j = 0; j < RewardList[i].redeem_limit; j++) {
-    //       const result = await redeemReward();
-    //       console.log(result);  
-    //     }
-      }
+      $httpClient.post(petFoodFeedRequest, function (error, response, data) {
+        if (error) {
+          return reject(['餵食失敗-1 ‼️', '連線錯誤']);
+        } else {
+          if (response.status === 200) {
+            const obj = JSON.parse(data);
+            if (obj.code === 0) {
+              console.log(`✅ 餵食成功`);
+              return resolve();
+            // } else if (obj.code === 409004) {
+            //   return reject(['領取失敗 ‼️', `無法領取「${taskName}」。作物狀態錯誤，請檢查是否已收成`]);
+            }
+          } else {
+            return reject(['餵食失敗-2 ‼️', response.status]);
+          }
+        }
+      });
+    }
 
   } catch (error) {
     handleError(error);
