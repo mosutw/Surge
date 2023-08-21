@@ -1,8 +1,9 @@
 // 寵物村餵食
-let pet_version = '20230821-2104';
+let pet_version = '20230821-2119';
 let showNotification = true;
 let config = null;
-let petsID = [];
+let petsId = [];
+let eventCode = null;
 
 config = {
   shopeeInfo: null,
@@ -84,15 +85,6 @@ async function preCheck() {
     return resolve();
   });
 
-  redeemRewardRequest = {
-    url: `https://games.shopee.tw/gameplatform/api/v2/redeem_store/redeem_item/store/397/item'/item_id?appid=LcqcAMvwNcX8MR63xX&activity=b711c6148c210f8f`,
-
-    headers: config.shopeeHeaders,
-    body: {
-      // request_id: `${userId}_397_${rewrardId}_${new Date().getTime()}`,
-      request_id: `${userId}_397_rewardId_${new Date().getTime()}`,
-    }
-  }  
 }
 
 // // ---------------------------
@@ -118,10 +110,10 @@ async function shopeePetsGetPetsInfo() {
               console.log(eventCode);
               PetsList = obj.data.pets;
               for (let i = 0; i < PetsList.length; i++) {
-                PetsId.push(PetsList[i].petID);
+                petsId.push(PetsList[i].petID);
               }
 
-              console.log('寵物數:' + PetsId.length);
+              console.log('寵物數:' + petsId.length);
               // $done();
               return resolve();
   
@@ -139,7 +131,7 @@ async function shopeePetsGetPetsInfo() {
               error
             );
             // $done();
-            return reject('獎勵兌換列表取得失敗2 ‼️');
+            return reject('服役寵物列表取得失敗2-1 ‼️');
   
           }
         } else {
@@ -163,16 +155,18 @@ async function shopeePetsGetPetsInfo() {
     await preCheck();
     console.log('✅ 檢查token成功');
     await shopeePetsGetPetsInfo();
-    // console.log(RewardList);
-    // for (let i = 0; i < RewardList.length; i++) {      
-    //   // console.log(RewardList[i]);
-    //   console.log(RewardList[i].name);
-    //   // console.log(`https://games.shopee.tw/gameplatform/api/v2/redeem_store/redeem_item/store/397/item/${RewardList[i].id}?appid=LcqcAMvwNcX8MR63xX&activity=b711c6148c210f8f`);
-    //   redeemRewardRequest = {
-    //     url: `https://games.shopee.tw/gameplatform/api/v2/redeem_store/redeem_item/store/397/item/${RewardList[i].id}?appid=LcqcAMvwNcX8MR63xX&activity=b711c6148c210f8f`,
+    console.log(petsId);
+    console.log(Date.now());
+    // for (let i = 0; i < petsId.length; i++) {      
+    // //   // console.log(`https://games.shopee.tw/gameplatform/api/v2/redeem_store/redeem_item/store/397/item/${RewardList[i].id}?appid=LcqcAMvwNcX8MR63xX&activity=b711c6148c210f8f`);
+    //   petFoodFeedRequest = {
+    //     url: `https://games.shopee.tw/api-gateway/pet/food/feed?activityCode=b711c6148c210f8f&eventCode=${eventCode}`,
     //     headers: config.shopeeHeaders,
     //     body: {
-    //       request_id: `${userId}_397_${RewardList[i].id}_${new Date().getTime()}`,
+    //       token: "",
+    //       petID: ${petsId[i]},
+    //       foodID : 11001
+
     //     }
     //   }              
 
@@ -184,7 +178,7 @@ async function shopeePetsGetPetsInfo() {
     //       const result = await redeemReward();
     //       console.log(result);  
     //     }
-    //   }
+      }
 
   } catch (error) {
     handleError(error);
