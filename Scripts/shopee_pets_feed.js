@@ -1,5 +1,5 @@
 // 寵物村餵食
-let pet_version = '20230821-2214';
+let pet_version = '20230821-2230';
 let showNotification = true;
 let config = null;
 let petsId = [];
@@ -14,14 +14,6 @@ let shopeePetsGetPetsInfoRequest = {
   url: 'https://games.shopee.tw/api-gateway/pet/home?activityCode=b711c6148c210f8f',
   headers: config.shopeeHeaders,
 };
-
-// let shopeePetsFoodFeed = {
-//   url: `https://games.shopee.tw/api-gateway/pet/food/feed?activityCode=b711c6148c210f8f&eventCode`,
-//   headers: null,
-//   body: {
-//     request_id: null,
-//   }
-// }  
 
 function surgeNotify(subtitle = '', message = '') {
   $notification.post('🍤 蝦皮寵物村餵食', subtitle, message, { 'url': 'shopeetw://' });
@@ -113,21 +105,21 @@ async function shopeePetsGetPetsInfo() {
                 petsId.push(PetsList[i].petID);
               }
 
-              console.log('寵物數:' + petsId.length);
+              // console.log('寵物數:' + petsId.length);
               // $done();
               return resolve();
   
             } else {
               surgeNotify(
-                '服役寵物列表取得失敗1 ‼️',
+                '寵物列表取得失敗1 ‼️',
                 obj.msg
               );
               // $done();
-              return reject('服役寵物列表取得失敗1-1 ‼️');
+              return reject('寵物列表取得失敗1-1 ‼️');
             }
           } catch (error) {
             surgeNotify(
-              '服役寵物列表取得失敗2 ‼️',
+              '寵物列表取得失敗2 ‼️',
               error
             );
             // $done();
@@ -151,7 +143,6 @@ async function shopeePetsGetPetsInfo() {
 async function petFoodFeed() {
   return new Promise((resolve, reject) => {
     $httpClient.post(petFoodFeedRequest, function (error, response, data) {
-      console.log(response.status);
       if (error) {
         return reject(['餵食失敗-1 ‼️', '連線錯誤']);
       } else {
@@ -235,22 +226,22 @@ async function petFoodFeed() {
     console.log('✅ 檢查token成功');
     await shopeePetsGetPetsInfo();
     console.log(petsId);
-    console.log(Date.now());
+    // console.log(Date.now());
     for (let i = 0; i < petsId.length; i++) {      
     //   // console.log(`https://games.shopee.tw/gameplatform/api/v2/redeem_store/redeem_item/store/397/item/${RewardList[i].id}?appid=LcqcAMvwNcX8MR63xX&activity=b711c6148c210f8f`);
       petFoodFeedRequest = {
         url: `https://games.shopee.tw/api-gateway/pet/food/feed?activityCode=b711c6148c210f8f&eventCode=${eventCode}`,
         headers: config.shopeeHeaders,
         body: {
-          token: Date.now().valueOf(),
+          token: Date.now().toString(),
           petID: petsId[i] ,
           foodID : 11001
 
         }
       }      
       // console.log(petFoodFeedRequest);  
-      // console.log(Date.now());
-      await petFoodFeed(petFooldFeedRequest);      
+      // console.log(Date.now().toString());
+      await petFoodFeed(petFoodFeedRequest);      
       await delay(0.5);      
 
 
