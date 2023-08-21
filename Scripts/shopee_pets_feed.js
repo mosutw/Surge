@@ -1,5 +1,5 @@
 // 寵物村餵食
-let pet_version = '20230821-2126';
+let pet_version = '20230821-2128';
 let showNotification = true;
 let config = null;
 let petsId = [];
@@ -224,25 +224,26 @@ async function shopeePetsGetPetsInfo() {
           foodID : 11001
 
         }
-      }              
+      }      
+      console.log(petFoodFeedRequest);        
 
-      $httpClient.post(petFoodFeedRequest, function (error, response, data) {
-        if (error) {
-          return reject(['餵食失敗-1 ‼️', '連線錯誤']);
-        } else {
-          if (response.status === 200) {
-            const obj = JSON.parse(data);
-            if (obj.code === 0) {
-              console.log(`✅ 餵食成功`);
-              return resolve();
-            // } else if (obj.code === 409004) {
-            //   return reject(['領取失敗 ‼️', `無法領取「${taskName}」。作物狀態錯誤，請檢查是否已收成`]);
-            }
-          } else {
-            return reject(['餵食失敗-2 ‼️', response.status]);
-          }
-        }
-      });
+      // $httpClient.post(petFoodFeedRequest, function (error, response, data) {
+      //   if (error) {
+      //     return reject(['餵食失敗-1 ‼️', '連線錯誤']);
+      //   } else {
+      //     if (response.status === 200) {
+      //       const obj = JSON.parse(data);
+      //       if (obj.code === 0) {
+      //         console.log(`✅ 餵食成功`);
+      //         return resolve();
+      //       // } else if (obj.code === 409004) {
+      //       //   return reject(['領取失敗 ‼️', `無法領取「${taskName}」。作物狀態錯誤，請檢查是否已收成`]);
+      //       }
+      //     } else {
+      //       return reject(['餵食失敗-2 ‼️', response.status]);
+      //     }
+      //   }
+      // });
     }
 
   } catch (error) {
