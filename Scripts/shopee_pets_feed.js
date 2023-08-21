@@ -114,7 +114,7 @@ async function shopeePetsGetPetsInfo() {
         if (response.status === 200) {
           const obj = JSON.parse(data);          
           try {
-            if (obj.msg === 'success') {
+            if (obj.code === 0) {
               eventCode = obj.data.eventCode;
               console.log(envCode);
               PetsList = obj.data.pets;
