@@ -1,5 +1,5 @@
 // 寵物村餵食
-let pet_version = '20230821-1';
+let pet_version = '20230821-2053';
 let showNotification = true;
 let config = null;
 let RewardList = null;
@@ -132,7 +132,7 @@ async function shopeePetsGetPetsInfo() {
                 obj.msg
               );
               // $done();
-              return reject('服役寵物列表取得失敗1 ‼️');
+              return reject('服役寵物列表取得失敗1-1 ‼️');
             }
           } catch (error) {
             surgeNotify(
