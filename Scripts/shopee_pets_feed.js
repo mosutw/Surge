@@ -10,7 +10,7 @@ config = {
   shopeeHeaders: null,
 }
 
-let shopeePetsGetPetInfoRequest = {
+let shopeePetsGetPetsInfoRequest = {
   url: 'https://games.shopee.tw/api-gateway/pet/home?activityCode=b711c6148c210f8f',
   headers: config.shopeeHeaders,
 };
@@ -160,7 +160,7 @@ async function shopeePetsGetPetInfo() {
   try {
     await preCheck();
     console.log('✅ 檢查token成功');
-    await shopeePetsGetPetIdListRequest();
+    await shopeePetsGetPetsInfoRequest();
     // console.log(RewardList);
     // for (let i = 0; i < RewardList.length; i++) {      
     //   // console.log(RewardList[i]);
