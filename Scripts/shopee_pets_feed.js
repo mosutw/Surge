@@ -112,34 +112,37 @@ async function shopeePetsGetPetsInfo() {
         return reject('寵物列表取得失敗');
       } else {
         if (response.status === 200) {
-          const obj = JSON.parse(data);
+          const obj = JSON.parse(data);          
+          try {
+            if (obj.msg === 'success') {
+              eventCode = obj.data.eventCode;
+              console.log(envCode);
+              PetsList = obj.data.pets;
+              for (let i = 0; i < PetsList.length; i++) {
+                PetsId.push(PetsList[i].petID);
+              }
 
-          console.log(data)
-          
-          // try {
-          //   if (obj.msg === 'success') {
-          //     PetsList = obj.data.item_list.filter(item => item.name.includes("3 蝦幣") || item.name.includes("1.5 蝦幣") ).sort((a, b) => parseFloat(b.name.split(' ')[0]) - parseFloat(a.name.split(' ')[0]));
-          //     console.log('可兌換項目數:' + RewardList.length);
-          //     // $done();
-          //     return resolve();
+              console.log('寵物數:' + PetsId.length);
+              // $done();
+              return resolve();
   
-          //   } else {
-          //     surgeNotify(
-          //       '獎勵兌換列表取得失敗1 ‼️',
-          //       obj.msg
-          //     );
-          //     // $done();
-          //     return reject('獎勵兌換列表取得失敗1 ‼️');
-          //   }
-          // } catch (error) {
-          //   surgeNotify(
-          //     '獎勵兌換列表取得失敗2 ‼️',
-          //     error
-          //   );
-          //   // $done();
-          //   return reject('獎勵兌換列表取得失敗2 ‼️');
+            } else {
+              surgeNotify(
+                '服役寵物列表取得失敗1 ‼️',
+                obj.msg
+              );
+              // $done();
+              return reject('服役寵物列表取得失敗1 ‼️');
+            }
+          } catch (error) {
+            surgeNotify(
+              '服役寵物列表取得失敗2 ‼️',
+              error
+            );
+            // $done();
+            return reject('獎勵兌換列表取得失敗2 ‼️');
   
-          // }
+          }
         } else {
           surgeNotify(
             '取得寵物列表失敗',
@@ -160,7 +163,7 @@ async function shopeePetsGetPetsInfo() {
   try {
     await preCheck();
     console.log('✅ 檢查token成功');
-    await shopeePetsGetPetInfo();
+    await shopeePetsGetPetsInfo();
     // console.log(RewardList);
     // for (let i = 0; i < RewardList.length; i++) {      
     //   // console.log(RewardList[i]);
