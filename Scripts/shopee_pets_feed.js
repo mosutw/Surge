@@ -1,9 +1,8 @@
 // 寵物村餵食
-let pet_version = '20230821-2053';
+let pet_version = '20230821-2104';
 let showNotification = true;
 let config = null;
-let RewardList = null;
-let userId = null;
+let petsID = [];
 
 config = {
   shopeeInfo: null,
@@ -116,7 +115,7 @@ async function shopeePetsGetPetsInfo() {
           try {
             if (obj.code === 0) {
               eventCode = obj.data.eventCode;
-              console.log(envCode);
+              console.log(eventCode);
               PetsList = obj.data.pets;
               for (let i = 0; i < PetsList.length; i++) {
                 PetsId.push(PetsList[i].petID);
