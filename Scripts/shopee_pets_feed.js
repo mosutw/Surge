@@ -114,7 +114,7 @@ async function shopeePetsGetPetInfo() {
         if (response.status === 200) {
           const obj = JSON.parse(data);
 
-          console.log(obj)
+          console.log(data)
           
           // try {
           //   if (obj.msg === 'success') {
@@ -160,7 +160,7 @@ async function shopeePetsGetPetInfo() {
   try {
     await preCheck();
     console.log('✅ 檢查token成功');
-    await shopeePetsGetPetsInfoRequest();
+    await shopeePetsGetPetInfo();
     // console.log(RewardList);
     // for (let i = 0; i < RewardList.length; i++) {      
     //   // console.log(RewardList[i]);
