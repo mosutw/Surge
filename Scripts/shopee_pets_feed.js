@@ -1,5 +1,5 @@
 // 寵物村餵食
-let pet_version = '20230821-2150';
+let pet_version = '20230821-2202';
 let showNotification = true;
 let config = null;
 let petsId = [];
@@ -15,13 +15,13 @@ let shopeePetsGetPetsInfoRequest = {
   headers: config.shopeeHeaders,
 };
 
-// let shopeePetsFoodFeed = {
-//   url: `https://games.shopee.tw/api-gateway/pet/food/feed?activityCode=b711c6148c210f8f&eventCode`,
-//   headers: null,
-//   body: {
-//     request_id: null,
-//   }
-// }  
+let shopeePetsFoodFeed = {
+  url: `https://games.shopee.tw/api-gateway/pet/food/feed?activityCode=b711c6148c210f8f&eventCode`,
+  headers: null,
+  body: {
+    request_id: null,
+  }
+}  
 
 function surgeNotify(subtitle = '', message = '') {
   $notification.post('🍤 蝦皮寵物村餵食', subtitle, message, { 'url': 'shopeetw://' });
@@ -90,7 +90,7 @@ async function preCheck() {
 // // ---------------------------
 
 
-  // 取得寵物村PetId 和eventCode
+// 取得寵物村PetId 和eventCode
 async function shopeePetsGetPetsInfo() {
   return new Promise((resolve, reject) => {
     $httpClient.get(shopeePetsGetPetsInfoRequest, function (error, response, data) {
@@ -147,6 +147,29 @@ async function shopeePetsGetPetsInfo() {
   });
 }
 
+// 餵食寵物
+async function PetFoodFeed() {
+  return new Promise((resolve, reject) => {
+    $httpClient.post(petFoodFeedRequest, function (error, response, data) {
+      console.log(response.status);
+      if (error) {
+        return reject(['餵食失敗-1 ‼️', '連線錯誤']);
+      } else {
+        if (response.status === 200) {
+          const obj = JSON.parse(data);
+          if (obj.code === 0) {
+            console.log(`✅ 餵食成功`);
+            return resolve();
+          // } else if (obj.code === 409004) {
+          //   return reject(['領取失敗 ‼️', `無法領取「${taskName}」。作物狀態錯誤，請檢查是否已收成`]);
+          }
+        } else {
+          return reject(['餵食失敗-2 ‼️', response.status]);
+        }
+      }
+    });
+  });
+}
 
   // 取得寵物村餵食
   async function shopeePetsFoodFeed() {
@@ -225,25 +248,10 @@ async function shopeePetsGetPetsInfo() {
 
         }
       }      
-      // console.log(petFoodFeedRequest);        
+      // console.log(petFoodFeedRequest);  
+      await petFoodFeed();      
 
-      $httpClient.post(petFoodFeedRequest, function (error, response, data) {
-        if (error) {
-          return reject(['餵食失敗-1 ‼️', '連線錯誤']);
-        } else {
-          if (response.status === 200) {
-            const obj = JSON.parse(data);
-            if (obj.code === 0) {
-              console.log(`✅ 餵食成功`);
-              return resolve();
-            // } else if (obj.code === 409004) {
-            //   return reject(['領取失敗 ‼️', `無法領取「${taskName}」。作物狀態錯誤，請檢查是否已收成`]);
-            }
-          } else {
-            return reject(['餵食失敗-2 ‼️', response.status]);
-          }
-        }
-      });
+
     }
 
   } catch (error) {
