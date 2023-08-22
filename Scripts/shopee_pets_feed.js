@@ -1,5 +1,5 @@
 // 寵物村餵食
-let pet_version = '20230821-2230';
+let pet_version = '20230822-1440';
 let showNotification = true;
 let config = null;
 let petsId = [];
