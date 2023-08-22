@@ -151,8 +151,8 @@ async function petFoodFeed() {
           if (obj.code === 0) {
             console.log(`✅ 餵食成功`);
             return resolve();
-          // } else if (obj.code === 409004) {
-          //   return reject(['領取失敗 ‼️', `無法領取「${taskName}」。作物狀態錯誤，請檢查是否已收成`]);
+          } else if (obj.code === 6010410) {
+            return reject(['餵食失敗 ‼️', `飼料還沒吃完`]);
           }
         } else {
           return reject(['餵食失敗-2 ‼️', response.status]);
