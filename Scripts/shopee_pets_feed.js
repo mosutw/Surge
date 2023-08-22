@@ -151,10 +151,16 @@ async function petFoodFeed() {
           if (obj.code === 0) {
             console.log(`✅ 餵食成功`);
             return resolve();
-          } else if (obj.code === 6010410) {
+          } else if (obj.code === 601041) {
             console.log('餵食失敗 ‼️飼料還沒吃完');
             return resolve();
             // return reject(['餵食失敗 ‼️', `飼料還沒吃完`]);
+          }
+          else {
+            console.log('餵食失敗 ‼️' + obj.code.toString() + obj.msg) ;
+            return resolve();
+            // return reject(['餵食失敗 ‼️', `飼料還沒吃完`]);
+
           }
         } else {
           return reject(['餵食失敗-2 ‼️', response.status]);
