@@ -2,7 +2,7 @@
 #!desc=每天自動做餵食功能
 
 [Script]
-[蝦蝦寵物村]寵物村餵食 = type=cron, cronexp="0 3,7,11,15,19,23 * * *", script-path=https://raw.githubusercontent.com/mosutw/Surge/main/Scripts/shopee_pets_feed.js, wake-system=1, timeout=30
+[蝦蝦寵物村]寵物村餵食 = type=cron, cronexp="0 2,6,10,14,18,22 * * *", script-path=https://raw.githubusercontent.com/mosutw/Surge/main/Scripts/shopee_pets_feed.js, wake-system=1, timeout=30
 
 [MITM]
 hostname = %APPEND% games.shopee.tw
