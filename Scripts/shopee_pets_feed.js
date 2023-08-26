@@ -1,5 +1,5 @@
 // 寵物村餵食
-let pet_version = '20230822-1440';
+let pet_version = '20230826-2352';
 let showNotification = true;
 let config = null;
 let petsId = [];
@@ -85,6 +85,10 @@ async function preCheck() {
 // 取得寵物村PetId 和eventCode
 async function shopeePetsGetPetsInfo() {
   return new Promise((resolve, reject) => {
+    shopeePetsGetPetsInfoRequest = {
+      url: 'https://games.shopee.tw/api-gateway/pet/home?activityCode=b711c6148c210f8f&event=',
+      headers: config.shopeeHeaders
+    }         
     $httpClient.get(shopeePetsGetPetsInfoRequest, function (error, response, data) {
       if (error) {
         surgeNotify(
