@@ -1,24 +1,28 @@
-function momoNotify(subtitle = '', message = '') {
-  $notification.post('🍑 Momo token', subtitle, message, { 'url': 'momo.app://' });
+function surgeNotify(subtitle = '', message = '') {
+  $notification.post('🍑 三創天天瘋簽到 token', subtitle, message, { 'url': 'syntrend.app://' });
 };
 
 if ($request.method === 'POST') {
   const cookie = $request.headers['Cookie'] || $request.headers['cookie'];
+  console.log(cookie);
+  console.log('-----------------');
+  console.log(request.bogy);
+  console.log('--------------------')
   if (cookie && $request.body) {
     try {
       let body = JSON.parse($request.body);
       if (body.doAction === 'list') {
         body.pNo = '';
         body.doAction = 'reg';
-        const saveCookie = $persistentStore.write(cookie, 'momoCookie');
-        const saveBody = $persistentStore.write(JSON.stringify(body), 'momoBody');
+        const saveCookie = $persistentStore.write(cookie, 'surgeCookie');
+        const saveBody = $persistentStore.write(JSON.stringify(body), 'surgeBody');
         if (!(saveCookie && saveBody)) {
-          momoNotify(
+          surgeNotify(
             '保存失敗 ‼️',
             '請稍後嘗試'
           );
         } else {
-          momoNotify(
+          surgeNotify(
             '保存成功 🍪',
             ''
           );
@@ -31,7 +35,7 @@ if ($request.method === 'POST') {
       );
     }
   } else {
-    momoNotify(
+    surgeNotify(
       '保存失敗 ‼️',
       '請重新登入'
     );
