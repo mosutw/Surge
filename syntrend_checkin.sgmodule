@@ -1,0 +1,9 @@
+#!name=三創 每日簽到
+#!desc=每天早上自動簽到。第一次使用前先到「會員專區」→「點選圖像齒輪 」取得 Cookie v20230905
+
+[Script]
+cron "16 0 * * *" script-path=https://raw.githubusercontent.com/mosutw/Surge/master/Scripts/syntrend_checkin.js, wake-system=1, timeout=10
+syntrend_checkin_info.js = type=http-request,pattern=^https:\/\/app\.syntrend\.com\.tw\/admin\/member\/api\/info\.json$,script-path=https://raw.githubusercontent.com/mosutw/Surge/master/Scripts/syntrend_checkin_info.js,requires-body=true,script-update-interval=-1
+
+[MITM]
+hostname = %APPEND% app.syntrend.com.tw
