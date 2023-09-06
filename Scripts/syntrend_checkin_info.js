@@ -8,7 +8,7 @@ if ($request.method === 'POST') {
   const cookie = $request.headers['Cookie'] || $request.headers['cookie'];
   console.log(cookie);
   console.log('-----------------');
-  console.log(request.bogy);
+  console.log($request.bogy);
   console.log('--------------------')
   if (cookie && $request.body) {
     try {
