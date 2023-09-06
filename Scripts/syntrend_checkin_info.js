@@ -2,9 +2,7 @@ function surgeNotify(subtitle = '', message = '') {
   $notification.post('🍑 三創天天瘋簽到 token', subtitle, message, { 'url': 'Syntrendapp://' });
 };
 
-surgeNotify("333333");
 if ($request.method === 'POST') {
-  surgeNotify("2222222");
   const cookie = $request.headers['Cookie'] || $request.headers['cookie'];
   console.log(cookie);
   console.log('-----------------');
