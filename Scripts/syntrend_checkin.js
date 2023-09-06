@@ -26,6 +26,7 @@ let checkinRequest = {
 };
 
 function getEventPageUrl() {
+  surgeNotify("1111111");
   $httpClient.post(luckyDrawBonusRequest, function (error, response, data) {
     if (error) {
       surgeNotify(
